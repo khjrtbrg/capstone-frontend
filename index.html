@@ -1,16 +1,12 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="noiseScoreApp">
   <head>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="app/js/app.js"></script>
   </head>
   <body>
-    <div>
-      <label>Hello? Is anybody there?</label>
-      <input type="text" ng-model="hello" placeholder="Maybe a traditional greeting?">
-      <hr>
-      <h1>{{hello}}</h1>
-    </div>
+    <h1>NoiseScore</h1>
+    <div class="container" ui-view></div>
   </body>
 </html>
