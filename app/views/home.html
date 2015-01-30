@@ -1,5 +1,8 @@
+
 <div ng-controller="homeController">
   <h2>View Map</h2>
+  <div id="map-canvas">
+  </div>
   <ul ng-repeat="location in noiseArray">
     <li>{{location.noise_type}}</li>
     <li>{{location.description}}</li>
