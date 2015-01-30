@@ -6,7 +6,7 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
 
     var mapOptions = {
       center: { lat: 47.6, lng: -122.3},
-      zoom: 11
+      zoom: 13
     };
 
     $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
