@@ -1,6 +1,6 @@
 var noiseScoreApp = angular.module('noiseScoreApp', [
-  'ui.router'//,
-  // 'homeControllerModule'
+  'ui.router',
+  'homeControllerModule'
 ]);
 
 noiseScoreApp.config(function($stateProvider, $urlRouterProvider) {
