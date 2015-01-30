@@ -1,6 +1,9 @@
 <div ng-controller="homeController">
-  <label>Hello? Is anybody there?</label>
-  <input type="text" ng-model="hello" placeholder="Maybe a traditional greeting?">
-  <hr>
-  <p>{{hello}}</p>
+  <h2>View Map</h2>
+  <ul ng-repeat="location in noiseArray">
+    <li>{{location.noise_type}}</li>
+    <li>{{location.description}}</li>
+    <li>{{location.lat}}</li>
+    <li>{{location.lon}}</li>
+  </ul>
 </div>
