@@ -5,14 +5,18 @@ describe('Home Controllers', function() {
 
   describe('homeController', function(){
 
-    // beforeEach(module('phonecatApp'));
+    var scope, ctrl, $httpBackend;
 
-    // it('should create "phones" model with 3 phones', inject(function($controller) {
-    //   var scope = {},
-    //       ctrl = $controller('PhoneListCtrl', {$scope:scope});
+    beforeEach(module('noiseScoreApp'));
+    beforeEach(inject(function($rootScope, $controller) {
+      scope = $rootScope.$new();
+      ctrl = $controller('homeController', {$scope: scope});
+    }));
 
-    //   expect(scope.phones.length).toBe(3);
-    // }));
+
+    it('should assign $scope.hello', function() {
+      expect(scope.hello).toEqual('Noise!!');
+    });
 
   });
 });
