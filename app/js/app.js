@@ -1,3 +1,5 @@
+'use strict';
+
 var noiseScoreApp = angular.module('noiseScoreApp', [
   'ui.router',
   'homeControllerModule'

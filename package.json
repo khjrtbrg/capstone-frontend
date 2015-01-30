@@ -1,10 +1,15 @@
 {
-  "name"         : "NoiseScore",
-  "version"      : "0.0.1",
-  "description"  : "Frontend of NoiseScore",
-  "main"         : "app.js",
-  "author"       : "katpke & khjrtbrg",
-  "dependencies" : {
+  "name": "NoiseScore",
+  "version": "0.0.1",
+  "author": "katpke & khjrtbrg",
+  "description": "Frontend of NoiseScore",
+  "repository": "",
+  "license": "MIT",
+  "devDependencies": {
+    "karma": "^0.12.16",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "protractor": "~1.0.0",
     "http-server": "^0.6.1",
     "tmp": "0.0.23",
     "bower": "^1.3.1",
@@ -15,6 +20,16 @@
 
     "prestart": "npm install",
     "start": "http-server -a 0.0.0.0 -p 8000",
+
+    "pretest": "npm install",
+    "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
+    "test-single-run": "node node_modules/karma/bin/karma start test/karma.conf.js  --single-run",
+
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor test/protractor-conf.js",
 
     "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + cat('bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\""
   }
