@@ -47,7 +47,7 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
         else if (location.noise_type === "Trolley"){
           allLayers.trolley.push({location: latLon, weight: 8});
         }
-        else if (location.noise_type === "Bus"){
+        else if (location.noise_type === "Bus Stop"){
           allLayers.buses.push({location: latLon, weight: 10});
         }
         else if (location.noise_type === "Police Station"){
@@ -62,8 +62,9 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
       }
 
       for (var heatmapData in allLayers){
+        console.log(heatmapData)
         var heatmap = new google.maps.visualization.HeatmapLayer({
-          data: heatmapData
+          data: allLayers[heatmapData]
         });
         heatmap.setMap($scope.map);
       }
