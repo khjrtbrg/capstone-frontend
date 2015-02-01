@@ -1,12 +1,21 @@
 
 <div ng-controller="homeController">
   <h2>View Map</h2>
-  <div id="map-canvas">
-  </div>
-  <ul ng-repeat="location in noiseArray">
+
+  <button ng-click="toggleTransit()">Toggle Transit</button>
+  <button ng-click="toggleDumps()">Toggle Dumps</button>
+  <button ng-click="toggleFireStations()">Toggle Fire Stations</button>
+  <button ng-click="toggleColleges()">Toggle Colleges</button>
+  <button ng-click="toggleSchools()">Toggle Schools</button>
+  <button ng-click="togglePoliceStations()">Toggle Police Stations</button>
+  <button ng-click="toggleHospitals()">Toggle Hospitals</button>
+  <button ng-click="toggleBars()">Toggle Bars</button>
+
+  <div id="map-canvas"></div>
+  <!-- <ul ng-repeat="location in noiseArray">
     <li>{{location.noise_type}}</li>
     <li>{{location.description}}</li>
     <li>{{location.lat}}</li>
     <li>{{location.lon}}</li>
-  </ul>
+  </ul> -->
 </div>
