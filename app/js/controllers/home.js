@@ -31,32 +31,32 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
         var latLon = new google.maps.LatLng(location.lat, location.lon);
         if (location.noise_type === "Transit Center"){
           allLayers.transitCenters.push({location: latLon, weight: 11});
-          }
+        }
         else if (location.noise_type === "Dump") {
           allLayers.dumps.push({location: latLon, weight: 10});
         }
-        else if (location.noise_type === "Fire Station"){
+        else if (location.noise_type === "Fire Station") {
           allLayers.fireStations.push({location: latLon, weight: 14});
         }
-        else if (location.noise_type === "College"){
+        else if (location.noise_type === "College") {
           allLayers.colleges.push({location: latLon, weight: 11});
         }
-        else if (location.noise_type === "School"){
+        else if (location.noise_type === "School") {
           allLayers.schools.push({location: latLon, weight: 9});
         }
-        else if (location.noise_type === "Trolley"){
+        else if (location.noise_type === "Trolley") {
           allLayers.trolley.push({location: latLon, weight: 8});
         }
-        else if (location.noise_type === "Bus Stop"){
+        else if (location.noise_type === "Bus Stop") {
           allLayers.buses.push({location: latLon, weight: 10});
         }
-        else if (location.noise_type === "Police Station"){
+        else if (location.noise_type === "Police Station") {
           allLayers.policeStations.push({location: latLon, weight: 14});
         }
-        else if (location.noise_type === "Hospital"){
+        else if (location.noise_type === "Hospital") {
           allLayers.hospitals.push({location: latLon, weight: 14});
         }
-        else if (location.noise_type === "Bars"){
+        else if (location.noise_type === "Bars") {
           allLayers.bars.push({location: latLon, weight: 10});
         }
       }
@@ -69,8 +69,5 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
         heatmap.setMap($scope.map);
       }
     });
-
-
-  // google.maps.event.addDomListener(window, 'load', initialize);
 
   }]);
