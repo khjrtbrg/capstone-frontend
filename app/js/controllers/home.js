@@ -9,8 +9,10 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
       zoom: 13
     };
 
+    // Create & Add Map
     $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+    // Fetch Noises From API and Process Into Layers
     $http.get('http://localhost:3000/').success(function(data) {
       $scope.noiseArray = data;
       var allLayers = {
@@ -53,110 +55,27 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
           allLayers.bars.push({location: latLon, weight: 10});
         }
       }
-
-
-      // Brute Force Filters
-      // Transit
-      $scope.transitHeatmap = new google.maps.visualization.HeatmapLayer({
-        data: allLayers['transit']
-      });
       
-      $scope.transitHeatmap.setMap($scope.map);
-
-      $scope.toggleTransit = function() {
-        $scope.transitHeatmap.setMap($scope.transitHeatmap.getMap() ? null : $scope.map);
+      // Create Heatmap Layer Function
+      var createLayer = function(heatmapName) {
+        // Creates Layer
+        $scope[heatmapName] = new google.maps.visualization.HeatmapLayer({
+          data: allLayers[heatmapName]
+        });
+        
+        // Adds Layer to Map
+        $scope[heatmapName].setMap($scope.map);
       }
 
-      // Dumps
-      $scope.dumpsHeatmap = new google.maps.visualization.HeatmapLayer({
-        data: allLayers['dumps']
-      });
-      
-      $scope.dumpsHeatmap.setMap($scope.map);
-
-      $scope.toggleDumps = function() {
-        $scope.dumpsHeatmap.setMap($scope.dumpsHeatmap.getMap() ? null : $scope.map);
+      // Toggle Layer Function
+      $scope.toggleLayer = function(layerName) {
+        layerName.setMap(layerName.getMap() ? null : $scope.map);
       }
 
-      // Fire Stations
-      $scope.fireStationsHeatmap = new google.maps.visualization.HeatmapLayer({
-        data: allLayers['fireStations']
-      });
-      
-      $scope.fireStationsHeatmap.setMap($scope.map);
-
-      $scope.toggleFireStations = function() {
-        $scope.fireStationsHeatmap.setMap($scope.fireStationsHeatmap.getMap() ? null : $scope.map);
+      // Create Heatmap Layers from allLayers
+      for (var heatmapData in allLayers){
+        createLayer(heatmapData);
       }
-
-      // Colleges
-      $scope.collegesHeatmap = new google.maps.visualization.HeatmapLayer({
-        data: allLayers['colleges']
-      });
-      
-      $scope.collegesHeatmap.setMap($scope.map);
-
-      $scope.toggleColleges = function() {
-        $scope.collegesHeatmap.setMap($scope.collegesHeatmap.getMap() ? null : $scope.map);
-      }
-
-      // Schools
-      $scope.schoolsHeatmap = new google.maps.visualization.HeatmapLayer({
-        data: allLayers['schools']
-      });
-      
-      $scope.schoolsHeatmap.setMap($scope.map);
-
-      $scope.toggleSchools = function() {
-        $scope.schoolsHeatmap.setMap($scope.schoolsHeatmap.getMap() ? null : $scope.map);
-      }
-
-      // Police Stations
-      $scope.policeStationsHeatmap = new google.maps.visualization.HeatmapLayer({
-        data: allLayers['policeStations']
-      });
-      
-      $scope.policeStationsHeatmap.setMap($scope.map);
-
-      $scope.togglePoliceStations = function() {
-        $scope.policeStationsHeatmap.setMap($scope.policeStationsHeatmap.getMap() ? null : $scope.map);
-      }
-
-      // Hospitals
-      $scope.hospitalsHeatmap = new google.maps.visualization.HeatmapLayer({
-        data: allLayers['hospitals']
-      });
-      
-      $scope.hospitalsHeatmap.setMap($scope.map);
-
-      $scope.toggleHospitals = function() {
-        $scope.hospitalsHeatmap.setMap($scope.hospitalsHeatmap.getMap() ? null : $scope.map);
-      }
-
-      // Bars
-      $scope.barsHeatmap = new google.maps.visualization.HeatmapLayer({
-        data: allLayers['bars']
-      });
-      
-      $scope.barsHeatmap.setMap($scope.map);
-
-      $scope.toggleBars = function() {
-        $scope.barsHeatmap.setMap($scope.barsHeatmap.getMap() ? null : $scope.map);
-      }
-      
-
-      // for (var heatmapData in allLayers){
-      //   $scope[heatmapData] = new google.maps.visualization.HeatmapLayer({
-      //     data: allLayers[heatmapData]
-      //   });
-      //   $scope[heatmapData].setMap($scope.map);
-
-      //   // Filter Layer on Click
-      //   $scope['toggle' + heatmapData] = function() {
-      //     console.log('clicked on ' + heatmapData);
-      //     $scope[heatmapData].setMap($scope[heatmapData].getMap() ? null : $scope.map);
-      //   }
-      // }
     });
 
   }]);

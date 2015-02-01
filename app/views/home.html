@@ -2,14 +2,14 @@
 <div ng-controller="homeController">
   <h2>View Map</h2>
 
-  <button ng-click="toggleTransit()">Toggle Transit</button>
-  <button ng-click="toggleDumps()">Toggle Dumps</button>
-  <button ng-click="toggleFireStations()">Toggle Fire Stations</button>
-  <button ng-click="toggleColleges()">Toggle Colleges</button>
-  <button ng-click="toggleSchools()">Toggle Schools</button>
-  <button ng-click="togglePoliceStations()">Toggle Police Stations</button>
-  <button ng-click="toggleHospitals()">Toggle Hospitals</button>
-  <button ng-click="toggleBars()">Toggle Bars</button>
+  <button ng-click="toggleLayer(transit)">Toggle Transit</button>
+  <button ng-click="toggleLayer(dumps)">Toggle Dumps</button>
+  <button ng-click="toggleLayer(fireStations)">Toggle Fire Stations</button>
+  <button ng-click="toggleLayer(colleges)">Toggle Colleges</button>
+  <button ng-click="toggleLayer(schools)">Toggle Schools</button>
+  <button ng-click="toggleLayer(policeStations)">Toggle Police Stations</button>
+  <button ng-click="toggleLayer(hospitals)">Toggle Hospitals</button>
+  <button ng-click="toggleLayer(bars)">Toggle Bars</button>
 
   <div id="map-canvas"></div>
   <!-- <ul ng-repeat="location in noiseArray">
