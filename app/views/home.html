@@ -1,12 +1,26 @@
-
 <div ng-controller="homeController">
-  <h2>View Map</h2>
-  <div id="map-canvas">
+
+  <div class="map-options">
+    <div class="map-filters">
+      <h3>Filter Noise Types</h3>
+      <label><input type="checkbox" checked="true" ng-click="toggleLayer(transit)">Transit</label>
+      <label><input type="checkbox" checked="true" ng-click="toggleLayer(dumps)">Dumps</label>
+      <label><input type="checkbox" checked="true" ng-click="toggleLayer(fireStations)">Fire Stations</label>
+      <label><input type="checkbox" checked="true" ng-click="toggleLayer(colleges)">Colleges</label>
+      <label><input type="checkbox" checked="true" ng-click="toggleLayer(schools)">Schools</label>
+      <label><input type="checkbox" checked="true" ng-click="toggleLayer(policeStations)">Police Stations</label>
+      <label><input type="checkbox" checked="true" ng-click="toggleLayer(hospitals)">Hospitals</label>
+      <label><input type="checkbox" checked="true" ng-click="toggleLayer(bars)">Bars</label>
+    </div>
+    <div class="location-search">
+      <form>
+        <label for="locationSearch">Find Location:</label>
+        <input type="text" id="locationSearch" ng-model="locationSearch">
+        <button ng-click="findLocation()">Search</button>
+        <button ng-click="currentLocation()">Current Location</button>
+      </form>
+    </div>
   </div>
-  <ul ng-repeat="location in noiseArray">
-    <li>{{location.noise_type}}</li>
-    <li>{{location.description}}</li>
-    <li>{{location.lat}}</li>
-    <li>{{location.lon}}</li>
-  </ul>
+
+  <div id="map-canvas"></div>
 </div>
