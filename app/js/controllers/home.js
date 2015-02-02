@@ -39,5 +39,18 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
         var coordinates = data.results[0].geometry.location;
         locationService.newMarker(coordinates, $scope, markers);
       });
-    }
+    };
+
+    // Zoom to Current Location
+    $scope.currentLocation = function(){
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var coordinates = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          locationService.newMarker(coordinates, $scope, markers);
+        });
+      }
+    };
   }]);
