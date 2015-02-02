@@ -3,30 +3,33 @@ var homeControllerModule = angular.module('homeControllerModule', []);
 homeControllerModule.controller('homeController', ['$scope', '$http', 'layerService', 'locationService',
   function($scope, $http, layerService, locationService) {
 
-    var mapOptions = {
-      center: { lat: 47.6, lng: -122.3},
-      zoom: 13
-    };
+    function initialize() {
+      var mapOptions = {
+        center: { lat: 47.6, lng: -122.3},
+        // zoom: 13
+        zoom:11
+      };
 
-    // Create & Add Map
-    $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      // Create & Add Map
+      $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-    // Fetch Noises From API and Process Into Layers
-    $http.get('http://localhost:3000/').success(function(data) {
+      // Fetch Noises From API and Process Into Layers
+      $http.get('http://localhost:3000/').success(function(data) {
 
-      // Sort Data into Layer Arrays
-      var layers = layerService.setupLayers(data);
+        // Sort Data into Layer Arrays
+        var layers = layerService.setupLayers(data);
 
-      // Create Heatmap Layers from Layer Arrays
-      for (var layer in layers){
-        layerService.createLayer($scope, layer, layers);
-      }
+        // Create Heatmap Layers from Layer Arrays
+        for (var layer in layers){
+          layerService.createLayer($scope, layer, layers);
+        }
 
-      // Toggle Layer Function
-      $scope.toggleLayer = function(layerName) {
-        layerName.setMap(layerName.getMap() ? null : $scope.map);
-      }
-    });
+        // Toggle Layer Function
+        $scope.toggleLayer = function(layerName) {
+          layerName.setMap(layerName.getMap() ? null : $scope.map);
+        }
+      });
+    }
 
     // Zoom Map to Searched Location
     var markers = [];
@@ -53,4 +56,8 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
         });
       }
     };
+
+    // initialize map
+    google.maps.event.addDomListener(window, 'load', initialize());
+
   }]);

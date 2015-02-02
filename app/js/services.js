@@ -41,9 +41,9 @@ servicesModule.factory('layerService', function() {
         else if (type === "Hospital") {
           layers.hospitals.push({location: latLon, weight: 14});
         }
-        // else if (type === "Bars") {
-        //   layers.bars.push({location: latLon, weight: 10});
-        // }
+        else if (type === "Bar") {
+          layers.bars.push({location: latLon, weight: 10});
+        }
       }
 
       return layers;
@@ -54,6 +54,10 @@ servicesModule.factory('layerService', function() {
         data: layers[layer],
       });
 
+      // Bars Won't Show Up Without maxIntensity
+      if (layer == 'bars') {
+        scope[layer].set('maxIntensity', 40);
+      }
       // Add Layer to Map
       scope[layer].setMap(scope.map);
     }
