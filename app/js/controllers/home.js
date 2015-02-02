@@ -47,4 +47,22 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'sortLayer
         createLayer(heatmapData);
       }
     });
+
+    $scope.findLocation = function() {
+      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.locationSearch + ',+Seattle,+WA&key=APIKEYHERE';
+      
+      $http.get(url).success(function(data) {
+        var coordinates = data.results[0].geometry.location;
+
+        // Create Marker for Searched Location
+        var marker = new google.maps.Marker({
+          position: coordinates,
+          map: $scope.map
+        });
+
+        // Center Map on Marker and Adjust Zoom
+        $scope.map.setZoom(15);
+        $scope.map.setCenter(marker.getPosition());
+      });
+    }
   }]);
