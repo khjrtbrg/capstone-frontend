@@ -1,15 +1,14 @@
-
 <div ng-controller="homeController">
   <h2>View Map</h2>
 
-  <button ng-click="toggleLayer(transit)">Toggle Transit</button>
-  <button ng-click="toggleLayer(dumps)">Toggle Dumps</button>
-  <button ng-click="toggleLayer(fireStations)">Toggle Fire Stations</button>
-  <button ng-click="toggleLayer(colleges)">Toggle Colleges</button>
-  <button ng-click="toggleLayer(schools)">Toggle Schools</button>
-  <button ng-click="toggleLayer(policeStations)">Toggle Police Stations</button>
-  <button ng-click="toggleLayer(hospitals)">Toggle Hospitals</button>
-  <button ng-click="toggleLayer(bars)">Toggle Bars</button>
+  <label><input type="checkbox" checked="true" ng-click="toggleLayer(transit)">Transit</label>
+  <label><input type="checkbox" checked="true" ng-click="toggleLayer(dumps)">Dumps</label>
+  <label><input type="checkbox" checked="true" ng-click="toggleLayer(fireStations)">Fire Stations</label>
+  <label><input type="checkbox" checked="true" ng-click="toggleLayer(colleges)">Colleges</label>
+  <label><input type="checkbox" checked="true" ng-click="toggleLayer(schools)">Schools</label>
+  <label><input type="checkbox" checked="true" ng-click="toggleLayer(policeStations)">Police Stations</label>
+  <label><input type="checkbox" checked="true" ng-click="toggleLayer(hospitals)">Hospitals</label>
+  <label><input type="checkbox" checked="true" ng-click="toggleLayer(bars)">Bars</label>
 
   <div id="map-canvas"></div>
 </div>
