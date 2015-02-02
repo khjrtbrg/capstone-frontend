@@ -1,7 +1,7 @@
 var homeControllerModule = angular.module('homeControllerModule', []);
 
-homeControllerModule.controller('homeController', ['$scope', '$http',
-  function($scope, $http) {
+homeControllerModule.controller('homeController', ['$scope', '$http', 'sortLayerArrays',
+  function($scope, $http, sortLayerArrays) {
     $scope.hello = 'Noise!!';
 
     var mapOptions = {
@@ -14,7 +14,6 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
 
     // Fetch Noises From API and Process Into Layers
     $http.get('http://localhost:3000/').success(function(data) {
-      $scope.noiseArray = data;
       var allLayers = {
         fireStations: [],
         colleges: [],
@@ -26,44 +25,15 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
         dumps: []
       };
 
-      for(var i = 0; i < $scope.noiseArray.length; i++) {
-        var location = $scope.noiseArray[i];
-        var type = location.noise_type;
-        var latLon = new google.maps.LatLng(location.lat, location.lon);
-        if (type === "Transit Center" || type === "Bus Stop" || type === "Trolley"){
-          allLayers.transit.push({location: latLon, weight: 11});
-        }
-        else if (type === "Dump") {
-          allLayers.dumps.push({location: latLon, weight: 10});
-        }
-        else if (type === "Fire Station") {
-          allLayers.fireStations.push({location: latLon, weight: 14});
-        }
-        else if (type === "College") {
-          allLayers.colleges.push({location: latLon, weight: 11});
-        }
-        else if (type === "School") {
-          allLayers.schools.push({location: latLon, weight: 9});
-        }
-        else if (type === "Police Station") {
-          allLayers.policeStations.push({location: latLon, weight: 14});
-        }
-        else if (type === "Hospital") {
-          allLayers.hospitals.push({location: latLon, weight: 14});
-        }
-        else if (type === "Bars") {
-          allLayers.bars.push({location: latLon, weight: 10});
-        }
-      }
+      // Sort Data into allLayers
+      sortLayerArrays.go(data, allLayers);
       
       // Create Heatmap Layer Function
       var createLayer = function(heatmapName) {
-        // Creates Layer
         $scope[heatmapName] = new google.maps.visualization.HeatmapLayer({
           data: allLayers[heatmapName]
         });
         
-        // Adds Layer to Map
         $scope[heatmapName].setMap($scope.map);
       }
 
@@ -77,5 +47,4 @@ homeControllerModule.controller('homeController', ['$scope', '$http',
         createLayer(heatmapData);
       }
     });
-
   }]);
