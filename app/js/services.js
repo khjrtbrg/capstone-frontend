@@ -18,31 +18,32 @@ servicesModule.factory('layerService', function() {
       for (var i = 0; i < apiResponse.length; i++) {
         var location = apiResponse[i];
         var type = location.noise_type;
+        var radius_px = location.reach;
         var latLon = new google.maps.LatLng(location.lat, location.lon);
         if (type === "Transit Center" || type === "Bus Stop" || type === "Trolley"){
           layers.transit.push({location: latLon, weight: 11});
         }
-        else if (type === "Dump") {
-          layers.dumps.push({location: latLon, weight: 10});
-        }
-        else if (type === "Fire Station") {
-          layers.fireStations.push({location: latLon, weight: 14});
-        }
-        else if (type === "College") {
-          layers.colleges.push({location: latLon, weight: 11});
-        }
-        else if (type === "School") {
-          layers.schools.push({location: latLon, weight: 9});
-        }
-        else if (type === "Police Station") {
-          layers.policeStations.push({location: latLon, weight: 14});
-        }
+        // else if (type === "Dump") {
+        //   layers.dumps.push({location: latLon, weight: 10});
+        // }
+        // else if (type === "Fire Station") {
+        //   layers.fireStations.push({location: latLon, weight: 14});
+        // }
+        // else if (type === "College") {
+        //   layers.colleges.push({location: latLon, weight: 11});
+        // }
+        // else if (type === "School") {
+        //   layers.schools.push({location: latLon, weight: 9});
+        // }
+        // else if (type === "Police Station") {
+        //   layers.policeStations.push({location: latLon, weight: 14});
+        // }
         else if (type === "Hospital") {
           layers.hospitals.push({location: latLon, weight: 14});
         }
-        else if (type === "Bars") {
-          layers.bars.push({location: latLon, weight: 10});
-        }
+        // else if (type === "Bars") {
+        //   layers.bars.push({location: latLon, weight: 10});
+        // }
       }
 
       return layers;
@@ -50,9 +51,9 @@ servicesModule.factory('layerService', function() {
     createLayer: function(scope, layer, layers) {
       // Make Layer & Add to Scope
       scope[layer] = new google.maps.visualization.HeatmapLayer({
-        data: layers[layer]
+        data: layers[layer],
       });
-      
+
       // Add Layer to Map
       scope[layer].setMap(scope.map);
     }

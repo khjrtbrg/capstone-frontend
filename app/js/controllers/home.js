@@ -33,8 +33,8 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
 
     // Zoom to Location Function
     $scope.findLocation = function() {
-      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.locationSearch + ',+Seattle,+WA&key=APIKEYHERE';
-      
+      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.locationSearch + ',+Seattle,+WA&key=AIzaSyCY7E9oBmlcDOJ4iBR1aL3PYp5feIpQ0KE';
+
       $http.get(url).success(function(data) {
         var coordinates = data.results[0].geometry.location;
         locationService.newMarker(coordinates, $scope, markers);
