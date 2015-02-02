@@ -2,12 +2,13 @@ var homeControllerModule = angular.module('homeControllerModule', []);
 
 homeControllerModule.controller('homeController', ['$scope', '$http', 'sortLayerArrays',
   function($scope, $http, sortLayerArrays) {
-    $scope.hello = 'Noise!!';
 
     var mapOptions = {
       center: { lat: 47.6, lng: -122.3},
       zoom: 13
     };
+
+    var markers = [];
 
     // Create & Add Map
     $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -54,11 +55,19 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'sortLayer
       $http.get(url).success(function(data) {
         var coordinates = data.results[0].geometry.location;
 
+        // Clear Markers
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+
         // Create Marker for Searched Location
         var marker = new google.maps.Marker({
           position: coordinates,
           map: $scope.map
         });
+
+        markers.push(marker);
 
         // Center Map on Marker and Adjust Zoom
         $scope.map.setZoom(15);
