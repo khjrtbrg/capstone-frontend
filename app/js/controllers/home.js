@@ -18,8 +18,8 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
       var layers = layerService.setupLayers(data);
 
       // Create Heatmap Layers from Layer Arrays
-      for (var heatmapData in layers){
-        layerService.createLayer($scope, heatmapData, layers);
+      for (var layer in layers){
+        layerService.createLayer($scope, layer, layers);
       }
 
       // Toggle Layer Function
@@ -31,6 +31,7 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
     // Zoom Map to Searched Location
     var markers = [];
 
+    // Zoom to Location Function
     $scope.findLocation = function() {
       var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.locationSearch + ',+Seattle,+WA&key=APIKEYHERE';
       

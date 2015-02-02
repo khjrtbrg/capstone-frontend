@@ -14,6 +14,7 @@ servicesModule.factory('layerService', function() {
         dumps: []
       };
 
+      // Add API Response Data to Layers
       for (var i = 0; i < apiResponse.length; i++) {
         var location = apiResponse[i];
         var type = location.noise_type;
@@ -46,12 +47,14 @@ servicesModule.factory('layerService', function() {
 
       return layers;
     },
-    createLayer: function(scope, heatmapName, allLayers) {
-      scope[heatmapName] = new google.maps.visualization.HeatmapLayer({
-        data: allLayers[heatmapName]
+    createLayer: function(scope, layer, layers) {
+      // Make Layer & Add to Scope
+      scope[layer] = new google.maps.visualization.HeatmapLayer({
+        data: layers[layer]
       });
       
-      scope[heatmapName].setMap(scope.map);
+      // Add Layer to Map
+      scope[layer].setMap(scope.map);
     }
   }
 });
@@ -59,20 +62,20 @@ servicesModule.factory('layerService', function() {
 servicesModule.factory('locationService', function() {
   return {
     newMarker: function(coordinates, scope, markers) {
-      // clear any current markers
+      // Clear Any Current Markers
       for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
       }
       markers = [];
 
-      // create new marker
+      // Create New Marker
       marker = new google.maps.Marker({
         position: coordinates,
         map: scope.map
       });
       markers.push(marker);
 
-      // zoom to new marker
+      // Zoom To New Marker
       scope.map.setZoom(15);
       scope.map.setCenter(marker.getPosition());
     }
