@@ -6,8 +6,7 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
     function initialize() {
       var mapOptions = {
         center: { lat: 47.6, lng: -122.3},
-        // zoom: 13
-        zoom:11
+        zoom: 13
       };
 
       // Create & Add Map
