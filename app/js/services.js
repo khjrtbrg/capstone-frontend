@@ -111,7 +111,7 @@ servicesModule.factory('locationService', function() {
 
       // Zoom To New Marker
       scope.map.setZoom(15);
-      scope.map.setCenter(marker.getPosition());
+      scope.map.panTo(marker.getPosition());
     }
   }
 });
