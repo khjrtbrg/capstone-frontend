@@ -44,8 +44,24 @@ h3 {
   padding: 1%;
 }
 
-/* Media Query to make map expand to fill available screen after filters are bumped down */
+/* Media Query */
 
-@media screen and (max-width: 990px) {
+@media only screen and (max-width: 990px) {
   #map-canvas {width: 95vw; margin-right: 1%; }
+}
+
+@media only screen and (max-width: 990px) {
+  h1, h3 { font-size: 2em; }
+}
+
+@media only screen and (max-height: 500px) {
+  #map-canvas {height: 50vh; }
+}
+
+@media only screen and (max-width: 990px) {
+  .map-filters p { font-size: .9em; }
+}
+
+@media only screen and (max-width: 990px) {
+  .map-filters p label { font-size: .9em; }
 }
