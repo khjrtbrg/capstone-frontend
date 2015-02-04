@@ -16,13 +16,10 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
       // Create & Add Map
       $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-
       // Fetch Noises From API and Process Into Layers
       $http.get('http://localhost:3000/').success(function(data) {
-
         // Sort Data into Layer Arrays
         var layers = layerService.setupLayers(data);
-
         // Create Heatmap Layers from Layer Arrays
         for (var layer in layers){
           layerService.createLayer($scope, layer, layers);
@@ -35,13 +32,8 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
 
         // Change Radius on Zoom
         google.maps.event.addListener($scope.map, 'zoom_changed', function() {
-          // Loop Through Layers...
           for (var i in layers) {
-            console.log(i);
-            // Get New Radius...
             var newRadius = layerService.findRadius($scope.map, layers[i].radius);
-
-            // And Set New Radius!
             $scope[layer].set('radius', newRadius);
           }
         });
