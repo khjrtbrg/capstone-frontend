@@ -12,15 +12,32 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
       // Create & Add Map
       $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+
       // Fetch Noises From API and Process Into Layers
       $http.get('http://localhost:3000/').success(function(data) {
+
+        function findRadius(radius) {
+          // // Get the zoom level the user is currently at; radius must start as num of px at closest range; 1ft = 6px
+          var current_zoom = $scope.map.getZoom();
+          // Find the difference between where they currently are and the closest range zoom
+          var no_of_divide_times = 21 - current_zoom
+          // Divide by 2 for each new level of zoom
+          if (no_of_divide_times != 0) {
+            for (var i = 0; i < no_of_divide_times; i++) {
+              radius = radius / 2
+            }
+          }
+          // Return the adjusted value of the radius
+          console.log(radius)
+          return radius
+        }
 
         // Sort Data into Layer Arrays
         var layers = layerService.setupLayers(data);
 
         // Create Heatmap Layers from Layer Arrays
         for (var layer in layers){
-          layerService.createLayer($scope, layer, layers);
+          layerService.createLayer($scope, layer, layers, findRadius);
         }
 
         // Toggle Layer Function
