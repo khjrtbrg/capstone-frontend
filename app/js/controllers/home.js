@@ -28,6 +28,18 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
         $scope.toggleLayer = function(layerName) {
           layerName.setMap(layerName.getMap() ? null : $scope.map);
         }
+
+        // Change Radius on Zoom
+        google.maps.event.addListener($scope.map, 'zoom_changed', function() {
+          // Loop Through Layers...
+          for (var i in layers) {
+            // Get New Radius...
+            var newRadius = layerService.findRadius($scope.map, layers[i].radius);
+
+            // And Set New Radius!
+            $scope[layer].set('radius', newRadius);
+          }
+        });
       });
     }
 

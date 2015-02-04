@@ -81,14 +81,17 @@ servicesModule.factory('layerService', function() {
       var no_of_divide_times = 21 - current_zoom;
       
       // Divide by 2 for each new level of zoom
-      if (no_of_divide_times != 0) {
+      if (no_of_divide_times > 0) {
         for (var i = 0; i < no_of_divide_times; i++) {
           radius = radius / 2;
         }
       }
+
+      // Round to nearest whole number to make Google's API happy
+      var newRadius = Math.round(radius);
       
       // Return the adjusted value of the radius
-      return radius;
+      return newRadius;
     }
   }
 });
