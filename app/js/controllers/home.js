@@ -5,12 +5,17 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
 
     function initialize() {
       var mapOptions = {
-        center: { lat: 47.6, lng: -122.3},
-        zoom: 13
+        center: { lat: 47.6, lng: -122.35},
+        zoom: 13,
+        maxZoom: 17,
+        minZoom: 10,
+        zoomControlOptions: { style: 'small' },
+        streetViewControl: false
       };
 
       // Create & Add Map
       $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
 
       // Fetch Noises From API and Process Into Layers
       $http.get('http://localhost:3000/').success(function(data) {
@@ -27,6 +32,19 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
         $scope.toggleLayer = function(layerName) {
           layerName.setMap(layerName.getMap() ? null : $scope.map);
         }
+
+        // Change Radius on Zoom
+        google.maps.event.addListener($scope.map, 'zoom_changed', function() {
+          // Loop Through Layers...
+          for (var i in layers) {
+            console.log(i);
+            // Get New Radius...
+            var newRadius = layerService.findRadius($scope.map, layers[i].radius);
+
+            // And Set New Radius!
+            $scope[layer].set('radius', newRadius);
+          }
+        });
       });
     }
 
