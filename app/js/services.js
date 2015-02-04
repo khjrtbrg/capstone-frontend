@@ -58,7 +58,6 @@ servicesModule.factory('layerService', function() {
     },
 
     createLayer: function(scope, layer, layers) {
-
       // Make Layer & Add to Scope
       scope[layer] = new google.maps.visualization.HeatmapLayer({
         data: layers[layer].items,
@@ -69,6 +68,7 @@ servicesModule.factory('layerService', function() {
       if (layer == 'bars') {
         scope[layer].set('maxIntensity', 40);
       }
+      
       // Add Layer to Map
       scope[layer].setMap(scope.map);
     },
@@ -76,16 +76,18 @@ servicesModule.factory('layerService', function() {
     findRadius: function(map, radius) {
       // Get the zoom level the user is currently at; radius must start as num of px at closest range; 1ft = 6px
       var current_zoom = map.getZoom();
+      
       // Find the difference between where they currently are and the closest range zoom
       var no_of_divide_times = 21 - current_zoom;
+      
       // Divide by 2 for each new level of zoom
       if (no_of_divide_times != 0) {
         for (var i = 0; i < no_of_divide_times; i++) {
           radius = radius / 2;
         }
       }
+      
       // Return the adjusted value of the radius
-      console.log(radius);
       return radius;
     }
   }
