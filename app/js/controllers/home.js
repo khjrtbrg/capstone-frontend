@@ -5,11 +5,12 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
 
     function initialize() {
       var mapOptions = {
-        center: { lat: 47.6, lng: -122.3},
+        center: { lat: 47.6, lng: -122.35},
         zoom: 13,
         maxZoom: 17,
         minZoom: 10,
-        zoomControlOptions: { style: 'small' }
+        zoomControlOptions: { style: 'small' },
+        streetViewControl: false
       };
 
       // Create & Add Map
@@ -36,6 +37,7 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
         google.maps.event.addListener($scope.map, 'zoom_changed', function() {
           // Loop Through Layers...
           for (var i in layers) {
+            console.log(i);
             // Get New Radius...
             var newRadius = layerService.findRadius($scope.map, layers[i].radius);
 

@@ -10,7 +10,7 @@ servicesModule.factory('layerService', function() {
         // hospitals: {radius: 15750, items: []},
         // bars: {radius: 1000, items: []},
         // policeStations: {radius: 15750, items: []},
-        transit: {radius: 10000, items: []},
+        transit: {radius: 4000, items: []},
         // dumps: {radius: 1500, items: []},
         // construction: {radius: 9054, items: []},
         // demolition: {radius: 15750, items: []}
