@@ -1,7 +1,16 @@
 body {
   height: 100vh;
   width: 100vw;
-  background-color: #E6E6E6;
+  padding: 1%;
+}
+
+.divider {
+  background-image: url('./../../Soundwave.svg');
+  height: 2.5vh;
+  width: 97vw;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: -1%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -29,4 +38,14 @@ h3 {
 
 .map-filters p label {
   margin-left: 1%;
+}
+
+.location-search {
+  padding: 1%;
+}
+
+/* Media Query to make map expand to fill available screen after filters are bumped down */
+
+@media screen and (max-width: 990px) {
+  #map-canvas {width: 95vw; margin-right: 1%; }
 }
