@@ -1,28 +1,34 @@
 <div ng-controller="homeController">
 
-  <div class="map-options">
-    <div class="map-filters">
-      <h3>Filter Noise Types</h3>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(transit)">Transit</label>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(dumps)">Dumps</label>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(fireStations)">Fire Stations</label>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(colleges)">Colleges</label>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(schools)">Schools</label>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(policeStations)">Police Stations</label>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(hospitals)">Hospitals</label>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(bars)">Bars</label>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(construction)">Construction</label>
-      <label><input type="checkbox" checked="true" ng-click="toggleLayer(demolition)">Demolition</label>
+  <div class="row">
+
+    <div class="map-options">
+      <div class="map-filters col-md-3">
+        <h3>Filter Noise Types</h3>
+        <p><label><input type="checkbox" checked="true" ng-click="toggleLayer(transit)">Transit</label>
+        <p><label><input type="checkbox" checked="true" ng-click="toggleLayer(dumps)">Dumps</label>
+        <p><label><input type="checkbox" checked="true" ng-click="toggleLayer(fireStations)">Fire Stations</label>
+        <p><label><input type="checkbox" checked="true" ng-click="toggleLayer(colleges)">Colleges</label>
+        <label><input type="checkbox" checked="true" ng-click="toggleLayer(schools)">Schools</label>
+        <label><input type="checkbox" checked="true" ng-click="toggleLayer(policeStations)">Police Stations</label>
+        <label><input type="checkbox" checked="true" ng-click="toggleLayer(hospitals)">Hospitals</label>
+        <label><input type="checkbox" checked="true" ng-click="toggleLayer(bars)">Bars</label>
+        <label><input type="checkbox" checked="true" ng-click="toggleLayer(construction)">Construction</label>
+        <label><input type="checkbox" checked="true" ng-click="toggleLayer(demolition)">Demolition</label>
+      </div>
+      <div class="col-md-9">
+        <div class="location-search">
+          <form>
+            <label for="locationSearch">Find Location:</label>
+            <input type="text" id="locationSearch" ng-model="locationSearch">
+            <button ng-click="findLocation()">Search</button>
+            <button ng-click="currentLocation()">Current Location</button>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="location-search">
-      <form>
-        <label for="locationSearch">Find Location:</label>
-        <input type="text" id="locationSearch" ng-model="locationSearch">
-        <button ng-click="findLocation()">Search</button>
-        <button ng-click="currentLocation()">Current Location</button>
-      </form>
-    </div>
+
+    <div id="map-canvas"></div>
   </div>
 
-  <div id="map-canvas"></div>
 </div>
