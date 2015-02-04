@@ -1,11 +1,67 @@
 body {
   height: 100vh;
   width: 100vw;
+  padding: 1%;
+}
+
+.divider {
+  background-image: url('./../../Soundwave.svg');
+  height: 2.5vh;
+  width: 97vw;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: -1%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Play', sans-serif;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h3 {
+  font-size: 2em;
 }
 
 #map-canvas {
-  height: 90vh;
-  width: 90vw;
+  height: 70vh;
+  width: 70vw;
   margin: 0;
   padding: 0;
+}
+
+.map-filters p {
+  font-size: 1.2em;
+}
+
+.map-filters p label {
+  margin-left: 1%;
+}
+
+.location-search {
+  padding: 1%;
+}
+
+/* Media Query */
+
+@media only screen and (max-width: 990px) {
+  #map-canvas {width: 95vw; margin-right: 1%; }
+}
+
+@media only screen and (max-width: 990px) {
+  h1, h3 { font-size: 2em; }
+}
+
+@media only screen and (max-height: 500px) {
+  #map-canvas {height: 50vh; }
+}
+
+@media only screen and (max-width: 990px) {
+  .map-filters p { font-size: .9em; }
+}
+
+@media only screen and (max-width: 990px) {
+  .map-filters p label { font-size: .9em; }
 }
