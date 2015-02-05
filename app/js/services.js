@@ -96,7 +96,7 @@ servicesModule.factory('layerService', function() {
   }
 });
 
-servicesModule.factory('locationService', function() {
+servicesModule.factory('locationService', ['$http', function($http) {
   return {
     newMarker: function(coordinates, scope, markers) {
       // Clear Any Current Markers
@@ -115,6 +115,28 @@ servicesModule.factory('locationService', function() {
       // Zoom To New Marker
       scope.map.setZoom(15);
       scope.map.panTo(marker.getPosition());
+
+      // Score Popup
+      var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
+      
+      $http.get(url).success(function(data) {
+
+        console.log(data);
+        var contentString = '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">Location Noise Score</h1>'+
+          '<div id="bodyContent">'+
+          '<h2 class="text-center">' + data.score + '</h2>'+
+          '</div>'+
+          '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        infowindow.open(scope.map,marker);
+      });
     }
   }
-});
+}]);
