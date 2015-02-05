@@ -99,9 +99,6 @@ servicesModule.factory('layerService', function() {
 servicesModule.factory('locationService', ['$http', function($http) {
   return {
     newMarker: function(coordinates, scope) {
-      console.log('markers: ' + scope.markers);
-      console.log('popups: ' + scope.popups);
-
       // Clear Any Current Markers
       for (var i = 0; i < scope.markers.length; i++) {
         scope.markers[i].setMap(null);
@@ -133,13 +130,25 @@ servicesModule.factory('locationService', ['$http', function($http) {
         scope.popups = [];
 
         // Score String
-        var contentString = '<div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">Location Noise Score</h1>'+
-          '<div id="bodyContent">'+
+        var nearbyNoises = '';
+        for (var noise in data.noises) {
+          var obj = data.noises[noise];
+          if (obj.noise_type === 'Bus Stop') {
+            nearbyNoises += '<li>Bus Stop on ';
+          } else {
+            nearbyNoises += '<li>';
+          }
+          nearbyNoises += obj.description + '</li>';
+        }
+
+        var contentString = '<div id="content">' +
+          '<div id="siteNotice">' +
+          '</div>' +
+          '<h1 id="firstHeading" class="firstHeading">Location Noise Score</h1>' +
+          '<div id="bodyContent">' +
           '<h2 class="text-center">' + data.score + '</h2>'+
-          '</div>'+
+          '<ul>' + nearbyNoises + '</ul>'
+          '</div>' +
           '</div>';
 
         // Create InfoWindow
