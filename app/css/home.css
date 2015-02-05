@@ -44,6 +44,17 @@ h3 {
   padding: 1%;
 }
 
+.unclicked {
+  padding: 1%;
+  border-radius: 3px;
+}
+
+.clicked {
+  background-color: #F52F5D;
+  border-radius: 3px;
+  padding: 3%;
+}
+
 /* Media Query */
 
 @media only screen and (max-width: 990px) {
