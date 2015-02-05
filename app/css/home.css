@@ -56,6 +56,10 @@ h3 {
   padding: 3%;
 }
 
+.glyphicon {
+  color: white;
+}
+
 /* Media Query */
 
 @media only screen and (max-width: 990px) {

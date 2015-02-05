@@ -18,7 +18,7 @@
     <div class="map-options">
       <div class="map-filters col-md-3 col-sm-12 col-xs-12">
         <h3>Filter Noise Types</h3>
-        <p><span class="glyphicon glyphicon-road clicked" ng-click="toggleLayer(transit); toggleHighlight()"></span><label>Transit</label></p>
+        <p><span id="transit" class="glyphicon glyphicon-road clicked" ng-click="toggleLayer($event, transit)"></span><label>Transit</label></p>
         <p><span class="glyphicon glyphicon-trash clicked" ng-click="toggleLayer(dumps)"></span><label>Dumps</label></p>
         <p><span class="glyphicon glyphicon-fire clicked" ng-click="toggleLayer(fireStations)"></span><label>Fire Stations</label></p>
         <p><span class="glyphicon glyphicon-pencil clicked" ng-click="toggleLayer(colleges)"></span><label>Colleges</label></p>
