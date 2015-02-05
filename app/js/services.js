@@ -96,25 +96,70 @@ servicesModule.factory('layerService', function() {
   }
 });
 
-servicesModule.factory('locationService', function() {
+servicesModule.factory('locationService', ['$http', function($http) {
   return {
-    newMarker: function(coordinates, scope, markers) {
+    newMarker: function(coordinates, scope) {
       // Clear Any Current Markers
-      for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
+      for (var i = 0; i < scope.markers.length; i++) {
+        scope.markers[i].setMap(null);
       }
-      markers = [];
+      scope.markers = [];
 
       // Create New Marker
       marker = new google.maps.Marker({
         position: coordinates,
         map: scope.map
       });
-      markers.push(marker);
+      scope.markers.push(marker);
 
       // Zoom To New Marker
       scope.map.setZoom(15);
       scope.map.panTo(marker.getPosition());
+      
+      // Add Popup
+      this.scorePopup(coordinates, scope);
+    },
+    scorePopup: function(coordinates, scope) {
+      var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
+      
+      $http.get(url).success(function(data) {
+        // Clear Any Current Popups
+        for (var i = 0; i < scope.popups.length; i++) {
+          scope.popups[i].setMap(null);
+        }
+        scope.popups = [];
+
+        // Score String
+        var nearbyNoises = '';
+        for (var noise in data.noises) {
+          var obj = data.noises[noise];
+          if (obj.noise_type === 'Bus Stop') {
+            nearbyNoises += '<li>Bus Stop on ';
+          } else {
+            nearbyNoises += '<li>';
+          }
+          nearbyNoises += obj.description + '</li>';
+        }
+
+        var contentString = '<div id="content">' +
+          '<div id="siteNotice">' +
+          '</div>' +
+          '<h1 id="firstHeading" class="firstHeading">Location Noise Score</h1>' +
+          '<div id="bodyContent">' +
+          '<h2 class="text-center">' + data.score + '</h2>'+
+          '<ul>' + nearbyNoises + '</ul>'
+          '</div>' +
+          '</div>';
+
+        // Create InfoWindow
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        scope.popups.push(infowindow);
+
+        // Add InfoWindow to Marker
+        infowindow.open(scope.map,marker);
+      });
     }
   }
-});
+}]);
