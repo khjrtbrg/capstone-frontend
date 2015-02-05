@@ -115,8 +115,12 @@ servicesModule.factory('locationService', ['$http', function($http) {
       // Zoom To New Marker
       scope.map.setZoom(15);
       scope.map.panTo(marker.getPosition());
+      
+      // Add Popup
+      this.scorePopup(coordinates, scope);
 
-      // Score Popup
+    },
+    scorePopup: function(coordinates, scope) {
       var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
       
       $http.get(url).success(function(data) {
