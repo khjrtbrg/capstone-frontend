@@ -26,7 +26,7 @@ h3 {
 }
 
 #map-canvas {
-  height: 70vh;
+  height: 75vh;
   width: 70vw;
   margin: 0;
   padding: 0;
@@ -45,8 +45,9 @@ h3 {
 }
 
 .unclicked {
-  padding: 1%;
-  border-radius: 3px;
+  /*padding: 1%;
+  border-radius: 3px;*/
+  border: 4px solid yellow;
 }
 
 .clicked {

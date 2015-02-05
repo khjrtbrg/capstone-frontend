@@ -13,7 +13,8 @@ servicesModule.factory('layerService', function() {
         transit: {radius: 4000, items: []},
         dumps: {radius: 1500, items: []},
         construction: {radius: 9054, items: []},
-        demolition: {radius: 15750, items: []}
+        demolition: {radius: 15750, items: []},
+        noiseComplaints: {radius: 3000, items: []}
       };
 
 
@@ -51,6 +52,9 @@ servicesModule.factory('layerService', function() {
         }
         else if (type === "Demolition") {
           layers.demolition.items.push({location: latLon, weight: 16});
+        }
+        else if (type === "Noise Complaints") {
+          layers.noiseComplaints.items.push({location: latLon, weight: 11});
         }
       }
 
@@ -115,13 +119,13 @@ servicesModule.factory('locationService', ['$http', function($http) {
       // Zoom To New Marker
       scope.map.setZoom(15);
       scope.map.panTo(marker.getPosition());
-      
+
       // Add Popup
       this.scorePopup(coordinates, scope);
     },
     scorePopup: function(coordinates, scope) {
       var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
-      
+
       $http.get(url).success(function(data) {
         // Clear Any Current Popups
         for (var i = 0; i < scope.popups.length; i++) {
