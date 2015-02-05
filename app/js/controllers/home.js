@@ -41,7 +41,8 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
     }
 
     // Zoom Map to Searched Location
-    var markers = [];
+    $scope.markers = [];
+    $scope.popups = [];
 
     // Zoom to Location Function
     $scope.findLocation = function() {
@@ -49,7 +50,7 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
 
       $http.get(url).success(function(data) {
         var coordinates = data.results[0].geometry.location;
-        locationService.newMarker(coordinates, $scope, markers);
+        locationService.newMarker(coordinates, $scope);
       });
     };
 
@@ -61,7 +62,7 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-          locationService.newMarker(coordinates, $scope, markers);
+          locationService.newMarker(coordinates, $scope);
         });
       }
     };
