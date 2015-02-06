@@ -30,12 +30,6 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
           layerName.setMap(layerName.getMap() ? null : $scope.map);
         }
 
-        // Change button appearance when layer is turned off
-        $scope.buttonClass = function(idName) {
-          var layerButton = window.document.getElementById("transit");
-          $(layerButton).addClass("clicked");
-        }
-
         // Change Radius on Zoom
         google.maps.event.addListener($scope.map, 'zoom_changed', function() {
           for (var i in layers) {
