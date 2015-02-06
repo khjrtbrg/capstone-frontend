@@ -27,9 +27,6 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
 
         // Toggle Layer Function
         $scope.toggleLayer = function(layerName) {
-          // var layerButton = window.document.getElementById("transit");
-          // console.log($event.toElement);
-          // layerButton.addAttribute("border", "3px solid red");
           layerName.setMap(layerName.getMap() ? null : $scope.map);
         }
 
