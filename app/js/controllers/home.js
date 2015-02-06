@@ -26,16 +26,11 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
         }
 
         // Toggle Layer Function
-        $scope.toggleLayer = function($event, layerName) {
-          var layerButton = window.document.getElementById("transit");
-          layerButton.className = "unclicked";
-          console.log($event.toElement);
-          // layerButton.addAttribute("border", "3px solid red");
-
-          layerName.setMap(layerName.getMap() ? null : $scope.map);
-          // var test = String(layerName);
+        $scope.toggleLayer = function(layerName) {
           // var layerButton = window.document.getElementById("transit");
-          // $(layerButton).addClass("clicked");
+          // console.log($event.toElement);
+          // layerButton.addAttribute("border", "3px solid red");
+          layerName.setMap(layerName.getMap() ? null : $scope.map);
         }
 
         // Change button appearance when layer is turned off

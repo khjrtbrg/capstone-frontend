@@ -44,20 +44,31 @@ h3 {
   padding: 1%;
 }
 
-.unclicked {
-  /*padding: 1%;
-  border-radius: 3px;*/
-  border: 4px solid yellow;
+input[type="checkbox"] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
 }
 
-.clicked {
-  background-color: #F52F5D;
+input[checked="false"] {
+  padding: 1%;
   border-radius: 3px;
-  padding: 3%;
+  border: 4px solid blue;
 }
 
 .glyphicon {
   color: white;
+}
+
+.clicked {
+  border-radius: 3px;
+  padding: 3%;
+  background-color: #F52F5D;
+}
+
+input[type=checkbox]:not(:checked) ~ span {
+  background-color: black;
+
 }
 
 /* Media Query */
