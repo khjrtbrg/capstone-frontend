@@ -14,7 +14,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
       };
 
       // Create & Add Map
-      $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      $scope.map = new google.maps.Map(d3.select("#map-canvas").node(), mapOptions);
 
       // Fetch Noises From API and Add To Map
       $http.get('http://54.191.247.160/noises').success(function(data) {
