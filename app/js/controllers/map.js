@@ -67,9 +67,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
 
     // Function to Toggle by noise_type
     $scope.toggleNoises = function(noise_type) {
-      // get all svgs that match noise type
       var noises = document.getElementsByClassName(noise_type);
-      // add or remove hide class
       angular.element(noises).toggleClass('hide');
     }
 
