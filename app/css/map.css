@@ -9,7 +9,11 @@
 }
 
 .noises circle {
-  fill: red;
+  fill: rgba(225, 19, 19, 0.5);
   stroke: black;
   stroke-width: 0.5px;
+}
+
+.hide_noise_type {
+  display: none;
 }

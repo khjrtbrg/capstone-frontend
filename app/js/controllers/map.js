@@ -35,7 +35,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
                 .each(transform) // update existing markers
               .enter().append("svg:svg")
                 .each(transform)
-                .attr("class", "marker");
+                .attr("class", findClass);
 
             // Add a circle.
             marker.append("svg:circle")
@@ -49,6 +49,10 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
               return d3.select(this)
                   .style("left", (d.x - padding) + "px")
                   .style("top", (d.y - padding) + "px");
+            }
+
+            function findClass(d) {
+              return d.value.noise_type;
             }
           };
         };
