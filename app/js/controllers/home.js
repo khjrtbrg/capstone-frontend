@@ -17,7 +17,7 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
       $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
       // Fetch Noises From API and Process Into Layers
-      $http.get('http://localhost:3000/').success(function(data) {
+      $http.get('http://54.191.247.160/noises').success(function(data) {
         // Sort Data into Layer Arrays
         var layers = layerService.setupLayers(data);
         // Create Heatmap Layers from Layer Arrays
