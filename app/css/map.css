@@ -1,15 +1,14 @@
-.stations, .stations svg {
+.noises, .noises svg {
   position: absolute;
 }
 
-.stations svg {
-  width: 60px;
+.noises svg {
+  width: 20px;
   height: 20px;
-  padding-right: 100px;
-  font: 10px sans-serif;
+  /*background-color: cyan;*/
 }
 
-.stations circle {
+.noises circle {
   fill: red;
   stroke: black;
   stroke-width: 0.5px;

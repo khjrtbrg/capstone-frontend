@@ -23,7 +23,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
         // Add the container when the overlay is added to the map.
         overlay.onAdd = function() {
           var layer = d3.select(this.getPanes().overlayLayer).append("div")
-              .attr("class", "stations");
+              .attr("class", "noises");
 
           // Draw each marker as a separate SVG element.
           overlay.draw = function() {
