@@ -18,8 +18,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
 
       // Fetch Noises From API and Add To Map
       d3.json("http://54.191.247.160/noises", function(data) {
-        console.log(data);
-
         var overlay = new google.maps.OverlayView();
 
         // Add the container when the overlay is added to the map.
