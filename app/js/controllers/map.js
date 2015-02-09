@@ -17,7 +17,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
       $scope.map = new google.maps.Map(d3.select("#map-canvas").node(), mapOptions);
 
       // Fetch Noises From API and Add To Map
-      d3.json("http://54.191.247.160/noises", function(data) {
+      d3.json("http://localhost:3000/noises", function(data) {
         var overlay = new google.maps.OverlayView();
 
         // Add the container when the overlay is added to the map.
@@ -64,5 +64,13 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
 
     // initialize map
     google.maps.event.addDomListener(window, 'load', initialize());
+
+    // Function to Toggle by noise_type
+    $scope.toggleNoises = function(noise_type) {
+      // get all svgs that match noise type
+      var noises = document.getElementsByClassName(noise_type);
+      // add or remove hide class
+      angular.element(noises).toggleClass('hide');
+    }
 
   }]);
