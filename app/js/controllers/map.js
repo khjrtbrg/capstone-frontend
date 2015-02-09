@@ -17,11 +17,11 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
       $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
       // Fetch Noises From API and Add To Map
-      // $http.get('http://localhost:3000/noises/').success(function(data) {
-        
-      //   // process into D3 SVGs here!
+      $http.get('http://54.191.247.160/noises').success(function(data) {
+        console.log('fetched data!');
+        // process into D3 SVGs here!
 
-      // });
+      });
     }
 
     // initialize map
