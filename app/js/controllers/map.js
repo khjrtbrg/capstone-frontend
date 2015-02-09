@@ -35,6 +35,8 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
                 .each(transform) // update existing markers
               .enter().append("svg:svg")
                 .each(transform)
+                .attr("tooltip", "pineapple")
+                .attr("tooltip-trigger", "click")
                 .attr("class", findClass);
 
             // Add a circle.
