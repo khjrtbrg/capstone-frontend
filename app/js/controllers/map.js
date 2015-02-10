@@ -22,8 +22,9 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
 
         // Add the container when the overlay is added to the map.
         overlay.onAdd = function() {
-          var layer = d3.select(this.getPanes().overlayLayer).append("div")
-              .attr("class", "noises");
+          var layer = d3.select(this.getPanes().overlayMouseTarget)
+            .append("div")
+            .attr("class", "noises");
 
           // Draw each marker as a separate SVG element.
           overlay.draw = function() {
@@ -35,7 +36,8 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
                 .each(transform) // update existing markers
               .enter().append("svg:svg")
                 .each(transform)
-                .attr("tooltip", "pineapple")
+                .on("click", pineapple)
+                .attr("tooltip", findClass)
                 .attr("tooltip-trigger", "click")
                 .attr("class", findClass);
 
@@ -56,6 +58,11 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
             function findClass(d) {
               return d.value.noise_type;
             }
+
+            function pineapple() {
+              console.log("This was a test!");
+            }
+
           };
         };
 
@@ -66,6 +73,11 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
 
     // initialize map
     google.maps.event.addDomListener(window, 'load', initialize());
+
+    // Listening event for clicking on a noise datapoint
+    // $scope.map.event.addDomListener(this, 'click', showNoiseType());
+
+    // // Function to show what type of noise the point is
 
     // Function to Toggle by noise_type
     $scope.toggleNoises = function(noise_type) {

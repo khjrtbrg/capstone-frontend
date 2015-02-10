@@ -50,15 +50,37 @@ input[type="checkbox"] {
   left: -9999px;
 }
 
-input[checked="false"] {
+/*input[checked="false"] {
   padding: 1%;
   border-radius: 3px;
   border: 4px solid blue;
   margin-right: 2%;
+}*/
+
+input(:checked) ~ div.on_notice {
+  /*position: absolute;
+  margin-left: 15%;*/
+}
+
+/*input[type=checkbox]:not(:checked) ~ div.on_notice {
+  display: none;
+}*/
+
+.off_notice {
+  /*position: absolute;
+  margin-left: 0%;*/
+  display: none;
+}
+
+.on_notice {
+  display: none;
 }
 
 .glyphicon {
   color: white;
+  /*-webkit-box-shadow: 1px 1px 3px 4px #d3d3d3;
+  -moz-box-shadow:    1px 1px 3px 4px #d3d3d3;
+  box-shadow:         1px 1px 3px 4px #d3d3d3;*/
 }
 
 .clicked {
@@ -66,15 +88,43 @@ input[checked="false"] {
   padding: 3%;
   background-color: black;
   margin-right: 2%;
+  animation-name: slide_on;
+  animation-duration: 1s;
+  /* Chrome, Safari, Opera */
+  -webkit-animation-name: slide_on;
+  -webkit-animation-duration: 0.7s;
+  /* Firefox */
+  -moz-animation-name: slide_on;
+  -moz-animation-duration: 0.7s;
 }
 
-input[type=checkbox]:not(:checked) ~ span {
-  background-color: #F52F5D;
-
+input[type=checkbox]:not(:checked) ~ div span {
+  /*background-color: #F52F5D;*/
+  animation-name: slide_off;
+  animation-duration: 1s;
+  /* Chrome, Safari, Opera */
+  -webkit-animation-name: slide_off;
+  -webkit-animation-duration: 0.7s;
+  /* Firefox */
+  -moz-animation-name: slide_off;
+  -moz-animation-duration: 0.7s;
+  margin-left: 10%;
+  background-color: gray;
 }
+
+/*input[type=checkbox]:not(:checked) ~ div span::after {
+  content: "OFF";
+}*/
 
 .map-filters label {
   display: block;
+}
+
+.switch {
+  /*border: 1px black solid;*/
+  display: inline;
+  width: 60px;
+  height: 25px;
 }
 
 /* Media Query */
@@ -97,4 +147,75 @@ input[type=checkbox]:not(:checked) ~ span {
 
 @media only screen and (max-width: 990px) {
   .map-filters p label { font-size: .9em; }
+}
+
+/* Key Frames */
+
+/* Standard */
+@keyframes slide_off {
+  0% {
+    background-color: black;
+    margin-left: 0%;
+  }
+  100% {
+    margin-left: 10%;
+    background-color: gray;
+  }
+}
+
+@keyframes slide_on {
+  0% {
+    background-color: gray;
+    margin-left: 10%;
+  }
+  100% {
+    margin-left: 0%;
+    background-color: black;
+  }
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes slide_off {
+  0% {
+    background-color: black;
+    margin-left: 0%;
+  }
+  100% {
+    margin-left: 10%;
+    background-color: gray;
+  }
+}
+
+@-webkit-keyframes slide_on {
+  0% {
+    background-color: gray;
+    margin-left: 10%;
+  }
+  100% {
+    margin-left: 0%;
+    background-color: black;
+  }
+}
+
+/* Firefox */
+@-moz-keyframes slide_off {
+  0% {
+    background-color: black;
+    margin-left: 0%;
+  }
+  100% {
+    margin-left: 10%;
+    background-color: gray;
+  }
+}
+
+@-moz-keyframes slide_on {
+  0% {
+    background-color: gray;
+    margin-left: 10%;
+  }
+  100% {
+    margin-left: 0%;
+    background-color: black;
+  }
 }
