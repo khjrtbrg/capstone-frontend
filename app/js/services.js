@@ -124,7 +124,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
       this.scorePopup(coordinates, scope);
     },
     scorePopup: function(coordinates, scope) {
-      var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
+      var url = 'http://54.191.247.160/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
 
       $http.get(url).success(function(data) {
         // Clear Any Current Popups
@@ -177,9 +177,10 @@ servicesModule.factory('newLayerService', function() {
         var location = apiResponse[i];
         var latLon = new google.maps.LatLng(location.lat, location.lon);
         var type = location.noise_type;
+        var adjustedWeight = location.decibel * 0.15
 
         if (excludedNoiseTypes.indexOf(type) == -1) {
-          noiseArray.push({location: latLon, noiseType: type});
+          noiseArray.push({location: latLon, noiseType: type, weight: adjustedWeight});
         }
       }
 
@@ -188,7 +189,7 @@ servicesModule.factory('newLayerService', function() {
     createLayer: function(points) {
       var layer = new google.maps.visualization.HeatmapLayer({
         data: points,
-        maxIntensity: 5
+        maxIntensity: 30
       });
 
       return layer;
