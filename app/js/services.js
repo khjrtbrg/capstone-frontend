@@ -167,3 +167,31 @@ servicesModule.factory('locationService', ['$http', function($http) {
     }
   }
 }]);
+
+servicesModule.factory('newLayerService', function() {
+  return {
+    setupLayer: function(apiResponse, excludedNoiseTypes) {
+      var noiseArray = [];
+
+      for (var i = 0; i < apiResponse.length; i++) {
+        var location = apiResponse[i];
+        var latLon = new google.maps.LatLng(location.lat, location.lon);
+        var type = location.noise_type;
+
+        if (excludedNoiseTypes.indexOf(type) == -1) {
+          noiseArray.push({location: latLon, noiseType: type});
+        }
+      }
+
+      return noiseArray;
+    },
+    createLayer: function(points) {
+      var layer = new google.maps.visualization.HeatmapLayer({
+        data: points,
+        maxIntensity: 5
+      });
+
+      return layer;
+    }
+  }
+});
