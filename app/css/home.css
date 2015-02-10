@@ -57,6 +57,11 @@ input[type="checkbox"] {
   border-radius: 3px;
 }
 
+.true {
+  background-color: red;
+  border: black 2px dotted;
+}
+
 label {
   display: block;
   height: 4vh;
@@ -67,18 +72,17 @@ label {
   position: absolute;
   padding: 8% 12%;
   height: 10%;
-  /*-webkit-box-shadow: 1px 1px 3px 4px #d3d3d3;
-  -moz-box-shadow:    1px 1px 3px 4px #d3d3d3;
-  box-shadow:         1px 1px 3px 4px #d3d3d3;*/
 }
 
 .clicked {
-  /*border-radius: 3px;*/
   top: 0;
+  border-radius: 3px;
   background-color: black;
   width: 50%;
   height: 100%;
-  /*margin-right: 2%;*/
+  -webkit-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.5);
+  -moz-box-shadow:    2px 2px 1px 1px rgba(0,0,0,0.5);
+  box-shadow:         2px 2px 1px 1px rgba(0,0,0,0.5);
   animation-name: slide_on;
   animation-duration: .7s;
   /* Chrome, Safari, Opera */
@@ -137,6 +141,9 @@ input[type=checkbox]:not(:checked) ~ div span {
   100% {
     margin-left: 50%;
     background-color: gray;
+    -webkit-box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.5);
+    -moz-box-shadow:    1px 1px 2px 2px rgba(0,0,0,0.5);
+    box-shadow:         1px 1px 2px 2px rgba(0,0,0,0.5);
   }
 }
 
@@ -151,7 +158,6 @@ input[type=checkbox]:not(:checked) ~ div span {
   }
 }
 
-
 /* Chrome, Safari, Opera */
 @-webkit-keyframes slide_off {
   0% {
@@ -161,6 +167,9 @@ input[type=checkbox]:not(:checked) ~ div span {
   100% {
     margin-left: 50%;
     background-color: gray;
+    -webkit-box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.5);
+    -moz-box-shadow:    1px 1px 2px 2px rgba(0,0,0,0.5);
+    box-shadow:         1px 1px 2px 2px rgba(0,0,0,0.5);
   }
 }
 
@@ -175,7 +184,6 @@ input[type=checkbox]:not(:checked) ~ div span {
   }
 }
 
-
 /* Firefox */
 @-moz-keyframes slide_off {
   0% {
@@ -185,6 +193,9 @@ input[type=checkbox]:not(:checked) ~ div span {
   100% {
     margin-left: 50%;
     background-color: gray;
+    -webkit-box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.5);
+    -moz-box-shadow:    1px 1px 2px 2px rgba(0,0,0,0.5);
+    box-shadow:         1px 1px 2px 2px rgba(0,0,0,0.5);
   }
 }
 

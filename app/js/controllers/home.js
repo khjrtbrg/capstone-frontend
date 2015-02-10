@@ -30,6 +30,16 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
           layerName.setMap(layerName.getMap() ? null : $scope.map);
         }
 
+        $scope.changeColor = function() {
+          console.log("pineapple");
+          console.log(this.typeOf);
+
+          // angular.element(this).css("background-color", "red");
+          var inputElement = angular.element(this);
+          var divElement = inputElement.siblings("div");
+          angular.element(divElement).toggleClass("switch-off");
+        }
+
         // Change Radius on Zoom
         google.maps.event.addListener($scope.map, 'zoom_changed', function() {
           for (var i in layers) {
