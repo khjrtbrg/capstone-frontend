@@ -57,23 +57,17 @@ input[type="checkbox"] {
   margin-right: 2%;
 }*/
 
-input(:checked) ~ div.on_notice {
-  /*position: absolute;
-  margin-left: 15%;*/
+.switch {
+  /*border: 1px black solid;*/
+  width: 25%;
+  height: 100%;
+  background-color: green;
+  display: inline-block;
 }
 
-/*input[type=checkbox]:not(:checked) ~ div.on_notice {
-  display: none;
-}*/
-
-.off_notice {
-  /*position: absolute;
-  margin-left: 0%;*/
-  display: none;
-}
-
-.on_notice {
-  display: none;
+label {
+  display: block;
+  height: 4vh;
 }
 
 .glyphicon {
@@ -85,9 +79,9 @@ input(:checked) ~ div.on_notice {
 
 .clicked {
   border-radius: 3px;
-  padding: 3%;
   background-color: black;
-  margin-right: 2%;
+  padding: 16%;
+  /*margin-right: 2%;*/
   animation-name: slide_on;
   animation-duration: 1s;
   /* Chrome, Safari, Opera */
@@ -108,7 +102,7 @@ input[type=checkbox]:not(:checked) ~ div span {
   /* Firefox */
   -moz-animation-name: slide_off;
   -moz-animation-duration: 0.7s;
-  margin-left: 10%;
+  margin-left: 50%;
   background-color: gray;
 }
 
@@ -116,16 +110,6 @@ input[type=checkbox]:not(:checked) ~ div span {
   content: "OFF";
 }*/
 
-.map-filters label {
-  display: block;
-}
-
-.switch {
-  /*border: 1px black solid;*/
-  display: inline;
-  width: 60px;
-  height: 25px;
-}
 
 /* Media Query */
 
@@ -158,7 +142,7 @@ input[type=checkbox]:not(:checked) ~ div span {
     margin-left: 0%;
   }
   100% {
-    margin-left: 10%;
+    margin-left: 50%;
     background-color: gray;
   }
 }
@@ -166,7 +150,7 @@ input[type=checkbox]:not(:checked) ~ div span {
 @keyframes slide_on {
   0% {
     background-color: gray;
-    margin-left: 10%;
+    margin-left: 50%;
   }
   100% {
     margin-left: 0%;
@@ -181,7 +165,7 @@ input[type=checkbox]:not(:checked) ~ div span {
     margin-left: 0%;
   }
   100% {
-    margin-left: 10%;
+    margin-left: 50%;
     background-color: gray;
   }
 }
@@ -189,7 +173,7 @@ input[type=checkbox]:not(:checked) ~ div span {
 @-webkit-keyframes slide_on {
   0% {
     background-color: gray;
-    margin-left: 10%;
+    margin-left: 50%;
   }
   100% {
     margin-left: 0%;
@@ -204,7 +188,7 @@ input[type=checkbox]:not(:checked) ~ div span {
     margin-left: 0%;
   }
   100% {
-    margin-left: 10%;
+    margin-left: 50%;
     background-color: gray;
   }
 }
@@ -212,7 +196,7 @@ input[type=checkbox]:not(:checked) ~ div span {
 @-moz-keyframes slide_on {
   0% {
     background-color: gray;
-    margin-left: 10%;
+    margin-left: 50%;
   }
   100% {
     margin-left: 0%;
