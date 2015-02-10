@@ -29,8 +29,6 @@ map2ControllerModule.controller('map2Controller', ['$scope', '$http', 'layerServ
 
         // Toggle Layer Function
         $scope.toggleLayer = function(layerName) {
-          console.log('removing: ' + layerName);
-
           // Add or Remove Filter to excludedNoises
           var i = $scope.excludedNoises.indexOf(layerName)
           if (i == -1) {
@@ -39,7 +37,8 @@ map2ControllerModule.controller('map2Controller', ['$scope', '$http', 'layerServ
             $scope.excludedNoises.splice(i, 1);
           }
 
-          // Create Heatmap Layer
+          // Remove Old/Create New Heatmap Layer
+          $scope.heatmap.setMap(null);
           createLayer(data);
         }
 
@@ -53,15 +52,7 @@ map2ControllerModule.controller('map2Controller', ['$scope', '$http', 'layerServ
       });
     }
 
-    var removeLayer = function() {
-      if ($scope.heatmap != undefined) {
-        $scope.heatmap.setMap(null);
-      }
-    }
-
     var createLayer = function(data) {
-      removeLayer();
-
       var newPoints = newLayerService.setupLayer(data, $scope.excludedNoises);
       $scope.heatmap = newLayerService.createLayer(newPoints);
       $scope.heatmap.setMap($scope.map);
