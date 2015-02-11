@@ -30,13 +30,6 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
           layerName.setMap(layerName.getMap() ? null : $scope.map);
         }
 
-        $scope.changeColor = function($event) {
-          // var switchDiv = angular.element($event["toElement"]);
-          // Can't figure out how to isolate the div specifically, it's assigning the background to whatever you click on
-          // var switchDiv = angular.element($event["toElement"]);
-          //  console.log(switchDiv);
-          // switchDiv.toggleClass("switched-off");
-        }
 
         // Change Radius on Zoom
         google.maps.event.addListener($scope.map, 'zoom_changed', function() {

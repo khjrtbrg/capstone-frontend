@@ -24,14 +24,8 @@
       <div class="map-options">
         <h3>Filter Noise Types</h3>
 
-        <!-- <label>
-          <input type="checkbox" checked="true" ng-click="toggleNoises('transit')"></input>
-          <span class="glyphicon glyphicon-leaf clicked"></span>
-          Transit
-        </label> -->
-
         <label>
-          <input type="checkbox" checked="true" ng-click="toggleNoises('transit')"></input>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('transit');changeColor($event)"></input>
           <div class="switch">
             <span class="glyphicon glyphicon-road clicked"></span>
           </div>
@@ -40,75 +34,103 @@
 
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('dump')"></input>
-          <span class="glyphicon glyphicon-trash clicked"></span>
-          Dumps
-        </label>
-
-
-        <!-- <label><input type="checkbox" checked="true" ng-click="toggleNoises('dumps')"></input><div class="switch"><span class="glyphicon glyphicon-trash clicked"></span></div>Dumps</label>
-        <label><input type="checkbox" checked="true" ng-click="toggleNoises('fireStations')"></input><div class="switch"><span class="glyphicon glyphicon-fire clicked"></span></div>Fire Stations</label> --> -->
+          <div class="switch">
+            <span class="glyphicon glyphicon-trash clicked"></span>
+          </div>Dumps</label>
 
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('fireStation')"></input>
-          <span class="glyphicon glyphicon-fire clicked"></span>
+          <div class="switch">
+            <span class="glyphicon glyphicon-fire clicked"></span>
+          </div>
           Fire Stations
         </label>
+
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('college')"></input>
-          <span class="glyphicon glyphicon-pencil clicked"></span>
+          <div class="switch">
+            <span class="glyphicon glyphicon-pencil clicked"></span>
+          </div>
           Colleges
         </label>
+
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('school')"></input>
-          <span class="glyphicon glyphicon-book clicked"></span>
+          <div class="switch">
+            <span class="glyphicon glyphicon-book clicked"></span>
+          </div>
           Schools
         </label>
+
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('policeStation')"></input>
-          <span class="glyphicon glyphicon-bullhorn clicked"></span>
+          <div class="switch">
+            <span class="glyphicon glyphicon-bullhorn clicked"></span>
+          </div>
           Police Stations
         </label>
+
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('hospital')"></input>
-          <span class="glyphicon glyphicon-plus-sign clicked"></span>
+          <div class="switch">
+            <span class="glyphicon glyphicon-plus-sign clicked"></span>
+          </div>
           Hospitals
         </label>
+
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('bar')"></input>
-          <span class="glyphicon glyphicon-glass clicked"></span>
+          <div class="switch">
+            <span class="glyphicon glyphicon-glass clicked"></span>
+          </div>
           Bars
         </label>
+
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('construction')"></input>
-          <span class="glyphicon glyphicon-wrench clicked"></span>
+          <div class="switch">
+            <span class="glyphicon glyphicon-wrench clicked"></span>
+          </div>
           Construction
         </label>
+
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('demolition')"></input>
-          <span class="glyphicon glyphicon-warning-sign clicked"></span>
+          <div class="switch">
+            <span class="glyphicon glyphicon-wrench clicked"></span>
+          </div>
           Demolition
         </label>
+
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('noiseComplaints')"></input>
-          <span class="glyphicon glyphicon-phone-alt clicked"></span>
+          <div class="switch">
+            <span class="glyphicon glyphicon-phone-alt clicked"></span>
+          </div>
           911 Noise Complaints
         </label>
 
-
-        <!-- New Filters... Need to Integrate with Kat's Toggles -->
         <label>
-          <input type="checkbox" checked="true" ng-click="toggleLayer('stadium')"></input>
-          <span class="glyphicon glyphicon-volume-up clicked"></span>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('stadium')"></input>
+          <div class="switch">
+            <span class="glyphicon glyphicon-volume-up clicked"></span>
+          </div>
           Stadiums
         </label>
+
         <label>
-          <input type="checkbox" checked="checked" ng-click="toggleLayer('freeway')"></input>
-          <span class="glyphicon glyphicon-road clicked"></span>
+          <input type="checkbox" checked="checked" ng-click="toggleNoises('freeway')"></input>
+          <div class="switch">
+            <span class="glyphicon glyphicon-road clicked"></span>
+          </div>
           Freeways
         </label>
+
         <label>
-          <input type="checkbox" checked="true" ng-click="toggleLayer('heliportOrAirport')"></input>
-          <span class="glyphicon glyphicon-plane clicked"></span>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('heliportOrAirport')"></input>
+          <div class="switch">
+            <span class="glyphicon glyphicon-plane clicked"></span>
+          </div>
           Airports/Heliports
         </label>
 
