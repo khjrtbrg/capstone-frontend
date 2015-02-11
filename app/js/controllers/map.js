@@ -29,6 +29,14 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
         // Create D3 Points
         var overlay = new google.maps.OverlayView();
+        
+        // Remove Freeways from Data
+        var d3Points = [];
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].noise_type != 'freeway') {
+            d3Points.push(data[i]);
+          };
+        }
 
         // Add the container when the overlay is added to the map.
         overlay.onAdd = function() {
@@ -41,7 +49,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
                 padding = 10;
 
             var marker = layer.selectAll("svg")
-                .data(d3.entries(data))
+                .data(d3.entries(d3Points))
                 .each(transform) // update existing markers
               .enter().append("svg:svg")
                 .each(transform)
