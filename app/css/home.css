@@ -128,7 +128,7 @@ label p {
 .glyphicon {
   color: white;
   position: absolute;
-  padding: 8% 12%;
+  padding: 8px 12px;
   height: 10%;
 }
 
