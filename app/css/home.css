@@ -9,7 +9,7 @@ body {
 }
 
 .divider {
-  background-image: url('./../../Soundwave.svg');
+  background-image: url('./../img/Soundwave.svg');
   height: 2.5vh;
   width: 100%;
   margin-top: 1%;
