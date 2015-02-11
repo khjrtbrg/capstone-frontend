@@ -86,10 +86,22 @@ input[type="checkbox"] {
   margin-right: 1%;
   border-radius: 3px;
   z-index: 1;
+  animation-name: to_green;
+  animation-duration: 1s;
+  -webkit-animation-name: to_green;
+  -webkit-animation-duration: 1s;
+  -moz-animation-name: to_green;
+  -moz-animation-duration: 1s;
 }
 
 .switched-off {
   background-color: #ff1919;
+  animation-name: to_red;
+  animation-duration: .7s;
+  -webkit-animation-name: to_red;
+  -webkit-animation-duration: 0.7s;
+  -moz-animation-name: to_red;
+  -moz-animation-duration: .7s;
 }
 
 label {
@@ -176,6 +188,24 @@ input[type=checkbox]:not(:checked) ~ div span {
   }
 }
 
+@keyframes to_red {
+  0% {
+    background-color: #00cc00;
+  }
+  100% {
+    background-color: #ff1919;
+  }
+}
+
+@keyframes to_green {
+  0% {
+    background-color: #ff1919;
+  }
+  100% {
+    background-color: #00cc00;
+  }
+}
+
 /* Chrome, Safari, Opera */
 @-webkit-keyframes slide_off {
   0% {
@@ -202,6 +232,24 @@ input[type=checkbox]:not(:checked) ~ div span {
   }
 }
 
+@-webkit-keyframes to_red {
+  0% {
+    background-color: #00cc00;
+  }
+  100% {
+    background-color: #ff1919;
+  }
+}
+
+@-webkit-keyframes to_green {
+  0% {
+    background-color: #ff1919;
+  }
+  100% {
+    background-color: #00cc00;
+  }
+}
+
 /* Firefox */
 @-moz-keyframes slide_off {
   0% {
@@ -225,5 +273,23 @@ input[type=checkbox]:not(:checked) ~ div span {
   100% {
     margin-left: 0%;
     background-color: black;
+  }
+}
+
+@-moz-keyframes to_red {
+  0% {
+    background-color: #00cc00;
+  }
+  100% {
+    background-color: #ff1919;
+  }
+}
+
+@-moz-keyframes to_green {
+  0% {
+    background-color: #ff1919;
+  }
+  100% {
+    background-color: #00cc00;
   }
 }
