@@ -2,81 +2,6 @@ var servicesModule = angular.module('servicesModule', []);
 
 servicesModule.factory('layerService', function() {
   return {
-    setupLayers: function(apiResponse) {
-      var layers = {
-        fireStations: {radius: 15750, items: []},
-        colleges: {radius: 1000, items: []},
-        schools: {radius: 1000, items: []},
-        hospitals: {radius: 15750, items: []},
-        bars: {radius: 1000, items: []},
-        policeStations: {radius: 15750, items: []},
-        transit: {radius: 4000, items: []},
-        dumps: {radius: 1500, items: []},
-        construction: {radius: 9054, items: []},
-        demolition: {radius: 15750, items: []},
-        noiseComplaints: {radius: 3000, items: []}
-      };
-
-
-      // Add API Response Data to Layers
-      for (var i = 0; i < apiResponse.length; i++) {
-        var location = apiResponse[i];
-        var type = location.noise_type;
-        var latLon = new google.maps.LatLng(location.lat, location.lon);
-        if (type === "Transit Center" || type === "Bus Stop" || type === "Trolley"){
-          layers.transit.items.push({location: latLon, weight: 11});
-        }
-        else if (type === "Dump") {
-          layers.dumps.items.push({location: latLon, weight: 10});
-        }
-        else if (type === "Fire Station") {
-          layers.fireStations.items.push({location: latLon, weight: 14});
-        }
-        else if (type === "College") {
-          layers.colleges.items.push({location: latLon, weight: 11});
-        }
-        else if (type === "School") {
-          layers.schools.items.push({location: latLon, weight: 9});
-        }
-        else if (type === "Police Station") {
-          layers.policeStations.items.push({location: latLon, weight: 14});
-        }
-        else if (type === "Hospital") {
-          layers.hospitals.items.push({location: latLon, weight: 14});
-        }
-        else if (type === "Bar") {
-          layers.bars.items.push({location: latLon, weight: 10});
-        }
-        else if (type === "Construction") {
-          layers.construction.items.push({location: latLon, weight: 16});
-        }
-        else if (type === "Demolition") {
-          layers.demolition.items.push({location: latLon, weight: 16});
-        }
-        else if (type === "Noise Complaints") {
-          layers.noiseComplaints.items.push({location: latLon, weight: 11});
-        }
-      }
-
-      return layers;
-    },
-
-    createLayer: function(scope, layer, layers) {
-      // Make Layer & Add to Scope
-      scope[layer] = new google.maps.visualization.HeatmapLayer({
-        data: layers[layer].items,
-        radius: this.findRadius(scope.map, layers[layer].radius)
-      });
-
-      // Bars Won't Show Up Without maxIntensity
-      if (layer == 'bars') {
-        scope[layer].set('maxIntensity', 40);
-      }
-
-      // Add Layer to Map
-      scope[layer].setMap(scope.map);
-    },
-
     findRadius: function(map, radius) {
       // Get the zoom level the user is currently at; radius must start as num of px at closest range; 1ft = 6px
       var current_zoom = map.getZoom();
@@ -93,8 +18,6 @@ servicesModule.factory('layerService', function() {
 
       // Round to nearest whole number to make Google's API happy
       var newRadius = Math.round(radius);
-
-      // Return the adjusted value of the radius
       return newRadius;
     }
   }
