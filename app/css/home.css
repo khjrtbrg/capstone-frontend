@@ -55,11 +55,11 @@ input[type="checkbox"] {
   border: 1px black solid;
   margin-right: 1%;
   border-radius: 3px;
+  z-index: 1;
 }
 
-.true {
+.switched-off {
   background-color: red;
-  border: black 2px dotted;
 }
 
 label {

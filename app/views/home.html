@@ -19,7 +19,7 @@
       <div class="map-filters col-md-3 col-sm-12 col-xs-12">
         <h3>Filter Noise Types</h3>
 
-        <label><input type="checkbox" checked="true" ng-click="toggleLayer(transit)"></input><div class="switch" ng-click="changeColor()"><span class="glyphicon glyphicon-road clicked"></span></div>Transit</label>
+        <label ng-click="changeColor($event)"><input type="checkbox" checked="true" ng-click="toggleLayer(transit)"></input><div class="switch"><span class="glyphicon glyphicon-road clicked"></span></div>Transit</label>
         <label><input type="checkbox" checked="true" ng-click="toggleLayer(dumps)"></input><div class="switch"><span class="glyphicon glyphicon-trash clicked"></span></div>Dumps</label>
         <label><input type="checkbox" checked="true" ng-click="toggleLayer(fireStations)"></input><div class="switch"><span class="glyphicon glyphicon-fire clicked"></span></div>Fire Stations</label>
         <label><input type="checkbox" checked="true" ng-click="toggleLayer(colleges)"></input><div class="switch"><span class="glyphicon glyphicon-pencil clicked"></span></div>Colleges</label>
