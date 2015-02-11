@@ -11,7 +11,7 @@ body {
 .divider {
   background-image: url('./../../Soundwave.svg');
   height: 2.5vh;
-  width: 97vw;
+  width: 100%;
   margin-top: 1%;
   margin-bottom: 1%;
   margin-left: -1%;
