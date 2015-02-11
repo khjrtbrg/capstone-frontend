@@ -5,14 +5,14 @@
     <div class="col-md-9 col-sm-12 col-xs-12">
 
       <div id="map-canvas"></div>
-      <!-- <div class="location-search">
+      <div class="location-search">
         <form>
           <label for="locationSearch">Find Location:</label>
           <input type="text" id="locationSearch" ng-model="locationSearch">
           <button ng-click="findLocation()">Search</button> OR
           <button ng-click="currentLocation()">Use Current Location</button>
         </form>
-      </div> -->
+      </div>
 
     </div>
 
@@ -74,6 +74,23 @@
           <input type="checkbox" checked="true" ng-click="toggleNoises('noiseComplaints')"></input>
           <span class="glyphicon glyphicon-phone-alt clicked"></span>
           911 Noise Complaints
+        </label>
+
+        <!-- New Filters... Need to Integrate with Kat's Toggles -->
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleLayer('stadium')"></input>
+          <span class="glyphicon glyphicon-volume-up clicked"></span>
+          Stadiums
+        </label>
+        <label>
+          <input type="checkbox" checked="checked" ng-click="toggleLayer('freeway')"></input>
+          <span class="glyphicon glyphicon-road clicked"></span>
+          Freeways
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleLayer('heliportOrAirport')"></input>
+          <span class="glyphicon glyphicon-plane clicked"></span>
+          Airports/Heliports
         </label>
 
       </div>

@@ -1,7 +1,7 @@
 var mapControllerModule = angular.module('mapControllerModule', []);
 
-mapControllerModule.controller('mapController', ['$scope', '$http',
-  function($scope, $http) {
+mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerService', 'locationService',
+  function($scope, $http, newLayerService, locationService) {
 
     function initialize() {
       var mapOptions = {
@@ -17,7 +17,17 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
       $scope.map = new google.maps.Map(d3.select("#map-canvas").node(), mapOptions);
 
       // Fetch Noises From API and Add To Map
-      d3.json("http://localhost:3000/noises", function(data) {
+      d3.json("http://54.191.247.160/noises", function(data) {
+        // Create Heatmaps
+        $scope.dataPoints = data;
+        // Setup Excluded Filters Array
+        $scope.excludedNoises = [];
+        
+        // Create Heatmap Layer
+        createLayer();
+
+
+        // Create D3 Points
         var overlay = new google.maps.OverlayView();
 
         // Add the container when the overlay is added to the map.
@@ -64,13 +74,62 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
       });
     }
 
-    // initialize map
-    google.maps.event.addDomListener(window, 'load', initialize());
 
-    // Function to Toggle by noise_type
-    $scope.toggleNoises = function(noise_type) {
-      var noises = document.getElementsByClassName(noise_type);
+    // Toggle Noises Function
+    $scope.toggleNoises = function(layerName) {
+      // Add or Remove Filter to excludedNoises
+      var i = $scope.excludedNoises.indexOf(layerName)
+      if (i == -1) {
+        $scope.excludedNoises.push(layerName);
+      } else {
+        $scope.excludedNoises.splice(i, 1);
+      }
+
+      // Remove Old/Create New Heatmap Layer
+      $scope.heatmap.setMap(null);
+      createLayer();
+
+      // Hide Corresponding D3 Elements
+      var noises = document.getElementsByClassName(layerName);
       angular.element(noises).toggleClass('hide');
     }
+
+    // Create Heatmap Layer
+    var createLayer = function() {
+      var newPoints = newLayerService.setupLayer($scope.dataPoints, $scope.excludedNoises);
+      $scope.heatmap = newLayerService.createLayer(newPoints);
+      $scope.heatmap.setMap($scope.map);
+    }
+
+    // Zoom Map to Searched Location
+    $scope.markers = [];
+    $scope.popups = [];
+
+    // Zoom to Location Function
+    $scope.findLocation = function() {
+      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.locationSearch + ',+Seattle,+WA&key=AIzaSyCY7E9oBmlcDOJ4iBR1aL3PYp5feIpQ0KE';
+
+      $http.get(url).success(function(data) {
+        var coordinates = data.results[0].geometry.location;
+        locationService.newMarker(coordinates, $scope);
+      });
+    };
+
+    // Zoom to Current Location
+    $scope.currentLocation = function(){
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var coordinates = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          locationService.newMarker(coordinates, $scope);
+        });
+      }
+    };
+
+
+    // Initialize Map
+    google.maps.event.addDomListener(window, 'load', initialize());
 
   }]);
