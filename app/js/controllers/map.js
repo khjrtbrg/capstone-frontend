@@ -98,8 +98,10 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       createLayer();
 
       // Hide Corresponding D3 Elements
-      var noises = document.getElementsByClassName(layerName);
-      angular.element(noises).toggleClass('hide');
+      if (layerName != 'freeway') {
+        var noises = document.getElementsByClassName(layerName);
+        angular.element(noises).toggleClass('hide');
+      };
     }
 
     // Create Heatmap Layer
