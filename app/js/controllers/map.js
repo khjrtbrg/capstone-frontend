@@ -59,10 +59,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http',
               return d.value.noise_type;
             }
 
-            function pineapple() {
-              console.log("This was a test!");
-            }
-
           };
         };
 

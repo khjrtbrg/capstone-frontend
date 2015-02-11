@@ -20,16 +20,30 @@
       <div class="map-filters col-md-3 col-sm-12 col-xs-12">
         <h3>Filter Noise Types</h3>
 
-        <label>
+        <!-- <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('transit')"></input>
           <span class="glyphicon glyphicon-road clicked"></span>
           Transit
-        </label>
+        </label> -->
+
         <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('transit')"></input>
+          <div class="switch">
+            <span class="glyphicon glyphicon-road clicked"></span>
+          </div>
+          Transit
+        </label>
+
+        <!-- <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('dump')"></input>
           <span class="glyphicon glyphicon-trash clicked"></span>
           Dumps
         </label>
+        -->
+
+        <label><input type="checkbox" checked="true" ng-click="toggleNoises('dumps')"></input><div class="switch"><span class="glyphicon glyphicon-trash clicked"></span></div>Dumps</label>
+        <label><input type="checkbox" checked="true" ng-click="toggleNoises('fireStations')"></input><div class="switch"><span class="glyphicon glyphicon-fire clicked"></span></div>Fire Stations</label>
+        <!--
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('fireStation')"></input>
           <span class="glyphicon glyphicon-fire clicked"></span>
@@ -74,7 +88,8 @@
           <input type="checkbox" checked="true" ng-click="toggleNoises('noiseComplaints')"></input>
           <span class="glyphicon glyphicon-phone-alt clicked"></span>
           911 Noise Complaints
-        </label>
+        </label> -->
+
 
       </div>
     </div>
