@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 40pt;
   margin-top: -5px;
   color: white;
 }
@@ -38,7 +38,7 @@ h1 {
 }
 
 h3 {
-  font-size: 2em;
+  font-size: 23pt;
 }
 
 .map-home.row {
@@ -103,22 +103,15 @@ input[type="checkbox"] {
 label {
   display: block;
   height: 35px;
-  /*position: relative;*/
-  /*display: inline;*/
-  /*border: 1px solid black;*/
-  /*margin: auto;
-  top: 10;
-  left: 10;*/
 }
 
 label p {
   height: 35px;
   padding-bottom: 10px;
-  font-size: 13pt;
+  font-size: 12pt;
   display: inline;
   position: absolute;
   padding-top: 5px;
-  /*padding-top: -20px;*/
 }
 
 .glyphicon {
