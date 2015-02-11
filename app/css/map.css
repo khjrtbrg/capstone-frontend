@@ -12,8 +12,13 @@
   fill: rgba(225, 19, 19, 0.5);
   stroke: black;
   stroke-width: 0.5px;
+  cursor: pointer;
 }
 
 .hide_noise_type {
+  display: none;
+}
+
+.hide {
   display: none;
 }

@@ -22,14 +22,14 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         $scope.dataPoints = data;
         // Setup Excluded Filters Array
         $scope.excludedNoises = [];
-        
+
         // Create Heatmap Layer
         createLayer();
 
 
         // Create D3 Points
         var overlay = new google.maps.OverlayView();
-        
+
         // Remove Freeways from Data
         var d3Points = [];
         for (var i = 0; i < data.length; i++) {
@@ -40,8 +40,9 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
         // Add the container when the overlay is added to the map.
         overlay.onAdd = function() {
-          var layer = d3.select(this.getPanes().overlayLayer).append("div")
-              .attr("class", "noises");
+          var layer = d3.select(this.getPanes().overlayMouseTarget)
+            .append("div")
+            .attr("class", "noises");
 
           // Draw each marker as a separate SVG element.
           overlay.draw = function() {
@@ -53,7 +54,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
                 .each(transform) // update existing markers
               .enter().append("svg:svg")
                 .each(transform)
-                .attr("tooltip", "pineapple")
+                .attr("tooltip", findClass)
                 .attr("tooltip-trigger", "click")
                 .attr("class", findClass);
 
@@ -74,6 +75,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
             function findClass(d) {
               return d.value.noise_type;
             }
+
           };
         };
 
