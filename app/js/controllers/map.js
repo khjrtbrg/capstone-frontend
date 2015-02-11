@@ -140,12 +140,9 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       }
     };
 
+    // Changing filter/switch background color
     $scope.changeColor = function($event) {
-      // var switchDiv = angular.element($event["toElement"]);
-      // console.log("pineapple");
-      // Can't figure out how to isolate the div specifically, it's assigning the background to whatever you click on
       var switchDiv = angular.element($event.toElement.nextElementSibling);
-      // console.log(switchDiv);
       switchDiv.toggleClass("switched-off");
     }
 
