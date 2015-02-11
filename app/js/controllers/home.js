@@ -17,7 +17,7 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
       $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
       // Fetch Noises From API and Process Into Layers
-      $http.get('http://localhost:3000/noises/').success(function(data) {
+      $http.get('http://54.191.247.160/noises').success(function(data) {
         // Sort Data into Layer Arrays
         var layers = layerService.setupLayers(data);
         // Create Heatmap Layers from Layer Arrays
@@ -28,6 +28,14 @@ homeControllerModule.controller('homeController', ['$scope', '$http', 'layerServ
         // Toggle Layer Function
         $scope.toggleLayer = function(layerName) {
           layerName.setMap(layerName.getMap() ? null : $scope.map);
+        }
+
+        $scope.changeColor = function($event) {
+          // var switchDiv = angular.element($event["toElement"]);
+          // Can't figure out how to isolate the div specifically, it's assigning the background to whatever you click on
+          // var switchDiv = angular.element($event["toElement"]);
+          //  console.log(switchDiv);
+          // switchDiv.toggleClass("switched-off");
         }
 
         // Change Radius on Zoom

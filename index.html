@@ -1,20 +1,30 @@
 <!doctype html>
 <html ng-app="noiseScoreApp">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="app/css/home.css">
+    <link rel="stylesheet" type="text/css" href="app/css/map.css">
     <link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="app/js/ui-bootstrap-tpls-0.12.0.min.js"></script>
     <script src="app/js/app.js"></script>
     <script src="app/js/controllers/home.js"></script>
+    <script src="app/js/controllers/map.js"></script>
     <script src="app/js/services.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
   </head>
   <body>
-    <div class="container-fluid">
-      <h1>Something Not Called NoiseScore</h1>
-      <div class="divider"></div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/"><h1>Shut Up, Seattle</h1></a>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid main">
       <div ui-view></div>
     </div>
   </body>

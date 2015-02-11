@@ -1,0 +1,120 @@
+<div ng-controller="mapController">
+
+  <div class="map-home row">
+
+    <div class="map-wrapper col-md-9 col-sm-12 col-xs-12">
+      <div id="map-canvas"></div>
+    </div>
+
+    <div class="map-filters col-md-3 col-sm-12 col-xs-12">
+      <div class="location-search">
+        <form>
+          <div class="form-group">
+            <label for="locationSearch"><h3>Find Location</h3></label>
+            <input class="form-control" type="text" id="locationSearch" ng-model="locationSearch">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" ng-click="findLocation()">Search</button>
+            <strong>OR</strong>
+            <button class="btn btn-default" ng-click="currentLocation()">Use Current Location</button>
+          </div>
+        </form>
+      </div>
+      <div class="divider"></div>
+      <div class="map-options">
+        <h3>Filter Noise Types</h3>
+
+        <!-- <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('transit')"></input>
+          <span class="glyphicon glyphicon-leaf clicked"></span>
+          Transit
+        </label> -->
+
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('transit')"></input>
+          <div class="switch">
+            <span class="glyphicon glyphicon-road clicked"></span>
+          </div>
+          Transit
+        </label>
+
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('dump')"></input>
+          <span class="glyphicon glyphicon-trash clicked"></span>
+          Dumps
+        </label>
+
+
+        <!-- <label><input type="checkbox" checked="true" ng-click="toggleNoises('dumps')"></input><div class="switch"><span class="glyphicon glyphicon-trash clicked"></span></div>Dumps</label>
+        <label><input type="checkbox" checked="true" ng-click="toggleNoises('fireStations')"></input><div class="switch"><span class="glyphicon glyphicon-fire clicked"></span></div>Fire Stations</label> --> -->
+
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('fireStation')"></input>
+          <span class="glyphicon glyphicon-fire clicked"></span>
+          Fire Stations
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('college')"></input>
+          <span class="glyphicon glyphicon-pencil clicked"></span>
+          Colleges
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('school')"></input>
+          <span class="glyphicon glyphicon-book clicked"></span>
+          Schools
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('policeStation')"></input>
+          <span class="glyphicon glyphicon-bullhorn clicked"></span>
+          Police Stations
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('hospital')"></input>
+          <span class="glyphicon glyphicon-plus-sign clicked"></span>
+          Hospitals
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('bar')"></input>
+          <span class="glyphicon glyphicon-glass clicked"></span>
+          Bars
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('construction')"></input>
+          <span class="glyphicon glyphicon-wrench clicked"></span>
+          Construction
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('demolition')"></input>
+          <span class="glyphicon glyphicon-warning-sign clicked"></span>
+          Demolition
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('noiseComplaints')"></input>
+          <span class="glyphicon glyphicon-phone-alt clicked"></span>
+          911 Noise Complaints
+        </label>
+
+
+        <!-- New Filters... Need to Integrate with Kat's Toggles -->
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleLayer('stadium')"></input>
+          <span class="glyphicon glyphicon-volume-up clicked"></span>
+          Stadiums
+        </label>
+        <label>
+          <input type="checkbox" checked="checked" ng-click="toggleLayer('freeway')"></input>
+          <span class="glyphicon glyphicon-road clicked"></span>
+          Freeways
+        </label>
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleLayer('heliportOrAirport')"></input>
+          <span class="glyphicon glyphicon-plane clicked"></span>
+          Airports/Heliports
+        </label>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
