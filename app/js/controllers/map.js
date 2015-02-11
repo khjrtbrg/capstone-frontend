@@ -140,6 +140,11 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       }
     };
 
+    // Changing filter/switch background color
+    $scope.changeColor = function($event) {
+      var switchDiv = angular.element($event.toElement.nextElementSibling);
+      switchDiv.toggleClass("switched-off");
+    }
 
     // Initialize Map
     google.maps.event.addDomListener(window, 'load', initialize());
