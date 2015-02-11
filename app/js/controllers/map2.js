@@ -18,9 +18,6 @@ map2ControllerModule.controller('map2Controller', ['$scope', '$http', 'layerServ
 
       // Fetch Noises From API and Process Into Layers
       $http.get('http://54.191.247.160/noises').success(function(data) {
-        // Saving Data to Scope Variable
-        data;
-
         // Setup Excluded Filters Array
         $scope.excludedNoises = [];
         
