@@ -60,7 +60,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
         var nearbyNoises = '';
         for (var noise in data.noises) {
           target_noise = data.noises[noise]
-          nearbyNoises += '<p><strong>' + target_noise.count + ' ' + target_noise.noise_type + '</strong>';
+          nearbyNoises += '<p><strong>' + target_noise.noise_type + '</strong>';
 
           if (target_noise.details != null) {
             nearbyNoises += '<ul>';
