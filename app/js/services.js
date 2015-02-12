@@ -35,7 +35,8 @@ servicesModule.factory('locationService', ['$http', function($http) {
       // Create New Marker
       marker = new google.maps.Marker({
         position: coordinates,
-        map: scope.map
+        map: scope.map,
+        zIndex: 100
       });
       scope.markers.push(marker);
 
@@ -60,7 +61,10 @@ servicesModule.factory('locationService', ['$http', function($http) {
         var nearbyNoises = '';
         for (var noise in data.noises) {
           target_noise = data.noises[noise]
-          nearbyNoises += '<p><strong>' + target_noise.noise_type + '</strong>';
+          nearbyNoises += '<p><span class="glyphicon glyphicon-' +
+                          target_noise.icon +
+                          ' score-icon"></span><strong>' +
+                          target_noise.noise_type + '</strong>';
 
           if (target_noise.details != null) {
             nearbyNoises += '<ul>';
@@ -72,13 +76,24 @@ servicesModule.factory('locationService', ['$http', function($http) {
           nearbyNoises += '</p>';
         }
 
+        var scoreType;
+        if (data.score == 'A') {
+          scoreType = 'good-score';
+        } else if (data.score == 'F') {
+          scoreType = 'bad-score';
+        } else {
+          scoreType = 'med-score';
+        }
+
         var contentString = '<div id="content">' +
           '<div id="siteNotice">' +
           '</div>' +
-          '<h1 id="firstHeading" class="firstHeading">Location Score</h1>' +
+          '<h1 id="firstHeading" class="firstHeading text-center">Location Score</h1>' +
           '<div id="bodyContent">' +
-          '<h2 class="text-center">' + data.score + '</h2>'+
-          '<ul>' + nearbyNoises + '</ul>'
+          '<h2 class="text-center ' +
+          scoreType +
+          '">' + data.score + '</h2>'+
+          nearbyNoises +
           '</div>' +
           '</div>';
 
@@ -116,7 +131,8 @@ servicesModule.factory('newLayerService', function() {
     createLayer: function(points) {
       var layer = new google.maps.visualization.HeatmapLayer({
         data: points,
-        maxIntensity: 30
+        maxIntensity: 30,
+        zIndex: 95
       });
 
       return layer;

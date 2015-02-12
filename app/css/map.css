@@ -26,6 +26,17 @@
 h1#firstHeading {
   color: black;
   font-size: 35px;
-  margin-top: 5px;
+  margin: 5px 0 0 0;
   padding: 10px 0;
 }
+
+.score-icon {
+  position: relative;
+  background-color: black;
+  border-radius: 10%;
+  margin-right: 10px;
+}
+
+.bad-score { color: red; }
+.med-score { color: yellow; }
+.good-score { color: green; }
