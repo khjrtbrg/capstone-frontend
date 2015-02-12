@@ -47,7 +47,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
       this.scorePopup(coordinates, scope);
     },
     scorePopup: function(coordinates, scope) {
-      var url = 'http://54.191.247.160/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
+      var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
 
       $http.get(url).success(function(data) {
         // Clear Any Current Popups
@@ -56,16 +56,20 @@ servicesModule.factory('locationService', ['$http', function($http) {
         }
         scope.popups = [];
 
-        // Score String
+        // Create Score String
         var nearbyNoises = '';
         for (var noise in data.noises) {
-          var obj = data.noises[noise];
-          if (obj.noise_type === 'Bus Stop') {
-            nearbyNoises += '<li>Bus Stop on ';
-          } else {
-            nearbyNoises += '<li>';
+          target_noise = data.noises[noise]
+          nearbyNoises += '<p><strong>' + target_noise.count + ' ' + target_noise.noise_type + '</strong>';
+
+          if (target_noise.details != null) {
+            nearbyNoises += '<ul>';
+            for (var i = 0; i < target_noise.details.length; i++) {
+              nearbyNoises += '<li>' + target_noise.details[i] + '</li>';
+            }
+            nearbyNoises += '</ul>';
           }
-          nearbyNoises += obj.description + '</li>';
+          nearbyNoises += '</p>';
         }
 
         var contentString = '<div id="content">' +
