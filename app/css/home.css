@@ -74,7 +74,7 @@ input[type="checkbox"] {
   position: relative;
   border: 1px black solid;
   margin-right: 1%;
-  border-radius: 3px;
+  border-radius: 4px;
   z-index: 1;
   animation-name: to_green;
   animation-duration: 1s;
@@ -121,9 +121,9 @@ label p {
   background-color: black;
   width: 50%;
   height: 100%;
-  -webkit-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.5);
-  -moz-box-shadow:    2px 2px 1px 1px rgba(0,0,0,0.5);
-  box-shadow:         2px 2px 1px 1px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 2px 0px 2px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow:    2px 0px 2px 0px rgba(0,0,0,0.5);
+  box-shadow:         2px 0px 2px 0px rgba(0,0,0,0.5);
   animation-name: slide_on;
   animation-duration: .7s;
   /* Chrome, Safari, Opera */
@@ -132,6 +132,10 @@ label p {
   /* Firefox */
   -moz-animation-name: slide_on;
   -moz-animation-duration: 0.7s;
+}
+
+.switched-off .clicked {
+  box-shadow: -2px 0px 2px 0px rgba(0,0,0,0.5);
 }
 
 input[type=checkbox]:not(:checked) ~ div span {
