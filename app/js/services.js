@@ -47,7 +47,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
       this.scorePopup(coordinates, scope);
     },
     scorePopup: function(coordinates, scope) {
-      var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
+      var url = 'http://54.191.247.160/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
 
       $http.get(url).success(function(data) {
         // Clear Any Current Popups
@@ -75,7 +75,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
         var contentString = '<div id="content">' +
           '<div id="siteNotice">' +
           '</div>' +
-          '<h1 id="firstHeading" class="firstHeading">Location Noise Score</h1>' +
+          '<h1 id="firstHeading" class="firstHeading">Location Score</h1>' +
           '<div id="bodyContent">' +
           '<h2 class="text-center">' + data.score + '</h2>'+
           '<ul>' + nearbyNoises + '</ul>'

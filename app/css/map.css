@@ -22,3 +22,10 @@
 .hide {
   display: none;
 }
+
+h1#firstHeading {
+  color: black;
+  font-size: 35px;
+  margin-top: 5px;
+  padding: 10px 0;
+}
