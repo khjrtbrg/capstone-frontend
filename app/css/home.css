@@ -54,6 +54,8 @@ h3 {
 
 .map-filters {
   background-color: white;
+  height: 88.5vh;
+  overflow: scroll;
 }
 
 .location-search {
@@ -161,6 +163,10 @@ input[type=checkbox]:not(:checked) ~ div span {
   label p { font-size: 12pt; }
   label p { font-size: 12pt; }
   #map-canvas { border-bottom: solid #5DD9C1 15px;}
+  .map-filters {
+    height: 100%;
+    overflow: visible;
+  }
 }
 
 /* Key Frames */
