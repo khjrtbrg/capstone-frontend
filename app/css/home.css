@@ -159,6 +159,12 @@ input[type=checkbox]:not(:checked) ~ div span {
   cursor: pointer;
 }
 
+.error-msg {
+  padding-top: 10px;
+  color: red;
+  font-weight: bold;
+}
+
 
 /* Media Query */
 

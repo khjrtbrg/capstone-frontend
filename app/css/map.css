@@ -36,5 +36,5 @@ h1#firstHeading {
 }
 
 .bad-score { color: red; }
-.med-score { color: yellow; }
+.med-score { color: orange; }
 .good-score { color: green; }
