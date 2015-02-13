@@ -119,11 +119,16 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Zoom to Location Function
     $scope.findLocation = function() {
-      var url = 'http://54.191.247.160/coordinates?address=' + $scope.locationSearch
+      var url = 'http://54.191.247.160/coordinates?address=' + $scope.locationSearch;
 
-      $http.get(url).success(function(data) {
-        locationService.newMarker(data, $scope);
-      });
+      $http.get(url).
+        success(function(data) {
+          $scope.address_error = '';
+          locationService.newMarker(data, $scope);
+        }).
+        error(function(data, status, headers, config) {
+          $scope.address_error = 'Whoops, can\'t find that address!';
+        });
     };
 
     // Zoom to Current Location
