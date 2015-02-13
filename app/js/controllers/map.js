@@ -119,11 +119,10 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Zoom to Location Function
     $scope.findLocation = function() {
-      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.locationSearch + ',+Seattle,+WA&key=AIzaSyCY7E9oBmlcDOJ4iBR1aL3PYp5feIpQ0KE';
+      var url = 'http://54.191.247.160/coordinates?address=' + $scope.locationSearch
 
       $http.get(url).success(function(data) {
-        var coordinates = data.results[0].geometry.location;
-        locationService.newMarker(coordinates, $scope);
+        locationService.newMarker(data, $scope);
       });
     };
 
