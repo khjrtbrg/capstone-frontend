@@ -25,6 +25,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
         // Create Heatmap Layer
         createLayer();
+        $scope.heatmapOn = true;
 
 
         // Create D3 Points
@@ -92,24 +93,39 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     // Toggle Individual Noises
     $scope.toggleNoises = function(layerName) {
       updateExcludedNoises(layerName);
+      toggleExcludedD3Elements(layerName);
       reRenderHeatmap();
-      toggleD3Elements(layerName);
+
+      // if ($scope.heatmapOn) {
+      //   reRenderHeatmap();
+      // }
     }
+
+    var toggleExcludedD3Elements = function(layerName) {
+      if (layerName != 'freeway') {
+        var noises = document.getElementsByClassName(layerName);
+        angular.element(noises).toggleClass('hide');
+      };
+    }
+
 
     // Toggle Heatmap
     $scope.toggleHeatmap = function() {
       $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
+      $scope.heatmapOn = $scope.heatmapOn ? false : true;
     }
 
     // Hide All Noises
     $scope.hideAll = function() {
-      toggleAllOff();
-      toggleSwitches(false);
+      if ($scope.excludedNoises.length < 14) {
+        allOff();
+        toggleSwitches(false);
+      };
     }
 
     // Show All Noises
     $scope.showAll = function() {
-      toggleAllOn();
+      allOn();
       toggleSwitches(true);
     }
 
@@ -131,7 +147,11 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
       var switches = document.getElementsByClassName('switch');
       for (var i = 0; i < switches.length; i++) {
-        angular.element(switches[i]).toggleClass('switched-off');
+        if (outputBoolean) {
+          angular.element(switches[i]).removeClass('switched-off');
+        } else {
+          angular.element(switches[i]).addClass('switched-off');
+        }
       }
     }
 
@@ -158,25 +178,24 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       createLayer();
     }
 
-    // toggle Corresponding D3 Elements
-    var toggleD3Elements = function(layerName) {
-      if (layerName != 'freeway') {
-        var noises = document.getElementsByClassName(layerName);
-        angular.element(noises).toggleClass('hide');
-      };
+    var showAllD3Elements = function(status) {
+      var circles = angular.element(document.getElementsByTagName('circle'));
+      if (status == true) {
+        circles.removeClass('hide');
+      } else {
+        circles.addClass('hide');
+      }
     }
 
     // Toggle All On
-    var toggleAllOn = function() {
-      for (var i = 0; i < $scope.excludedNoises.length; i++) {
-        toggleD3Elements($scope.excludedNoises[i]);
-      }
+    var allOn = function() {
+      showAllD3Elements(true);
       $scope.excludedNoises = [];
       reRenderHeatmap();
     }
 
     // Toggle All Off
-    var toggleAllOff = function() {
+    var allOff = function() {
       $scope.excludedNoises = [
         'transit',
         'dump',
@@ -195,9 +214,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       ];
 
       reRenderHeatmap();
-      for (var i = 0; i < $scope.excludedNoises.length; i++) {
-        toggleD3Elements($scope.excludedNoises[i]);
-      }
+      showAllD3Elements(false);
     }
 
 
