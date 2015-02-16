@@ -26,12 +26,22 @@
         <h3>Filter Noise Types</h3>
 
         <label>
-          <input type="checkbox" checked="true" ng-click="hideHeatmap();changeColor($event)"></input>
+          <input type="checkbox" checked="true" ng-click="toggleAll();changeColor($event)"></input>
+          <div class="switch">
+            <span class="glyphicon glyphicon-off clicked"></span>
+          </div>
+          <p>Hide All</p>
+        </label>
+
+        <label>
+          <input type="checkbox" checked="true" ng-click="toggleHeatmap();changeColor($event)"></input>
           <div class="switch">
             <span class="glyphicon glyphicon-off clicked"></span>
           </div>
           <p>Hide Heatmap</p>
         </label>
+
+        <hr>
 
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('transit');changeColor($event)"></input>

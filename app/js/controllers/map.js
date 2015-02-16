@@ -85,30 +85,35 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     }
 
 
-    // Toggle Noises Function
+    //////////////////////////////////////////////////
+    // Functions for Toggling Layers                //
+    //////////////////////////////////////////////////
+
+    // Toggle Individual Noises
     $scope.toggleNoises = function(layerName) {
-      // Add or Remove Filter to excludedNoises
-      var i = $scope.excludedNoises.indexOf(layerName)
-      if (i == -1) {
-        $scope.excludedNoises.push(layerName);
-      } else {
-        $scope.excludedNoises.splice(i, 1);
-      }
-
-      // Remove Old/Create New Heatmap Layer
-      $scope.heatmap.setMap(null);
-      createLayer();
-
-      // Hide Corresponding D3 Elements
-      if (layerName != 'freeway') {
-        var noises = document.getElementsByClassName(layerName);
-        angular.element(noises).toggleClass('hide');
-      };
+      updateExcludedNoises(layerName);
+      reRenderHeatmap();
+      toggleD3Elements(layerName);
     }
 
     // Toggle Heatmap
-    $scope.hideHeatmap = function() {
+    $scope.toggleHeatmap = function() {
       $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
+    }
+
+    // Toggle All Noises
+    $scope.toggleAll = function() {
+      if ($scope.excludedNoises.length == 14) {
+        toggleAllOn();
+      } else {
+        toggleAllOff();
+      }
+    }
+
+    // Changing filter/switch background color
+    $scope.changeColor = function($event) {
+      var switchDiv = angular.element($event.toElement.nextElementSibling);
+      switchDiv.toggleClass("switched-off");
     }
 
     // Create Heatmap Layer
@@ -117,6 +122,69 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       $scope.heatmap = newLayerService.createLayer(newPoints);
       $scope.heatmap.setMap($scope.map);
     }
+
+    // Setup Excluded Noises
+    var updateExcludedNoises = function(layerName) {
+      var i = $scope.excludedNoises.indexOf(layerName)
+      if (i == -1) {
+        $scope.excludedNoises.push(layerName);
+      } else {
+        $scope.excludedNoises.splice(i, 1);
+      }
+    }
+
+    // Re-Render Heatmap on Filter
+    var reRenderHeatmap = function() {
+      $scope.heatmap.setMap(null);
+      createLayer();
+    }
+
+    // toggle Corresponding D3 Elements
+    var toggleD3Elements = function(layerName) {
+      if (layerName != 'freeway') {
+        var noises = document.getElementsByClassName(layerName);
+        angular.element(noises).toggleClass('hide');
+      };
+    }
+
+    // Toggle All On
+    var toggleAllOn = function() {
+      for (var i = 0; i < $scope.excludedNoises.length; i++) {
+        toggleD3Elements($scope.excludedNoises[i]);
+      }
+      $scope.excludedNoises = [];
+      reRenderHeatmap();
+    }
+
+    // Toggle All Off
+    var toggleAllOff = function() {
+      $scope.excludedNoises = [
+        'transit',
+        'dump',
+        'fireStation',
+        'college',
+        'school',
+        'policeStation',
+        'hospital',
+        'bar',
+        'construction',
+        'demolition',
+        'noiseComplaints',
+        'stadium',
+        'freeway',
+        'heliportOrAirport'
+      ];
+
+      reRenderHeatmap();
+      for (var i = 0; i < $scope.excludedNoises.length; i++) {
+        toggleD3Elements($scope.excludedNoises[i]);
+      }
+    }
+
+
+    //////////////////////////////////////////////////
+    // Functions for Searching for Locations        //
+    //////////////////////////////////////////////////
 
     // Zoom Map to Searched Location
     $scope.markers = [];
@@ -148,12 +216,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         });
       }
     };
-
-    // Changing filter/switch background color
-    $scope.changeColor = function($event) {
-      var switchDiv = angular.element($event.toElement.nextElementSibling);
-      switchDiv.toggleClass("switched-off");
-    }
 
     // Initialize Map
     google.maps.event.addDomListener(window, 'load', initialize());
