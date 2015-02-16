@@ -103,6 +103,8 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Toggle All Noises
     $scope.toggleAll = function() {
+      toggleSwitches();      
+
       if ($scope.excludedNoises.length == 14) {
         toggleAllOn();
       } else {
@@ -114,6 +116,14 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     $scope.changeColor = function($event) {
       var switchDiv = angular.element($event.toElement.nextElementSibling);
       switchDiv.toggleClass("switched-off");
+    }
+
+    // Toggle All Switches
+    var toggleSwitches = function() {
+      var switches = document.getElementsByClassName('switch');
+      for (var i = 0; i < switches.length; i++) {
+        angular.element(switches[i]).toggleClass('switched-off');
+      }
     }
 
     // Create Heatmap Layer
