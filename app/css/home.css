@@ -154,11 +154,19 @@ input[type=checkbox]:not(:checked) ~ div span {
   background-color: gray;
 }
 
+.global-filters {
+  margin: 20px 0;
+}
+
+.global-filters .heatmap {
+  margin-top: 10px;
+  width: 100%;
+}
+
 .error-msg {
   padding-top: 10px;
   color: red;
   font-weight: bold;
-  transition:;
 }
 
 

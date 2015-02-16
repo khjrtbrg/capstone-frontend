@@ -101,15 +101,16 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
     }
 
-    // Toggle All Noises
-    $scope.toggleAll = function() {     
-      if ($scope.excludedNoises.length == 14) {
-        toggleAllOn();
-        toggleSwitches(true);
-      } else {
-        toggleAllOff();
-        toggleSwitches(false);
-      }
+    // Hide All Noises
+    $scope.hideAll = function() {
+      toggleAllOff();
+      toggleSwitches(false);
+    }
+
+    // Show All Noises
+    $scope.showAll = function() {
+      toggleAllOn();
+      toggleSwitches(true);
     }
 
     // Changing filter/switch background color
