@@ -102,13 +102,13 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     }
 
     // Toggle All Noises
-    $scope.toggleAll = function() {
-      toggleSwitches();      
-
+    $scope.toggleAll = function() {     
       if ($scope.excludedNoises.length == 14) {
         toggleAllOn();
+        toggleSwitches(true);
       } else {
         toggleAllOff();
+        toggleSwitches(false);
       }
     }
 
@@ -119,7 +119,15 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     }
 
     // Toggle All Switches
-    var toggleSwitches = function() {
+    var toggleSwitches = function(outputBoolean) {
+      var checkboxes = [];
+      var wrapper = document.getElementsByClassName('map-options')[0];
+      checkboxes = wrapper.getElementsByTagName('input');
+
+      for (var i = 0; i < checkboxes.length; i++)  {
+        checkboxes[i].checked = outputBoolean;
+      }
+
       var switches = document.getElementsByClassName('switch');
       for (var i = 0; i < switches.length; i++) {
         angular.element(switches[i]).toggleClass('switched-off');
