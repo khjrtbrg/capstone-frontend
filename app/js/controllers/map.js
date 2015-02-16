@@ -106,6 +106,11 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       };
     }
 
+    // Toggle Heatmap
+    $scope.hideHeatmap = function() {
+      $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
+    }
+
     // Create Heatmap Layer
     var createLayer = function() {
       var newPoints = newLayerService.setupLayer($scope.dataPoints, $scope.excludedNoises);
