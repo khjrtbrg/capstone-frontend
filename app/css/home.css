@@ -154,11 +154,23 @@ input[type=checkbox]:not(:checked) ~ div span {
   background-color: gray;
 }
 
+.info {
+  height: 15px;
+  display: inline-block;
+  width: 15px;
+  margin-left: 3px;
+  margin-bottom: 2px;
+}
+
+/* Per AngularUI Needs */
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
+
 .error-msg {
   padding-top: 10px;
   color: red;
   font-weight: bold;
-  transition:;
 }
 
 

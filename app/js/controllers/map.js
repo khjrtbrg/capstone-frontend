@@ -17,7 +17,8 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       $scope.map = new google.maps.Map(d3.select("#map-canvas").node(), mapOptions);
 
       // Fetch Noises From API and Add To Map
-      d3.json("http://54.191.247.160/noises", function(data) {
+      d3.json("http://localhost:3000/noises", function(data) {
+        // http://54.191.247.160/noises
         // Create Heatmaps
         $scope.dataPoints = data;
         // Setup Excluded Filters Array
@@ -54,8 +55,8 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
                 .each(transform) // update existing markers
               .enter().append("svg:svg")
                 .each(transform)
-                .attr("tooltip", findClass)
-                .attr("tooltip-trigger", "click")
+                .attr("tooltip-placement", "right")
+                .attr("tooltip", "testing!")
                 .attr("class", findClass);
 
             // Add a circle.
