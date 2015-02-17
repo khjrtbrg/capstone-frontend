@@ -153,6 +153,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Zoom Map to Searched Location
     $scope.markers = [];
+    $scope.circles = [];
     $scope.popups = [];
 
     // Zoom to Location Function
