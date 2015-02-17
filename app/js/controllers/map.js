@@ -90,7 +90,9 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Show All Noises
     $scope.showAll = function() {
-      showAllLayers(true);
+      if ($scope.excludedNoises.length > 0) {
+        showAllLayers(true);
+      }
     }
 
     // All the things that happen when you toggle all layers
