@@ -204,8 +204,6 @@ servicesModule.factory('newLayerService', function() {
               .each(transform) // update existing markers
             .enter().append("svg:svg")
               .each(transform)
-              .attr("tooltip", findClass)
-              .attr("tooltip-trigger", "click")
               .attr("class", findClass);
 
           // Add a circle.
@@ -214,6 +212,11 @@ servicesModule.factory('newLayerService', function() {
               .attr("r", findRadius)
               .attr("cx", padding)
               .attr("cy", padding);
+
+            //  How do I add this to the map as a whole when the markers haven't been created yet?
+          // scope.map.event.addListener(marker, 'click', function(){
+          //   console.log("It worked!");
+          // });
 
           function transform(d) {
             d = new google.maps.LatLng(d.value.lat, d.value.lon);

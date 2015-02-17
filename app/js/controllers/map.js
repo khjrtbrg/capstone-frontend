@@ -36,10 +36,14 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         var overlay = newLayerService.createD3Points(data);
         // Bind D3 overlay to the map
         overlay.setMap($scope.map);
+        // google.maps.event.addListener(overlay, 'click', function($event){
+        //   console.log("It worked!");
+        // });
       });
 
       // Listener for Zoom
       google.maps.event.addListener($scope.map, 'zoom_changed', adjustRadius);
+
     }
 
 
@@ -100,6 +104,11 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       switchDiv.toggleClass("switched-off");
     }
 
+    // Show individual noises info
+    $scope.showDescription = function() {
+      console.log("pineapple");
+    }
+
 
     //////////////////////////////////////////////////
     // Functions for Toggling All Layers            //
@@ -157,7 +166,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Zoom to Location Function
     $scope.findLocation = function() {
-      var url = 'http://54.191.247.160/coordinates?address=' + $scope.locationSearch;
+      var url = 'http://localhost:3000/coordinates?address=' + $scope.locationSearch;
 
       $http.get(url).
         success(function(data) {
