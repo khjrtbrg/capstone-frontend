@@ -27,6 +27,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
         // Create Heatmap Layer
         createHeatmapLayer();
+        $scope.heatmapOn = true;
 
         // Create D3 Points
         var overlay = newLayerService.createD3Points(data);
@@ -49,8 +50,10 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Re-Render Heatmap on Filter
     var reRenderHeatmap = function() {
-      $scope.heatmap.setMap(null);
-      createHeatmapLayer();
+      if ($scope.heatmapOn) {
+        $scope.heatmap.setMap(null);
+        createHeatmapLayer();
+      }
     }
 
 
@@ -91,7 +94,14 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Toggle Heatmap
     $scope.toggleHeatmap = function() {
-      $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
+      if ($scope.heatmap.getMap() == null) {
+        $scope.heatmapOn = true;
+        reRenderHeatmap();
+        $scope.heatmap.setMap($scope.map);
+      } else {
+        $scope.heatmapOn = false;
+        $scope.heatmap.setMap(null);
+      }
     }
 
     // Hide All Noises
@@ -118,7 +128,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     var showAllLayers = function(status) {
       filterService.toggleSwitches(status);
       $scope.excludedNoises = filterService.excludeAllNoises(!status);
-      
+
       reRenderHeatmap();
       filterService.showAllD3Elements(status);
     }
