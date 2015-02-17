@@ -1,7 +1,7 @@
 var mapControllerModule = angular.module('mapControllerModule', []);
 
-mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerService', 'locationService',
-  function($scope, $http, newLayerService, locationService) {
+mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerService', 'locationService', 'filterService',
+  function($scope, $http, newLayerService, locationService, filterService) {
 
     function initialize() {
       var mapOptions = {
@@ -25,7 +25,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
         // Create Heatmap Layer
         createLayer();
-        $scope.heatmapOn = true;
 
 
         // Create D3 Points
@@ -110,23 +109,13 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Toggle Individual Noises
     $scope.toggleNoises = function(layerName) {
-      updateExcludedNoises(layerName);
+      filterService.excludeOneNoise($scope.excludedNoises, layerName);
       reRenderHeatmap();
 
       if (layerName != 'freeway') {
         var noises = document.getElementsByClassName(layerName);
         angular.element(noises).toggleClass('hide');
       };
-    }
-
-    // Setup Excluded Noises
-    var updateExcludedNoises = function(layerName) {
-      var i = $scope.excludedNoises.indexOf(layerName)
-      if (i == -1) {
-        $scope.excludedNoises.push(layerName);
-      } else {
-        $scope.excludedNoises.splice(i, 1);
-      }
     }
 
     // Changing filter/switch background color
@@ -143,82 +132,27 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     // // Toggle Heatmap
     // $scope.toggleHeatmap = function() {
     //   $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
-    //   $scope.heatmapOn = $scope.heatmapOn ? false : true;
     // }
-
 
     // Hide All Noises
     $scope.hideAll = function() {
       if ($scope.excludedNoises.length < 14) {
-        toggleAllLayers(false);
+        showAllLayers(false);
       };
     }
 
     // Show All Noises
     $scope.showAll = function() {
-      toggleAllLayers(true);
+      showAllLayers(true);
     }
 
     // All the things that happen when you toggle all layers
-    var toggleAllLayers = function (status) {
-      toggleSwitches(status);
-      excludeAllNoises(!status);
+    var showAllLayers = function(status) {
+      filterService.toggleSwitches(status);
+      $scope.excludedNoises = filterService.excludeAllNoises(!status);
+      
       reRenderHeatmap();
-      showAllD3Elements(status);
-    }
-
-    // Toggle All Excluded Noises
-    var excludeAllNoises = function(status) {
-      if (status) {
-        $scope.excludedNoises = [
-          'transit',
-          'dump',
-          'fireStation',
-          'college',
-          'school',
-          'policeStation',
-          'hospital',
-          'bar',
-          'construction',
-          'demolition',
-          'noiseComplaints',
-          'stadium',
-          'freeway',
-          'heliportOrAirport'
-        ];
-      } else {
-        $scope.excludedNoises = [];
-      }
-    }
-
-    // Show All D3 Elements
-    var showAllD3Elements = function(status) {
-      var circles = angular.element(document.getElementsByTagName('circle'));
-      if (status) {
-        circles.removeClass('hide');
-      } else {
-        circles.addClass('hide');
-      }
-    }
-
-    // Toggle All Switches
-    var toggleSwitches = function(outputBoolean) {
-      var checkboxes = [];
-      var wrapper = document.getElementsByClassName('map-options')[0];
-      checkboxes = wrapper.getElementsByTagName('input');
-
-      for (var i = 0; i < checkboxes.length; i++)  {
-        checkboxes[i].checked = outputBoolean;
-      }
-
-      var switches = document.getElementsByClassName('switch');
-      for (var i = 0; i < switches.length; i++) {
-        if (outputBoolean) {
-          angular.element(switches[i]).removeClass('switched-off');
-        } else {
-          angular.element(switches[i]).addClass('switched-off');
-        }
-      }
+      filterService.showAllD3Elements(status);
     }
 
 

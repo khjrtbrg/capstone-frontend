@@ -1,9 +1,63 @@
 var servicesModule = angular.module('servicesModule', []);
 
-servicesModule.factory('layerService', function() {
+servicesModule.factory('filterService', function() {
   return {
-    findRadius: function(map, radius) {
-      
+    excludeOneNoise: function(excludedNoises, layerName) {
+      var i = excludedNoises.indexOf(layerName)
+      if (i == -1) {
+        excludedNoises.push(layerName);
+      } else {
+        excludedNoises.splice(i, 1);
+      }
+    },
+    excludeAllNoises: function(status) {
+      if (status) {
+        excludedNoises = [
+          'transit',
+          'dump',
+          'fireStation',
+          'college',
+          'school',
+          'policeStation',
+          'hospital',
+          'bar',
+          'construction',
+          'demolition',
+          'noiseComplaints',
+          'stadium',
+          'freeway',
+          'heliportOrAirport'
+        ];
+      } else {
+        excludedNoises = [];
+      }
+      return excludedNoises;
+    },
+    showAllD3Elements: function(status) {
+      var circles = angular.element(document.getElementsByTagName('circle'));
+      if (status) {
+        circles.removeClass('hide');
+      } else {
+        circles.addClass('hide');
+      }
+    },
+    toggleSwitches: function(status) {
+      var checkboxes = [];
+      var wrapper = document.getElementsByClassName('map-options')[0];
+      checkboxes = wrapper.getElementsByTagName('input');
+
+      for (var i = 0; i < checkboxes.length; i++)  {
+        checkboxes[i].checked = status;
+      }
+
+      var switches = document.getElementsByClassName('switch');
+      for (var i = 0; i < switches.length; i++) {
+        if (status) {
+          angular.element(switches[i]).removeClass('switched-off');
+        } else {
+          angular.element(switches[i]).addClass('switched-off');
+        }
+      }
     }
   }
 });
