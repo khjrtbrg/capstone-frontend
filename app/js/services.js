@@ -234,7 +234,7 @@ servicesModule.factory('newLayerService', function() {
 
           function findRadius(d) {
             var reach = d.value.reach;
-            return reach / 25;
+            return reach / 400;
           }
 
         };

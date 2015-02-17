@@ -5,15 +5,16 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     function initialize() {
       var mapOptions = {
-        // center: { lat: 47.6, lng: -122.35},
-        // zoom: 13,
-        center: { lat: 47.6260276, lng: -122.2924232 },
-        zoom: 17,
+        center: { lat: 47.6, lng: -122.35},
+        zoom: 13,
         maxZoom: 17,
         minZoom: 10,
         zoomControlOptions: { style: 'small' },
         streetViewControl: false
       };
+
+      // Store Zoom Level for Later Reference
+      $scope.mapZoomLevel = mapOptions.zoom;
 
       // Disable/Enable Buttons
       $scope.hideAllButton = false;
@@ -63,19 +64,24 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Adjust Radius on Zoom
     var adjustRadius = function() {
-      var zoomLevel = $scope.map.getZoom();
-      console.log(zoomLevel);
+      var newZoomLevel = $scope.map.getZoom();
 
       var circles = document.getElementsByTagName('circle');
       for (var i = 0; i < circles.length; i++) {
         var circle = circles[i];
-        var newRadius = radiusMath(circle.r.baseVal.value);
+        var newRadius = radiusMath(circle.r.baseVal.value, $scope.mapZoomLevel, newZoomLevel);
         angular.element(circle).attr('r', newRadius);
       }
+
+      $scope.mapZoomLevel = newZoomLevel;
     }
 
-    var radiusMath = function(radius) {
-      return Math.round(radius / 2);
+    var radiusMath = function(radius, originalZoom, newZoomLevel) {
+      if (originalZoom > newZoomLevel) {
+        return radius / 2;
+      } else {
+        return radius * 2;
+      }
     }
 
 
