@@ -87,52 +87,118 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
 
     //////////////////////////////////////////////////
-    // Functions for Toggling Layers                //
+    // Functions for Setting Up Layers/Filtering    //
+    //////////////////////////////////////////////////
+
+    // Create Heatmap Layer
+    var createLayer = function() {
+      var newPoints = newLayerService.setupLayer($scope.dataPoints, $scope.excludedNoises);
+      $scope.heatmap = newLayerService.createLayer(newPoints);
+      $scope.heatmap.setMap($scope.map);
+    }
+
+    // Re-Render Heatmap on Filter
+    var reRenderHeatmap = function() {
+      $scope.heatmap.setMap(null);
+      createLayer();
+    }
+
+
+    //////////////////////////////////////////////////
+    // Functions for Toggling Single Layer          //
     //////////////////////////////////////////////////
 
     // Toggle Individual Noises
     $scope.toggleNoises = function(layerName) {
       updateExcludedNoises(layerName);
-      toggleExcludedD3Elements(layerName);
       reRenderHeatmap();
 
-      // if ($scope.heatmapOn) {
-      //   reRenderHeatmap();
-      // }
-    }
-
-    var toggleExcludedD3Elements = function(layerName) {
       if (layerName != 'freeway') {
         var noises = document.getElementsByClassName(layerName);
         angular.element(noises).toggleClass('hide');
       };
     }
 
-
-    // Toggle Heatmap
-    $scope.toggleHeatmap = function() {
-      $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
-      $scope.heatmapOn = $scope.heatmapOn ? false : true;
-    }
-
-    // Hide All Noises
-    $scope.hideAll = function() {
-      if ($scope.excludedNoises.length < 14) {
-        allOff();
-        toggleSwitches(false);
-      };
-    }
-
-    // Show All Noises
-    $scope.showAll = function() {
-      allOn();
-      toggleSwitches(true);
+    // Setup Excluded Noises
+    var updateExcludedNoises = function(layerName) {
+      var i = $scope.excludedNoises.indexOf(layerName)
+      if (i == -1) {
+        $scope.excludedNoises.push(layerName);
+      } else {
+        $scope.excludedNoises.splice(i, 1);
+      }
     }
 
     // Changing filter/switch background color
     $scope.changeColor = function($event) {
       var switchDiv = angular.element($event.toElement.nextElementSibling);
       switchDiv.toggleClass("switched-off");
+    }
+
+
+    //////////////////////////////////////////////////
+    // Functions for Toggling All Layers            //
+    //////////////////////////////////////////////////
+
+    // // Toggle Heatmap
+    // $scope.toggleHeatmap = function() {
+    //   $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
+    //   $scope.heatmapOn = $scope.heatmapOn ? false : true;
+    // }
+
+
+    // Hide All Noises
+    $scope.hideAll = function() {
+      if ($scope.excludedNoises.length < 14) {
+        toggleAllLayers(false);
+      };
+    }
+
+    // Show All Noises
+    $scope.showAll = function() {
+      toggleAllLayers(true);
+    }
+
+    // All the things that happen when you toggle all layers
+    var toggleAllLayers = function (status) {
+      toggleSwitches(status);
+      excludeAllNoises(!status);
+      reRenderHeatmap();
+      showAllD3Elements(status);
+    }
+
+    // Toggle All Excluded Noises
+    var excludeAllNoises = function(status) {
+      if (status) {
+        $scope.excludedNoises = [
+          'transit',
+          'dump',
+          'fireStation',
+          'college',
+          'school',
+          'policeStation',
+          'hospital',
+          'bar',
+          'construction',
+          'demolition',
+          'noiseComplaints',
+          'stadium',
+          'freeway',
+          'heliportOrAirport'
+        ];
+      } else {
+        $scope.excludedNoises = [];
+      }
+    }
+
+    // Show All D3 Elements
+    var showAllD3Elements = function(status) {
+      var circles = angular.element(document.getElementsByTagName('circle'));
+      if (status) {
+        circles.removeClass('hide');
+      } else {
+        circles.addClass('hide');
+      }
     }
 
     // Toggle All Switches
@@ -153,68 +219,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
           angular.element(switches[i]).addClass('switched-off');
         }
       }
-    }
-
-    // Create Heatmap Layer
-    var createLayer = function() {
-      var newPoints = newLayerService.setupLayer($scope.dataPoints, $scope.excludedNoises);
-      $scope.heatmap = newLayerService.createLayer(newPoints);
-      $scope.heatmap.setMap($scope.map);
-    }
-
-    // Setup Excluded Noises
-    var updateExcludedNoises = function(layerName) {
-      var i = $scope.excludedNoises.indexOf(layerName)
-      if (i == -1) {
-        $scope.excludedNoises.push(layerName);
-      } else {
-        $scope.excludedNoises.splice(i, 1);
-      }
-    }
-
-    // Re-Render Heatmap on Filter
-    var reRenderHeatmap = function() {
-      $scope.heatmap.setMap(null);
-      createLayer();
-    }
-
-    var showAllD3Elements = function(status) {
-      var circles = angular.element(document.getElementsByTagName('circle'));
-      if (status == true) {
-        circles.removeClass('hide');
-      } else {
-        circles.addClass('hide');
-      }
-    }
-
-    // Toggle All On
-    var allOn = function() {
-      showAllD3Elements(true);
-      $scope.excludedNoises = [];
-      reRenderHeatmap();
-    }
-
-    // Toggle All Off
-    var allOff = function() {
-      $scope.excludedNoises = [
-        'transit',
-        'dump',
-        'fireStation',
-        'college',
-        'school',
-        'policeStation',
-        'hospital',
-        'bar',
-        'construction',
-        'demolition',
-        'noiseComplaints',
-        'stadium',
-        'freeway',
-        'heliportOrAirport'
-      ];
-
-      reRenderHeatmap();
-      showAllD3Elements(false);
     }
 
 
