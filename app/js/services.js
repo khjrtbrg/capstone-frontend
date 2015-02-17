@@ -87,8 +87,8 @@ servicesModule.factory('locationService', ['$http', function($http) {
       this.scorePopup(coordinates, scope);
     },
     scorePopup: function(coordinates, scope) {
-      var url = 'http://54.191.247.160/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
-
+      var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
+      // http://54.191.247.160
       $http.get(url).success(function(data) {
         // Clear Any Current Popups
         for (var i = 0; i < scope.popups.length; i++) {
