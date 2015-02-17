@@ -5,8 +5,10 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     function initialize() {
       var mapOptions = {
-        center: { lat: 47.6, lng: -122.35},
-        zoom: 13,
+        // center: { lat: 47.6, lng: -122.35},
+        // zoom: 13,
+        center: { lat: 47.6260276, lng: -122.2924232 },
+        zoom: 17,
         maxZoom: 17,
         minZoom: 10,
         zoomControlOptions: { style: 'small' },
@@ -34,6 +36,9 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         // Bind D3 overlay to the map
         overlay.setMap($scope.map);
       });
+
+      // Listener for Zoom
+      google.maps.event.addListener($scope.map, 'zoom_changed', adjustRadius);
     }
 
 
@@ -54,6 +59,23 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         $scope.heatmap.setMap(null);
         createHeatmapLayer();
       }
+    }
+
+    // Adjust Radius on Zoom
+    var adjustRadius = function() {
+      var zoomLevel = $scope.map.getZoom();
+      console.log(zoomLevel);
+
+      var circles = document.getElementsByTagName('circle');
+      for (var i = 0; i < circles.length; i++) {
+        var circle = circles[i];
+        var newRadius = radiusMath(circle.r.baseVal.value);
+        angular.element(circle).attr('r', newRadius);
+      }
+    }
+
+    var radiusMath = function(radius) {
+      return Math.round(radius / 2);
     }
 
 

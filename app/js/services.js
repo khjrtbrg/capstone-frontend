@@ -183,9 +183,14 @@ servicesModule.factory('newLayerService', function() {
       // Remove Freeways from Data
       var d3Points = [];
       for (var i = 0; i < data.length; i++) {
-        if (data[i].noise_type != 'freeway') {
+        // for testing...
+        if (data[i].noise_type == 'fireStation') {
           d3Points.push(data[i]);
-        };
+        }
+
+        // if (data[i].noise_type != 'freeway') {
+        //   d3Points.push(data[i]);
+        // };
       }
 
       // Add the container when the overlay is added to the map.
@@ -197,7 +202,7 @@ servicesModule.factory('newLayerService', function() {
         // Draw each marker as a separate SVG element.
         overlay.draw = function() {
           var projection = this.getProjection(),
-              padding = 10;
+              padding = 200;
 
           var marker = layer.selectAll("svg")
               .data(d3.entries(d3Points))
@@ -210,7 +215,8 @@ servicesModule.factory('newLayerService', function() {
 
           // Add a circle.
           marker.append("svg:circle")
-              .attr("r", 4.5)
+              // .attr("r", 4.5)
+              .attr("r", findRadius)
               .attr("cx", padding)
               .attr("cy", padding);
 
@@ -226,6 +232,11 @@ servicesModule.factory('newLayerService', function() {
             return d.value.noise_type;
           }
 
+          function findRadius(d) {
+            var reach = d.value.reach;
+            return reach / 25;
+          }
+
         };
       };
       return overlay;
@@ -235,7 +246,7 @@ servicesModule.factory('newLayerService', function() {
       var current_zoom = map.getZoom();
 
       // Find the difference between where they currently are and the closest range zoom
-      var no_of_divide_times = 21 - current_zoom;
+      var no_of_divide_times = 17 - current_zoom;
 
       // Divide by 2 for each new level of zoom
       if (no_of_divide_times > 0) {
