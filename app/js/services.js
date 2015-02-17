@@ -34,11 +34,11 @@ servicesModule.factory('filterService', function() {
       return excludedNoises;
     },
     showAllD3Elements: function(status) {
-      var circles = angular.element(document.getElementsByTagName('circle'));
+      var svgs = angular.element(document.getElementsByTagName('svg'));
       if (status) {
-        circles.removeClass('hide');
+        svgs.removeClass('hide');
       } else {
-        circles.addClass('hide');
+        svgs.addClass('hide');
       }
     },
     toggleSwitches: function(status) {
