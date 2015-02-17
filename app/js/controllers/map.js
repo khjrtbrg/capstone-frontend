@@ -18,68 +18,15 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
       // Fetch Noises From API and Add To Map
       d3.json("http://54.191.247.160/noises", function(data) {
-        // Create Heatmaps
         $scope.dataPoints = data;
-        // Setup Excluded Filters Array
         $scope.excludedNoises = [];
 
         // Create Heatmap Layer
-        createLayer();
-
+        createHeatmapLayer();
 
         // Create D3 Points
-        var overlay = new google.maps.OverlayView();
-
-        // Remove Freeways from Data
-        var d3Points = [];
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].noise_type != 'freeway') {
-            d3Points.push(data[i]);
-          };
-        }
-
-        // Add the container when the overlay is added to the map.
-        overlay.onAdd = function() {
-          var layer = d3.select(this.getPanes().overlayMouseTarget)
-            .append("div")
-            .attr("class", "noises");
-
-          // Draw each marker as a separate SVG element.
-          overlay.draw = function() {
-            var projection = this.getProjection(),
-                padding = 10;
-
-            var marker = layer.selectAll("svg")
-                .data(d3.entries(d3Points))
-                .each(transform) // update existing markers
-              .enter().append("svg:svg")
-                .each(transform)
-                .attr("tooltip", findClass)
-                .attr("tooltip-trigger", "click")
-                .attr("class", findClass);
-
-            // Add a circle.
-            marker.append("svg:circle")
-                .attr("r", 4.5)
-                .attr("cx", padding)
-                .attr("cy", padding);
-
-            function transform(d) {
-              d = new google.maps.LatLng(d.value.lat, d.value.lon);
-              d = projection.fromLatLngToDivPixel(d);
-              return d3.select(this)
-                  .style("left", (d.x - padding) + "px")
-                  .style("top", (d.y - padding) + "px");
-            }
-
-            function findClass(d) {
-              return d.value.noise_type;
-            }
-
-          };
-        };
-
-        // Bind our overlay to the map…
+        var overlay = newLayerService.createD3Points(data);
+        // Bind D3 overlay to the map
         overlay.setMap($scope.map);
       });
     }
@@ -90,7 +37,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     //////////////////////////////////////////////////
 
     // Create Heatmap Layer
-    var createLayer = function() {
+    var createHeatmapLayer = function() {
       var newPoints = newLayerService.setupLayer($scope.dataPoints, $scope.excludedNoises);
       $scope.heatmap = newLayerService.createLayer(newPoints);
       $scope.heatmap.setMap($scope.map);
@@ -99,7 +46,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     // Re-Render Heatmap on Filter
     var reRenderHeatmap = function() {
       $scope.heatmap.setMap(null);
-      createLayer();
+      createHeatmapLayer();
     }
 
 
