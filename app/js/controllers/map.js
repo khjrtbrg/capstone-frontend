@@ -13,6 +13,9 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         streetViewControl: false
       };
 
+      // Store Zoom Level for Later Reference
+      $scope.mapZoomLevel = mapOptions.zoom;
+
       // Disable/Enable Buttons
       $scope.hideAllButton = false;
       $scope.showAllButton = true;
@@ -34,6 +37,9 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         // Bind D3 overlay to the map
         overlay.setMap($scope.map);
       });
+
+      // Listener for Zoom
+      google.maps.event.addListener($scope.map, 'zoom_changed', adjustRadius);
     }
 
 
@@ -54,6 +60,13 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         $scope.heatmap.setMap(null);
         createHeatmapLayer();
       }
+    }
+
+    // Adjust Radius on Zoom
+    var adjustRadius = function() {
+      var newZoomLevel = $scope.map.getZoom();
+      newLayerService.adjustRadius($scope.mapZoomLevel, newZoomLevel);
+      $scope.mapZoomLevel = newZoomLevel;
     }
 
 

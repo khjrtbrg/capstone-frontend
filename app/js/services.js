@@ -197,7 +197,7 @@ servicesModule.factory('newLayerService', function() {
         // Draw each marker as a separate SVG element.
         overlay.draw = function() {
           var projection = this.getProjection(),
-              padding = 10;
+              padding = 200;
 
           var marker = layer.selectAll("svg")
               .data(d3.entries(d3Points))
@@ -210,7 +210,8 @@ servicesModule.factory('newLayerService', function() {
 
           // Add a circle.
           marker.append("svg:circle")
-              .attr("r", 4.5)
+              // .attr("r", 4.5)
+              .attr("r", findRadius)
               .attr("cx", padding)
               .attr("cy", padding);
 
@@ -226,27 +227,27 @@ servicesModule.factory('newLayerService', function() {
             return d.value.noise_type;
           }
 
+          function findRadius(d) {
+            return d.value.display_reach;
+          }
         };
       };
       return overlay;
     },
-    findRadius: function(map, radius) {
-      // Get the zoom level the user is currently at; radius must start as num of px at closest range; 1ft = 6px
-      var current_zoom = map.getZoom();
-
-      // Find the difference between where they currently are and the closest range zoom
-      var no_of_divide_times = 21 - current_zoom;
-
-      // Divide by 2 for each new level of zoom
-      if (no_of_divide_times > 0) {
-        for (var i = 0; i < no_of_divide_times; i++) {
-          radius = radius / 2;
-        }
+    radiusMath: function(radius, originalZoom, newZoomLevel) {
+      if (originalZoom > newZoomLevel) {
+        return radius / 2;
+      } else {
+        return radius * 2;
       }
-
-      // Round to nearest whole number to make Google's API happy
-      var newRadius = Math.round(radius);
-      return newRadius;
+    },
+    adjustRadius: function(mapZoomLevel, newZoomLevel) {
+      var circles = document.getElementsByTagName('circle');
+      for (var i = 0; i < circles.length; i++) {
+        var circle = circles[i];
+        var newRadius = this.radiusMath(circle.r.baseVal.value, mapZoomLevel, newZoomLevel);
+        angular.element(circle).attr('r', newRadius);
+      }
     }
   }
 });
