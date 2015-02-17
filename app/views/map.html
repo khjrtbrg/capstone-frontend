@@ -25,6 +25,25 @@
       <div class="map-options">
         <h3>Filter Noise Types</h3>
 
+        <div class="global-filters">
+          <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default" ng-click="hideAll()" ng-disabled="hideAllButton">
+                Hide All Noises
+              </button>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default" ng-click="showAll()" ng-disabled="showAllButton">
+                Show All Noises
+              </button>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-default btn-block" ng-click="toggleHeatmap()">
+            Toggle Heatmap
+          </button>
+        </div>
+
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('transit');changeColor($event)"></input>
           <div class="switch">
@@ -132,7 +151,7 @@
         </label>
 
         <label>
-          <input type="checkbox" checked="checked" ng-click="toggleNoises('freeway');changeColor($event)"></input>
+          <input type="checkbox" checked="true" ng-click="toggleNoises('freeway');changeColor($event)"></input>
           <div class="switch">
             <span class="glyphicon glyphicon-road clicked"></span>
           </div>

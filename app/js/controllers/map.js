@@ -1,7 +1,7 @@
 var mapControllerModule = angular.module('mapControllerModule', []);
 
-mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerService', 'locationService',
-  function($scope, $http, newLayerService, locationService) {
+mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerService', 'locationService', 'filterService',
+  function($scope, $http, newLayerService, locationService, filterService) {
 
     function initialize() {
       var mapOptions = {
@@ -13,106 +13,130 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         streetViewControl: false
       };
 
+      // Disable/Enable Buttons
+      $scope.hideAllButton = false;
+      $scope.showAllButton = true;
+
       // Create & Add Map
       $scope.map = new google.maps.Map(d3.select("#map-canvas").node(), mapOptions);
 
       // Fetch Noises From API and Add To Map
-      d3.json("http://localhost:3000/noises", function(data) {
-        // http://54.191.247.160/noises
-        // Create Heatmaps
+      d3.json("http://54.191.247.160/noises", function(data) {
         $scope.dataPoints = data;
-        // Setup Excluded Filters Array
         $scope.excludedNoises = [];
 
         // Create Heatmap Layer
-        createLayer();
-
+        createHeatmapLayer();
+        $scope.heatmapOn = true;
 
         // Create D3 Points
-        var overlay = new google.maps.OverlayView();
-
-        // Remove Freeways from Data
-        var d3Points = [];
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].noise_type != 'freeway') {
-            d3Points.push(data[i]);
-          };
-        }
-
-        // Add the container when the overlay is added to the map.
-        overlay.onAdd = function() {
-          var layer = d3.select(this.getPanes().overlayMouseTarget)
-            .append("div")
-            .attr("class", "noises");
-
-          // Draw each marker as a separate SVG element.
-          overlay.draw = function() {
-            var projection = this.getProjection(),
-                padding = 10;
-
-            var marker = layer.selectAll("svg")
-                .data(d3.entries(d3Points))
-                .each(transform) // update existing markers
-              .enter().append("svg:svg")
-                .each(transform)
-                .attr("tooltip-placement", "right")
-                .attr("tooltip", "testing!")
-                .attr("class", findClass);
-
-            // Add a circle.
-            marker.append("svg:circle")
-                .attr("r", 4.5)
-                .attr("cx", padding)
-                .attr("cy", padding);
-
-            function transform(d) {
-              d = new google.maps.LatLng(d.value.lat, d.value.lon);
-              d = projection.fromLatLngToDivPixel(d);
-              return d3.select(this)
-                  .style("left", (d.x - padding) + "px")
-                  .style("top", (d.y - padding) + "px");
-            }
-
-            function findClass(d) {
-              return d.value.noise_type;
-            }
-
-          };
-        };
-
-        // Bind our overlay to the map…
+        var overlay = newLayerService.createD3Points(data);
+        // Bind D3 overlay to the map
         overlay.setMap($scope.map);
       });
     }
 
 
-    // Toggle Noises Function
-    $scope.toggleNoises = function(layerName) {
-      // Add or Remove Filter to excludedNoises
-      var i = $scope.excludedNoises.indexOf(layerName)
-      if (i == -1) {
-        $scope.excludedNoises.push(layerName);
-      } else {
-        $scope.excludedNoises.splice(i, 1);
-      }
-
-      // Remove Old/Create New Heatmap Layer
-      $scope.heatmap.setMap(null);
-      createLayer();
-
-      // Hide Corresponding D3 Elements
-      if (layerName != 'freeway') {
-        var noises = document.getElementsByClassName(layerName);
-        angular.element(noises).toggleClass('hide');
-      };
-    }
+    //////////////////////////////////////////////////
+    // Functions for Setting Up Layers/Filtering    //
+    //////////////////////////////////////////////////
 
     // Create Heatmap Layer
-    var createLayer = function() {
+    var createHeatmapLayer = function() {
       var newPoints = newLayerService.setupLayer($scope.dataPoints, $scope.excludedNoises);
       $scope.heatmap = newLayerService.createLayer(newPoints);
       $scope.heatmap.setMap($scope.map);
     }
+
+    // Re-Render Heatmap on Filter
+    var reRenderHeatmap = function() {
+      if ($scope.heatmapOn) {
+        $scope.heatmap.setMap(null);
+        createHeatmapLayer();
+      }
+    }
+
+
+    //////////////////////////////////////////////////
+    // Functions for Toggling Single Layer          //
+    //////////////////////////////////////////////////
+
+    // Toggle Individual Noises
+    $scope.toggleNoises = function(layerName) {
+      filterService.excludeOneNoise($scope.excludedNoises, layerName);
+      reRenderHeatmap();
+
+      if (layerName != 'freeway') {
+        var noises = document.getElementsByClassName(layerName);
+        angular.element(noises).toggleClass('hide');
+      };
+
+      if ($scope.excludedNoises.length == 14) {
+        $scope.hideAllButton = true;
+      } else if ($scope.excludedNoises.length == 0) {
+        $scope.showAllButton = true;
+      } else {
+        $scope.hideAllButton = false;
+        $scope.showAllButton = false;
+      }
+    }
+
+    // Changing filter/switch background color
+    $scope.changeColor = function($event) {
+      var switchDiv = angular.element($event.toElement.nextElementSibling);
+      switchDiv.toggleClass("switched-off");
+    }
+
+
+    //////////////////////////////////////////////////
+    // Functions for Toggling All Layers            //
+    //////////////////////////////////////////////////
+
+    // Toggle Heatmap
+    $scope.toggleHeatmap = function() {
+      if ($scope.heatmap.getMap() == null) {
+        $scope.heatmapOn = true;
+        reRenderHeatmap();
+        $scope.heatmap.setMap($scope.map);
+      } else {
+        $scope.heatmapOn = false;
+        $scope.heatmap.setMap(null);
+      }
+    }
+
+    // Hide All Noises
+    $scope.hideAll = function() {
+      if ($scope.excludedNoises.length < 14) {
+        showAllLayers(false);
+
+        $scope.hideAllButton = true;
+        $scope.showAllButton = false;
+      };
+    }
+
+    // Show All Noises
+    $scope.showAll = function() {
+      if ($scope.excludedNoises.length > 0) {
+        showAllLayers(true);
+
+        $scope.hideAllButton = false;
+        $scope.showAllButton = true;
+      }
+    }
+
+    // All the things that happen when you toggle all layers
+    var showAllLayers = function(status) {
+      filterService.toggleSwitches(status);
+      $scope.excludedNoises = filterService.excludeAllNoises(!status);
+
+      reRenderHeatmap();
+      filterService.showAllD3Elements(status);
+    }
+
+
+    //////////////////////////////////////////////////
+    // Functions for Searching for Locations        //
+    //////////////////////////////////////////////////
 
     // Zoom Map to Searched Location
     $scope.markers = [];
@@ -144,12 +168,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         });
       }
     };
-
-    // Changing filter/switch background color
-    $scope.changeColor = function($event) {
-      var switchDiv = angular.element($event.toElement.nextElementSibling);
-      switchDiv.toggleClass("switched-off");
-    }
 
     // Initialize Map
     google.maps.event.addDomListener(window, 'load', initialize());

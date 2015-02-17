@@ -154,6 +154,14 @@ input[type=checkbox]:not(:checked) ~ div span {
   background-color: gray;
 }
 
+.global-filters {
+  margin: 20px 0;
+}
+
+.global-filters .btn-block {
+  margin-top: 10px;
+}
+
 .info {
   height: 15px;
   display: inline-block;

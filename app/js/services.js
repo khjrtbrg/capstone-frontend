@@ -1,24 +1,63 @@
 var servicesModule = angular.module('servicesModule', []);
 
-servicesModule.factory('layerService', function() {
+servicesModule.factory('filterService', function() {
   return {
-    findRadius: function(map, radius) {
-      // Get the zoom level the user is currently at; radius must start as num of px at closest range; 1ft = 6px
-      var current_zoom = map.getZoom();
+    excludeOneNoise: function(excludedNoises, layerName) {
+      var i = excludedNoises.indexOf(layerName)
+      if (i == -1) {
+        excludedNoises.push(layerName);
+      } else {
+        excludedNoises.splice(i, 1);
+      }
+    },
+    excludeAllNoises: function(status) {
+      if (status) {
+        excludedNoises = [
+          'transit',
+          'dump',
+          'fireStation',
+          'college',
+          'school',
+          'policeStation',
+          'hospital',
+          'bar',
+          'construction',
+          'demolition',
+          'noiseComplaints',
+          'stadium',
+          'freeway',
+          'heliportOrAirport'
+        ];
+      } else {
+        excludedNoises = [];
+      }
+      return excludedNoises;
+    },
+    showAllD3Elements: function(status) {
+      var svgs = angular.element(document.getElementsByTagName('svg'));
+      if (status) {
+        svgs.removeClass('hide');
+      } else {
+        svgs.addClass('hide');
+      }
+    },
+    toggleSwitches: function(status) {
+      var checkboxes = [];
+      var wrapper = document.getElementsByClassName('map-options')[0];
+      checkboxes = wrapper.getElementsByTagName('input');
 
-      // Find the difference between where they currently are and the closest range zoom
-      var no_of_divide_times = 21 - current_zoom;
-
-      // Divide by 2 for each new level of zoom
-      if (no_of_divide_times > 0) {
-        for (var i = 0; i < no_of_divide_times; i++) {
-          radius = radius / 2;
-        }
+      for (var i = 0; i < checkboxes.length; i++)  {
+        checkboxes[i].checked = status;
       }
 
-      // Round to nearest whole number to make Google's API happy
-      var newRadius = Math.round(radius);
-      return newRadius;
+      var switches = document.getElementsByClassName('switch');
+      for (var i = 0; i < switches.length; i++) {
+        if (status) {
+          angular.element(switches[i]).removeClass('switched-off');
+        } else {
+          angular.element(switches[i]).addClass('switched-off');
+        }
+      }
     }
   }
 });
@@ -136,6 +175,78 @@ servicesModule.factory('newLayerService', function() {
       });
 
       return layer;
+    },
+    createD3Points: function(data) {
+      // Set Up Overlay
+      var overlay = new google.maps.OverlayView();
+
+      // Remove Freeways from Data
+      var d3Points = [];
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].noise_type != 'freeway') {
+          d3Points.push(data[i]);
+        };
+      }
+
+      // Add the container when the overlay is added to the map.
+      overlay.onAdd = function() {
+        var layer = d3.select(this.getPanes().overlayMouseTarget)
+          .append("div")
+          .attr("class", "noises");
+
+        // Draw each marker as a separate SVG element.
+        overlay.draw = function() {
+          var projection = this.getProjection(),
+              padding = 10;
+
+          var marker = layer.selectAll("svg")
+              .data(d3.entries(d3Points))
+              .each(transform) // update existing markers
+            .enter().append("svg:svg")
+              .each(transform)
+              .attr("tooltip", findClass)
+              .attr("tooltip-trigger", "click")
+              .attr("class", findClass);
+
+          // Add a circle.
+          marker.append("svg:circle")
+              .attr("r", 4.5)
+              .attr("cx", padding)
+              .attr("cy", padding);
+
+          function transform(d) {
+            d = new google.maps.LatLng(d.value.lat, d.value.lon);
+            d = projection.fromLatLngToDivPixel(d);
+            return d3.select(this)
+                .style("left", (d.x - padding) + "px")
+                .style("top", (d.y - padding) + "px");
+          }
+
+          function findClass(d) {
+            return d.value.noise_type;
+          }
+
+        };
+      };
+      return overlay;
+    },
+    findRadius: function(map, radius) {
+      // Get the zoom level the user is currently at; radius must start as num of px at closest range; 1ft = 6px
+      var current_zoom = map.getZoom();
+
+      // Find the difference between where they currently are and the closest range zoom
+      var no_of_divide_times = 21 - current_zoom;
+
+      // Divide by 2 for each new level of zoom
+      if (no_of_divide_times > 0) {
+        for (var i = 0; i < no_of_divide_times; i++) {
+          radius = radius / 2;
+        }
+      }
+
+      // Round to nearest whole number to make Google's API happy
+      var newRadius = Math.round(radius);
+      return newRadius;
     }
   }
 });
