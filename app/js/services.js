@@ -228,14 +228,8 @@ servicesModule.factory('newLayerService', function() {
           }
 
           function findRadius(d) {
-            var reach = d.value.reach;
-            return reach / 400;
-            // HERE'S THE PROBLEM! Sirens look great at this reach, everything else is TINY
-            // If we do reach / 50ish, buses look tiny still and sirens overwhelm the city
-            // Buses look best at reach / 25ish, for reference!
-            // Adjust reaches in API?
+            return d.value.display_reach;
           }
-
         };
       };
       return overlay;
