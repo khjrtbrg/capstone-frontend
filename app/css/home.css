@@ -158,9 +158,8 @@ input[type=checkbox]:not(:checked) ~ div span {
   margin: 20px 0;
 }
 
-.global-filters .heatmap {
+.global-filters .btn-block {
   margin-top: 10px;
-  width: 100%;
 }
 
 .info {

@@ -13,6 +13,10 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         streetViewControl: false
       };
 
+      // Disable/Enable Buttons
+      $scope.hideAllButton = false;
+      $scope.showAllButton = true;
+
       // Create & Add Map
       $scope.map = new google.maps.Map(d3.select("#map-canvas").node(), mapOptions);
 
@@ -63,6 +67,15 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         var noises = document.getElementsByClassName(layerName);
         angular.element(noises).toggleClass('hide');
       };
+
+      if ($scope.excludedNoises.length == 14) {
+        $scope.hideAllButton = true;
+      } else if ($scope.excludedNoises.length == 0) {
+        $scope.showAllButton = true;
+      } else {
+        $scope.hideAllButton = false;
+        $scope.showAllButton = false;
+      }
     }
 
     // Changing filter/switch background color
@@ -76,15 +89,18 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     // Functions for Toggling All Layers            //
     //////////////////////////////////////////////////
 
-    // // Toggle Heatmap
-    // $scope.toggleHeatmap = function() {
-    //   $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
-    // }
+    // Toggle Heatmap
+    $scope.toggleHeatmap = function() {
+      $scope.heatmap.setMap($scope.heatmap.getMap() ? null : $scope.map);
+    }
 
     // Hide All Noises
     $scope.hideAll = function() {
       if ($scope.excludedNoises.length < 14) {
         showAllLayers(false);
+
+        $scope.hideAllButton = true;
+        $scope.showAllButton = false;
       };
     }
 
@@ -92,6 +108,9 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     $scope.showAll = function() {
       if ($scope.excludedNoises.length > 0) {
         showAllLayers(true);
+
+        $scope.hideAllButton = false;
+        $scope.showAllButton = true;
       }
     }
 
