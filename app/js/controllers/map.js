@@ -69,19 +69,11 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       var circles = document.getElementsByTagName('circle');
       for (var i = 0; i < circles.length; i++) {
         var circle = circles[i];
-        var newRadius = radiusMath(circle.r.baseVal.value, $scope.mapZoomLevel, newZoomLevel);
+        var newRadius = newLayerService.radiusMath(circle.r.baseVal.value, $scope.mapZoomLevel, newZoomLevel);
         angular.element(circle).attr('r', newRadius);
       }
 
       $scope.mapZoomLevel = newZoomLevel;
-    }
-
-    var radiusMath = function(radius, originalZoom, newZoomLevel) {
-      if (originalZoom > newZoomLevel) {
-        return radius / 2;
-      } else {
-        return radius * 2;
-      }
     }
 
 

@@ -234,6 +234,13 @@ servicesModule.factory('newLayerService', function() {
       };
       return overlay;
     },
+    radiusMath: function(radius, originalZoom, newZoomLevel) {
+      if (originalZoom > newZoomLevel) {
+        return radius / 2;
+      } else {
+        return radius * 2;
+      }
+    },
     findRadius: function(map, radius) {
       // Get the zoom level the user is currently at; radius must start as num of px at closest range; 1ft = 6px
       var current_zoom = map.getZoom();
