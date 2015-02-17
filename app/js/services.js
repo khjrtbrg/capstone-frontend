@@ -241,23 +241,13 @@ servicesModule.factory('newLayerService', function() {
         return radius * 2;
       }
     },
-    findRadius: function(map, radius) {
-      // Get the zoom level the user is currently at; radius must start as num of px at closest range; 1ft = 6px
-      var current_zoom = map.getZoom();
-
-      // Find the difference between where they currently are and the closest range zoom
-      var no_of_divide_times = 17 - current_zoom;
-
-      // Divide by 2 for each new level of zoom
-      if (no_of_divide_times > 0) {
-        for (var i = 0; i < no_of_divide_times; i++) {
-          radius = radius / 2;
-        }
+    adjustRadius: function(mapZoomLevel, newZoomLevel) {
+      var circles = document.getElementsByTagName('circle');
+      for (var i = 0; i < circles.length; i++) {
+        var circle = circles[i];
+        var newRadius = this.radiusMath(circle.r.baseVal.value, mapZoomLevel, newZoomLevel);
+        angular.element(circle).attr('r', newRadius);
       }
-
-      // Round to nearest whole number to make Google's API happy
-      var newRadius = Math.round(radius);
-      return newRadius;
     }
   }
 });

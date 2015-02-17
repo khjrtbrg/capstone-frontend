@@ -65,14 +65,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     // Adjust Radius on Zoom
     var adjustRadius = function() {
       var newZoomLevel = $scope.map.getZoom();
-
-      var circles = document.getElementsByTagName('circle');
-      for (var i = 0; i < circles.length; i++) {
-        var circle = circles[i];
-        var newRadius = newLayerService.radiusMath(circle.r.baseVal.value, $scope.mapZoomLevel, newZoomLevel);
-        angular.element(circle).attr('r', newRadius);
-      }
-
+      newLayerService.adjustRadius($scope.mapZoomLevel, newZoomLevel);
       $scope.mapZoomLevel = newZoomLevel;
     }
 
