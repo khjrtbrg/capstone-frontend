@@ -40,6 +40,9 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
       // Listener for Zoom
       google.maps.event.addListener($scope.map, 'zoom_changed', adjustRadius);
+
+      // Listener for Dropped Pin
+      google.maps.event.addListener($scope.map, "click", function(e) { dropPin(e); });
     }
 
 
@@ -68,6 +71,17 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       newLayerService.adjustRadius($scope.mapZoomLevel, newZoomLevel);
       $scope.mapZoomLevel = newZoomLevel;
     }
+
+    // Drop Pin on Click
+    var dropPin = function(e) {
+        var latLng = e.latLng;
+        console.log(latLng)
+        var coordinates = {
+          lat: latLng.k,
+          lng: latLng.D
+        };
+        locationService.newMarker(coordinates, $scope);
+    };
 
 
     //////////////////////////////////////////////////
