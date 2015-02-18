@@ -171,7 +171,12 @@ servicesModule.factory('locationService', ['$http', function($http) {
         // Add InfoWindow to Marker
         infowindow.open(scope.map,marker);
 
-        // Reopen Popup if Marker Clicked
+        // Close InfoWindow if Map Clicked
+        google.maps.event.addListener(scope.map, "click", function(){
+          infowindow.close();
+        });
+
+        // Reopen InfoWindow if Marker Clicked
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.open(scope.map,marker);
         });
