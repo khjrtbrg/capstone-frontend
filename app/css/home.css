@@ -71,7 +71,7 @@ input[type="checkbox"] {
 .switch {
   width: 80px;
   height: 33px;
-  background-color: #846B8A;
+  background-color: #8681C6;
   display: inline-block;
   position: relative;
   border: 1px black solid;
@@ -226,7 +226,7 @@ input[type=checkbox]:not(:checked) ~ div span {
 
 @keyframes to_red {
   0% {
-    background-color: #846B8A;
+    background-color: #8681C6;
   }
   100% {
     background-color: #ADACB5;
@@ -238,7 +238,7 @@ input[type=checkbox]:not(:checked) ~ div span {
     background-color: #ADACB5;
   }
   100% {
-    background-color: #846B8A;
+    background-color: #8681C6;
   }
 }
 
@@ -270,7 +270,7 @@ input[type=checkbox]:not(:checked) ~ div span {
 
 @-webkit-keyframes to_red {
   0% {
-    background-color: #846B8A;
+    background-color: #8681C6;
   }
   100% {
     background-color: #ADACB5;
@@ -282,7 +282,7 @@ input[type=checkbox]:not(:checked) ~ div span {
     background-color: #ADACB5;
   }
   100% {
-    background-color: #846B8A;
+    background-color: #8681C6;
   }
 }
 
@@ -314,7 +314,7 @@ input[type=checkbox]:not(:checked) ~ div span {
 
 @-moz-keyframes to_red {
   0% {
-    background-color: #846B8A;
+    background-color: #8681C6;
   }
   100% {
     background-color: #ADACB5;
@@ -326,6 +326,6 @@ input[type=checkbox]:not(:checked) ~ div span {
     background-color: #ADACB5;
   }
   100% {
-    background-color: #846B8A;
+    background-color: #8681C6;
   }
 }
