@@ -36,16 +36,12 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         var overlay = newLayerService.createD3Points(data);
         // Bind D3 overlay to the map
         overlay.setMap($scope.map);
-        // google.maps.event.addListener(overlay, 'click', function($event){
-        //   console.log("It worked!");
-        // });
       });
 
       // Listener for Zoom
       google.maps.event.addListener($scope.map, 'zoom_changed', adjustRadius);
 
     }
-
 
     //////////////////////////////////////////////////
     // Functions for Setting Up Layers/Filtering    //
