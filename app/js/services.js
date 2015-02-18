@@ -236,7 +236,6 @@ servicesModule.factory('newLayerService', function() {
 
           // Add a circle.
           marker.append("svg:circle")
-              // .attr("r", 4.5)
               .attr("r", findRadius)
               .attr("cx", padding)
               .attr("cy", padding);
