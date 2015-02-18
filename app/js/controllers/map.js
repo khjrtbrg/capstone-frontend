@@ -101,9 +101,26 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     }
 
     // Show individual noises info
-    $scope.showDescription = function() {
-      console.log("pineapple");
-    }
+    $scope.showNoiseDescrip = function(data, item, map) {
+      var noiseContentString = '<div id="content">' +
+        '<h1 id="firstHeading" class="firstHeading text-center">' +
+        data.value.noise_type +
+        '</h1>' +
+        '<div id="bodyContent">' +
+        '<h2 class="text-center ' +
+        data.value.description +
+        '</div>' +
+        '</div>';
+
+    // Create InfoWindow
+    var noiseWindow = new google.maps.InfoWindow({
+        content: noiseContentString
+    });
+    // scope.popups.push(infowindow);
+
+    // Add InfoWindow to Circle
+    noiseWindow.open(scope.map,item);
+  }
 
 
     //////////////////////////////////////////////////

@@ -214,9 +214,9 @@ servicesModule.factory('newLayerService', function() {
               .attr("cx", padding)
               .attr("cy", padding)
               .style("pointer-events", "all")
-              .on("click", function(d){
-                console.log(d.value.description);
-              });
+              .on("click", scope.showNoiseDescrip(d, this, map));
+            //  .onclick function takes in this/circle argument
+            // function sets content string, creates info window
 
           function transform(d) {
             d = new google.maps.LatLng(d.value.lat, d.value.lon);
