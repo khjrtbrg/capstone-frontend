@@ -83,8 +83,34 @@ servicesModule.factory('locationService', ['$http', function($http) {
       scope.map.setZoom(15);
       scope.map.panTo(marker.getPosition());
 
+      // Add Circle
+      this.scoreCircle(coordinates, scope);
+
       // Add Popup
       this.scorePopup(coordinates, scope);
+    },
+    scoreCircle: function(coordinates, scope) {
+      // Clear Any Current Circles
+      for (var i = 0; i < scope.circles.length; i++) {
+        scope.circles[i].setMap(null);
+      }
+      scope.circles = [];
+
+      // Set Options for Circle
+      var populationOptions = {
+        strokeColor: '#00cc00',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#00cc00',
+        fillOpacity: 0.35,
+        map: scope.map,
+        center: coordinates,
+        radius: 64
+      };
+
+      // Add Circle to Map & Array
+      var newCircle = new google.maps.Circle(populationOptions);
+      scope.circles.push(newCircle);
     },
     scorePopup: function(coordinates, scope) {
       var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
