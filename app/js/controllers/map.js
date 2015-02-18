@@ -42,7 +42,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       google.maps.event.addListener($scope.map, 'zoom_changed', adjustRadius);
 
       // Listener for Dropped Pin
-      google.maps.event.addListener($scope.map, "click", function(e) { dropPin(e); });
+      google.maps.event.addListener($scope.map, 'rightclick', function(e) { dropPin(e); });
     }
 
 
@@ -81,6 +81,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
           lng: latLng.D
         };
         locationService.newMarker(coordinates, $scope);
+        newLayerService.adjustRadius($scope.mapZoomLevel, 15);
     };
 
 
