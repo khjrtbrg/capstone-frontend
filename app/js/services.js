@@ -214,10 +214,9 @@ servicesModule.factory('newLayerService', function() {
               .attr("cx", padding)
               .attr("cy", padding)
               .style("pointer-events", "all")
-              .on("click", function(){
-                console.log("OMFG it worked", this);
+              .on("click", function(d){
+                console.log(d.value.description);
               });
-
 
           function transform(d) {
             d = new google.maps.LatLng(d.value.lat, d.value.lon);
