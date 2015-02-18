@@ -267,11 +267,28 @@ servicesModule.factory('newLayerService', function() {
         return radius * 2;
       }
     },
+    bigRadiusJump: function(radius, diff) {
+      var posDiff = Math.abs(diff);
+      for (var i = 0; i < posDiff; i++) {
+        if (diff > 0) {
+          radius = radius / 2;
+        } else {
+          radius = radius * 2;
+        }
+      }
+      return radius;
+    },
     adjustRadius: function(mapZoomLevel, newZoomLevel) {
+      var diff = mapZoomLevel - newZoomLevel;
       var circles = document.getElementsByTagName('circle');
+
       for (var i = 0; i < circles.length; i++) {
         var circle = circles[i];
-        var newRadius = this.radiusMath(circle.r.baseVal.value, mapZoomLevel, newZoomLevel);
+        if (diff === 1 || diff === -1) {
+          var newRadius = this.radiusMath(circle.r.baseVal.value, mapZoomLevel, newZoomLevel);
+        } else if (diff > 1 || diff < -1) {
+          var newRadius = this.bigRadiusJump(circle.r.baseVal.value, diff);
+        }
         angular.element(circle).attr('r', newRadius);
       }
     }
