@@ -28,7 +28,7 @@ h1 {
 
 .navbar.navbar-inverse.navbar-fixed-top {
   height: 80px;
-  background-color: #482876;
+  background-color: #383961;
 }
 
 h3 {
@@ -71,7 +71,7 @@ input[type="checkbox"] {
 .switch {
   width: 80px;
   height: 33px;
-  background-color: #00cc00;
+  background-color: #846B8A;
   display: inline-block;
   position: relative;
   border: 1px black solid;
@@ -87,7 +87,7 @@ input[type="checkbox"] {
 }
 
 .switched-off {
-  background-color: #ff1919;
+  background-color: #ADACB5;
   animation-name: to_red;
   animation-duration: .7s;
   -webkit-animation-name: to_red;
@@ -226,19 +226,19 @@ input[type=checkbox]:not(:checked) ~ div span {
 
 @keyframes to_red {
   0% {
-    background-color: #00cc00;
+    background-color: #846B8A;
   }
   100% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
 }
 
 @keyframes to_green {
   0% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
   100% {
-    background-color: #00cc00;
+    background-color: #846B8A;
   }
 }
 
@@ -270,19 +270,19 @@ input[type=checkbox]:not(:checked) ~ div span {
 
 @-webkit-keyframes to_red {
   0% {
-    background-color: #00cc00;
+    background-color: #846B8A;
   }
   100% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
 }
 
 @-webkit-keyframes to_green {
   0% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
   100% {
-    background-color: #00cc00;
+    background-color: #846B8A;
   }
 }
 
@@ -314,18 +314,18 @@ input[type=checkbox]:not(:checked) ~ div span {
 
 @-moz-keyframes to_red {
   0% {
-    background-color: #00cc00;
+    background-color: #846B8A;
   }
   100% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
 }
 
 @-moz-keyframes to_green {
   0% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
   100% {
-    background-color: #00cc00;
+    background-color: #846B8A;
   }
 }
