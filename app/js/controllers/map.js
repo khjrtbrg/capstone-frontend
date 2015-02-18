@@ -72,18 +72,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       $scope.mapZoomLevel = newZoomLevel;
     }
 
-    // Drop Pin on Click
-    var dropPin = function(e) {
-        var latLng = e.latLng;
-        console.log(latLng)
-        var coordinates = {
-          lat: latLng.k,
-          lng: latLng.D
-        };
-        locationService.newMarker(coordinates, $scope);
-        newLayerService.adjustRadius($scope.mapZoomLevel, 15);
-    };
-
 
     //////////////////////////////////////////////////
     // Functions for Toggling Single Layer          //
@@ -198,6 +186,18 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
           newLayerService.adjustRadius($scope.mapZoomLevel, 15);
         });
       }
+    };
+
+    // Zoom to Dropped Pin (On Right Click)
+    var dropPin = function(e) {
+        var latLng = e.latLng;
+        console.log(latLng)
+        var coordinates = {
+          lat: latLng.k,
+          lng: latLng.D
+        };
+        locationService.newMarker(coordinates, $scope);
+        newLayerService.adjustRadius($scope.mapZoomLevel, 15);
     };
 
     // Initialize Map
