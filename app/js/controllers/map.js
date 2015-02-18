@@ -163,6 +163,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         success(function(data) {
           $scope.address_error = '';
           locationService.newMarker(data, $scope);
+          newLayerService.adjustRadius($scope.mapZoomLevel, 15);
         }).
         error(function(data, status, headers, config) {
           $scope.address_error = 'Whoops, can\'t find that address!';
@@ -178,6 +179,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
             lng: position.coords.longitude
           };
           locationService.newMarker(coordinates, $scope);
+          newLayerService.adjustRadius($scope.mapZoomLevel, 15);
         });
       }
     };
