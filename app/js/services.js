@@ -170,6 +170,16 @@ servicesModule.factory('locationService', ['$http', function($http) {
 
         // Add InfoWindow to Marker
         infowindow.open(scope.map,marker);
+
+        // Close InfoWindow if Map Clicked
+        google.maps.event.addListener(scope.map, "click", function(){
+          infowindow.close();
+        });
+
+        // Reopen InfoWindow if Marker Clicked
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(scope.map,marker);
+        });
       });
     }
   }
@@ -236,7 +246,6 @@ servicesModule.factory('newLayerService', function() {
 
           // Add a circle.
           marker.append("svg:circle")
-              // .attr("r", 4.5)
               .attr("r", findRadius)
               .attr("cx", padding)
               .attr("cy", padding);

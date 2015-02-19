@@ -24,7 +24,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       $scope.map = new google.maps.Map(d3.select("#map-canvas").node(), mapOptions);
 
       // Fetch Noises From API and Add To Map
-      d3.json("http://54.191.247.160/noises", function(data) {
+      d3.json("http://localhost:3000/noises", function(data) {
         $scope.dataPoints = data;
         $scope.excludedNoises = [];
 
@@ -191,7 +191,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     // Zoom to Dropped Pin (On Right Click)
     var dropPin = function(e) {
         var latLng = e.latLng;
-        console.log(latLng)
         var coordinates = {
           lat: latLng.k,
           lng: latLng.D
