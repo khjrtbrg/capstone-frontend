@@ -75,7 +75,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
       marker = new google.maps.Marker({
         position: coordinates,
         map: scope.map,
-        zIndex: 100
+        zIndex: 99
       });
       scope.markers.push(marker);
 
@@ -212,7 +212,7 @@ servicesModule.factory('newLayerService', function() {
 
       return layer;
     },
-    createD3Points: function(data) {
+    createD3Points: function(data, scope) {
       // Set Up Overlay
       var overlay = new google.maps.OverlayView();
 
@@ -228,6 +228,7 @@ servicesModule.factory('newLayerService', function() {
       overlay.onAdd = function() {
         var layer = d3.select(this.getPanes().overlayMouseTarget)
           .append("div")
+          .style("pointer-events", "none")
           .attr("class", "noises");
 
         // Draw each marker as a separate SVG element.
@@ -240,15 +241,15 @@ servicesModule.factory('newLayerService', function() {
               .each(transform) // update existing markers
             .enter().append("svg:svg")
               .each(transform)
-              .attr("tooltip", findClass)
-              .attr("tooltip-trigger", "click")
               .attr("class", findClass);
 
           // Add a circle.
           marker.append("svg:circle")
               .attr("r", findRadius)
               .attr("cx", padding)
-              .attr("cy", padding);
+              .attr("cy", padding)
+              .style("pointer-events", "all")
+              .on("click", showNoiseDescrip);
 
           function transform(d) {
             d = new google.maps.LatLng(d.value.lat, d.value.lon);
@@ -265,10 +266,37 @@ servicesModule.factory('newLayerService', function() {
           function findRadius(d) {
             return d.value.display_reach;
           }
+
+          function showNoiseDescrip(d) {
+            scope.currentNoiseType = formatNoiseDescrip(d.value.noise_type);
+            scope.currentNoiseInfo = d.value.description;
+            scope.$apply(scope);
+          }
+
+          function formatNoiseDescrip(noise_type) {
+            if (noise_type === "fireStation") {
+              return "Fire Station";
+            }
+            else if (noise_type === "heliportOrAirport") {
+              return "Heliport/Airport";
+            }
+            else if (noise_type === "policeStation") {
+              return "Police Station";
+            }
+            else if (noise_type === "noiseComplaints") {
+              return "Noise Complaint";
+            }
+            else {
+              var newTitle = noise_type.charAt(0).toUpperCase() + noise_type.slice(1);
+              return newTitle;
+            }
+          }
+
         };
       };
       return overlay;
     },
+
     radiusMath: function(radius, originalZoom, newZoomLevel) {
       if (originalZoom > newZoomLevel) {
         return radius / 2;
