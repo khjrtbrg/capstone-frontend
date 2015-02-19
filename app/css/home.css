@@ -57,17 +57,21 @@ h3 {
 .noise-descrip {
   border: 2px black solid;
   z-index: 100;
-  height: 110px;
+  height: 120px;
   width: 300px;
   position: absolute;
   background-color: white;
   bottom: 0;
-  padding: 0 5px;
+  padding: 4px;
   margin: 5px;
   overflow: scroll;
 }
 
-.noise-descrip p, h2 {
+.noise-descrip h4 {
+  font-size: 20pt;
+}
+
+.noise-descrip p, h4 {
   text-align: center;
 }
 

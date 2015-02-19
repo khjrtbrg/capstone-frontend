@@ -238,27 +238,30 @@ servicesModule.factory('newLayerService', function() {
             actualScope.$apply(actualScope);
           }
 
+          function formatNoiseDescrip(noise_type) {
+            if (noise_type === "fireStation") {
+              return "Fire Station";
+            }
+            else if (noise_type === "heliportOrAirport") {
+              return "Heliport/Airport";
+            }
+            else if (noise_type === "policeStation") {
+              return "Police Station";
+            }
+            else if (noise_type === "noiseComplaints") {
+              return "Noise Complaint";
+            }
+            else {
+              var newTitle = noise_type.charAt(0).toUpperCase() + noise_type.slice(1);
+              return newTitle;
+            }
+          }
+
         };
       };
       return overlay;
     },
-    formatNoiseDescrip: function(noise_type) {
-      if (noise_type === "fireStation") {
-        return "Fire Station";
-      }
-      else if (noise_type === "heliportOrAirport") {
-        return "Heliport/Airport";
-      }
-      else if (noise_type === "policeStation") {
-        return "Police Station";
-      }
-      else if (noise_type === "noiseComplaints") {
-        return "Noise Complaint";
-      }
-      else {
-        // capitalize first letter
-      }
-    },
+
     radiusMath: function(radius, originalZoom, newZoomLevel) {
       if (originalZoom > newZoomLevel) {
         return radius / 2;
