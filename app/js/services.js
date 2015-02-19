@@ -235,6 +235,7 @@ servicesModule.factory('newLayerService', function() {
           function showNoiseDescrip(d) {
             // angular.element(map).append("Hello!!");
             // Create text to appear in window
+            // Need to refactor!
             var noiseContentString = '<div id="content">' +
               '<h1 id="firstHeading" class="firstHeading text-center">' +
               d.value.noise_type +

@@ -8,6 +8,17 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     ///////////////////////////////////////////////////
     $scope.currentNoiseInfo = "Click a spot to learn more";
 
+    // Watch event to look for changes in the value of currentNoiseInfo
+    //  Also, try ng-change? May only work in case of user input fields
+    $scope.$watch(function(scope) {
+      return scope.currentNoiseInfo;
+    },
+      function(scope) {
+        console.log("Reached listener part of watch event");
+        console.log(document.getElementById("noise-descrip").innerHTML);
+        document.getElementById("noise-descrip").innerHTML = scope.currentNoiseInfo;
+      });
+
     function initialize() {
       var mapOptions = {
         center: { lat: 47.6, lng: -122.35},
