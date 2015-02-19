@@ -9,17 +9,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     $scope.currentNoiseType = "Noise Info";
     $scope.currentNoiseInfo = "Click a spot to learn more";
 
-    // Watch event to look for changes in the value of currentNoiseInfo
-    //  Also, try ng-change? May only work in case of user input fields
-    // $scope.$watch(function(scope) {
-    //   return scope.currentNoiseInfo;
-    // },
-    //   function(scope) {
-    //     console.log("Reached listener part of watch event");
-    //     console.log(document.getElementById("noise-descrip").innerHTML);
-    //     document.getElementById("noise-descrip").innerHTML = scope.currentNoiseInfo;
-    //   });
-
     function initialize() {
       var mapOptions = {
         center: { lat: 47.6, lng: -122.35},
@@ -50,8 +39,8 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         $scope.heatmapOn = true;
 
         // Create D3 Points
-        // Rename scope argument!
         var overlay = newLayerService.createD3Points(data, $scope.map, $scope);
+
         // Bind D3 overlay to the map
         overlay.setMap($scope.map);
       });
@@ -88,7 +77,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       newLayerService.adjustRadius($scope.mapZoomLevel, newZoomLevel);
       $scope.mapZoomLevel = newZoomLevel;
     }
-
 
     //////////////////////////////////////////////////
     // Functions for Toggling Single Layer          //
