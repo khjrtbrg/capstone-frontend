@@ -39,7 +39,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         $scope.heatmapOn = true;
 
         // Create D3 Points
-        var overlay = newLayerService.createD3Points(data, $scope.map, $scope);
+        var overlay = newLayerService.createD3Points(data, $scope);
 
         // Bind D3 overlay to the map
         overlay.setMap($scope.map);

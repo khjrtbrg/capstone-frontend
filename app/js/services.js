@@ -212,7 +212,7 @@ servicesModule.factory('newLayerService', function() {
 
       return layer;
     },
-    createD3Points: function(data, scope, actualScope) {
+    createD3Points: function(data, scope) {
       // Set Up Overlay
       var overlay = new google.maps.OverlayView();
 
@@ -268,9 +268,9 @@ servicesModule.factory('newLayerService', function() {
           }
 
           function showNoiseDescrip(d) {
-            actualScope.currentNoiseType = formatNoiseDescrip(d.value.noise_type);
-            actualScope.currentNoiseInfo = d.value.description;
-            actualScope.$apply(actualScope);
+            scope.currentNoiseType = formatNoiseDescrip(d.value.noise_type);
+            scope.currentNoiseInfo = d.value.description;
+            scope.$apply(scope);
           }
 
           function formatNoiseDescrip(noise_type) {
