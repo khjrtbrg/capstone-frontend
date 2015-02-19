@@ -3,6 +3,12 @@ var mapControllerModule = angular.module('mapControllerModule', []);
 mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerService', 'locationService', 'filterService',
   function($scope, $http, newLayerService, locationService, filterService) {
 
+    ////////////////////////////////////////////////////
+    // Displaying Individual Noise Info //
+    ///////////////////////////////////////////////////
+    $scope.currentNoiseType = "Noise Info";
+    $scope.currentNoiseInfo = "Click a spot to learn more";
+
     function initialize() {
       var mapOptions = {
         center: { lat: 47.6, lng: -122.35},
@@ -33,7 +39,8 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         $scope.heatmapOn = true;
 
         // Create D3 Points
-        var overlay = newLayerService.createD3Points(data);
+        var overlay = newLayerService.createD3Points(data, $scope);
+
         // Bind D3 overlay to the map
         overlay.setMap($scope.map);
       });
@@ -44,7 +51,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       // Listener for Dropped Pin
       google.maps.event.addListener($scope.map, 'rightclick', function(e) { dropPin(e); });
     }
-
 
     //////////////////////////////////////////////////
     // Functions for Setting Up Layers/Filtering    //
@@ -71,7 +77,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       newLayerService.adjustRadius($scope.mapZoomLevel, newZoomLevel);
       $scope.mapZoomLevel = newZoomLevel;
     }
-
 
     //////////////////////////////////////////////////
     // Functions for Toggling Single Layer          //
@@ -102,7 +107,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       var switchDiv = angular.element($event.toElement.nextElementSibling);
       switchDiv.toggleClass("switched-off");
     }
-
 
     //////////////////////////////////////////////////
     // Functions for Toggling All Layers            //
@@ -161,7 +165,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Zoom to Location Function
     $scope.findLocation = function() {
-      var url = 'http://54.191.247.160/coordinates?address=' + $scope.locationSearch;
+      var url = 'http://localhost:3000/coordinates?address=' + $scope.locationSearch;
 
       $http.get(url).
         success(function(data) {
