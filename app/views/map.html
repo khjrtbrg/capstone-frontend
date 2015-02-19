@@ -1,7 +1,5 @@
 <div ng-controller="mapController">
-
   <div class="map-home row">
-
     <div class="map-wrapper col-md-9 col-sm-12 col-xs-12">
       <div id="map-canvas"></div>
       <div class="noise-descrip">
@@ -9,7 +7,6 @@
         <p ng-model="currentNoiseInfo">{{ currentNoiseInfo }}</p>
       </div>
     </div>
-
     <div class="map-filters col-md-3 col-sm-12 col-xs-12">
       <div class="location-search">
         <form>
@@ -28,7 +25,6 @@
       </div>
       <div class="map-options">
         <h3>Filter Noise Types</h3>
-
         <div class="global-filters">
           <div class="btn-group btn-group-justified" role="group">
             <div class="btn-group" role="group">
@@ -42,12 +38,10 @@
               </button>
             </div>
           </div>
-
           <button type="button" class="btn btn-default btn-block" ng-click="toggleHeatmap()">
             Toggle Heatmap
           </button>
         </div>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('transit');changeColor($event)"></input>
           <div class="switch">
@@ -57,7 +51,6 @@
             <img src="app/img/info_symbol.png" class="info" tooltip-placement="right" tooltip="Bus and streetcar stops, transit centers"/>
           </p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('dump');changeColor($event)"></input>
           <div class="switch">
@@ -65,7 +58,6 @@
           </div>
           <p>Dumps</p>
           </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('fireStation');changeColor($event)"></input>
           <div class="switch">
@@ -73,7 +65,6 @@
           </div>
           <p>Fire Stations</p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('college');changeColor($event)"></input>
           <div class="switch">
@@ -81,7 +72,6 @@
           </div>
           <p>Colleges</p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('school');changeColor($event)"></input>
           <div class="switch">
@@ -89,7 +79,6 @@
           </div>
           <p>Schools</p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('policeStation');changeColor($event)"></input>
           <div class="switch">
@@ -97,7 +86,6 @@
           </div>
           <p>Police Stations</p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('hospital');changeColor($event)"></input>
           <div class="switch">
@@ -105,7 +93,6 @@
           </div>
           <p>Hospitals</p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('bar');changeColor($event)"></input>
           <div class="switch">
@@ -115,7 +102,6 @@
             <img src="app/img/info_symbol.png" class="info" tooltip-placement="right" tooltip="Includes some restaurants that double as bars"/>
           </p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('construction');changeColor($event)"></input>
           <div class="switch">
@@ -125,7 +111,6 @@
             <img src="app/img/info_symbol.png" class="info" tooltip-placement="right" tooltip="Locations of active, new construction permits; updated daily"/>
           </p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('demolition');changeColor($event)"></input>
           <div class="switch">
@@ -135,7 +120,6 @@
             <img src="app/img/info_symbol.png" class="info" tooltip-placement="right" tooltip="Locations of active demolition permits; updated daily"/>
           </p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('noiseComplaints');changeColor($event)"></input>
           <div class="switch">
@@ -145,7 +129,6 @@
             <img src="app/img/info_symbol.png" class="info" tooltip-placement="bottom" tooltip="Recent noise complaints called into 911; updated daily"/>
           </p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('stadium');changeColor($event)"></input>
           <div class="switch">
@@ -153,7 +136,6 @@
           </div>
           <p>Stadiums</p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('freeway');changeColor($event)"></input>
           <div class="switch">
@@ -161,7 +143,6 @@
           </div>
           <p>Freeways</p>
         </label>
-
         <label>
           <input type="checkbox" checked="true" ng-click="toggleNoises('heliportOrAirport');changeColor($event)"></input>
           <div class="switch">
@@ -169,10 +150,7 @@
           </div>
           <p>Airports/Heliports</p>
         </label>
-
       </div>
     </div>
-
   </div>
-
 </div>

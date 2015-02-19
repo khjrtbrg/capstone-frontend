@@ -3,9 +3,9 @@ var mapControllerModule = angular.module('mapControllerModule', []);
 mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerService', 'locationService', 'filterService',
   function($scope, $http, newLayerService, locationService, filterService) {
 
-    ////////////////////////////////////////////////////
-    // Displaying Individual Noise Info //
-    ///////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    // Displaying Individual Noise Info             //
+    //////////////////////////////////////////////////
     $scope.currentNoiseType = "Noise Info";
     $scope.currentNoiseInfo = "Click a spot to learn more";
 

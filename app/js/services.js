@@ -3,8 +3,8 @@ var servicesModule = angular.module('servicesModule', []);
 servicesModule.factory('filterService', function() {
   return {
     excludeOneNoise: function(excludedNoises, layerName) {
-      var i = excludedNoises.indexOf(layerName)
-      if (i == -1) {
+      var i = excludedNoises.indexOf(layerName);
+      if (i === -1) {
         excludedNoises.push(layerName);
       } else {
         excludedNoises.splice(i, 1);
@@ -12,7 +12,7 @@ servicesModule.factory('filterService', function() {
     },
     excludeAllNoises: function(status) {
       if (status) {
-        excludedNoises = [
+        return [
           'transit',
           'dump',
           'fireStation',
@@ -29,9 +29,8 @@ servicesModule.factory('filterService', function() {
           'heliportOrAirport'
         ];
       } else {
-        excludedNoises = [];
+        return [];
       }
-      return excludedNoises;
     },
     showAllD3Elements: function(status) {
       var svgs = angular.element(document.getElementsByTagName('svg'));
@@ -59,7 +58,7 @@ servicesModule.factory('filterService', function() {
         }
       }
     }
-  }
+  };
 });
 
 servicesModule.factory('locationService', ['$http', function($http) {
@@ -72,7 +71,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
       scope.markers = [];
 
       // Create New Marker
-      marker = new google.maps.Marker({
+      var marker = new google.maps.Marker({
         position: coordinates,
         map: scope.map,
         zIndex: 99
@@ -87,7 +86,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
       this.scoreCircle(coordinates, scope);
 
       // Add Popup
-      this.scorePopup(coordinates, scope);
+      this.scorePopup(coordinates, marker, scope);
     },
     scoreCircle: function(coordinates, scope) {
       // Clear Any Current Circles
@@ -112,8 +111,8 @@ servicesModule.factory('locationService', ['$http', function($http) {
       var newCircle = new google.maps.Circle(populationOptions);
       scope.circles.push(newCircle);
     },
-    scorePopup: function(coordinates, scope) {
-      var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
+    scorePopup: function(coordinates, marker, scope) {
+      var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng;
       // http://54.191.247.160
       $http.get(url).success(function(data) {
         // Clear Any Current Popups
@@ -125,13 +124,13 @@ servicesModule.factory('locationService', ['$http', function($http) {
         // Create Score String
         var nearbyNoises = '';
         for (var noise in data.noises) {
-          target_noise = data.noises[noise]
+          var target_noise = data.noises[noise];
           nearbyNoises += '<p><span class="glyphicon glyphicon-' +
                           target_noise.icon +
                           ' score-icon"></span><strong>' +
                           target_noise.noise_type + '</strong>';
 
-          if (target_noise.details != null) {
+          if (target_noise.details !== null) {
             nearbyNoises += '<ul>';
             for (var i = 0; i < target_noise.details.length; i++) {
               nearbyNoises += '<li>' + target_noise.details[i] + '</li>';
@@ -142,9 +141,9 @@ servicesModule.factory('locationService', ['$http', function($http) {
         }
 
         var scoreType;
-        if (data.score == 'A') {
+        if (data.score === 'A') {
           scoreType = 'good-score';
-        } else if (data.score == 'F') {
+        } else if (data.score === 'F') {
           scoreType = 'bad-score';
         } else {
           scoreType = 'med-score';
@@ -182,7 +181,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
         });
       });
     }
-  }
+  };
 }]);
 
 servicesModule.factory('newLayerService', function() {
@@ -194,9 +193,9 @@ servicesModule.factory('newLayerService', function() {
         var location = apiResponse[i];
         var latLon = new google.maps.LatLng(location.lat, location.lon);
         var type = location.noise_type;
-        var adjustedWeight = location.decibel * 0.15
+        var adjustedWeight = location.decibel * 0.15;
 
-        if (excludedNoiseTypes.indexOf(type) == -1) {
+        if (excludedNoiseTypes.indexOf(type) === -1) {
           noiseArray.push({location: latLon, noiseType: type, weight: adjustedWeight});
         }
       }
@@ -219,9 +218,9 @@ servicesModule.factory('newLayerService', function() {
       // Remove Freeways from Data
       var d3Points = [];
       for (var i = 0; i < data.length; i++) {
-        if (data[i].noise_type != 'freeway') {
+        if (data[i].noise_type !== 'freeway') {
           d3Points.push(data[i]);
-        };
+        }
       }
 
       // Add the container when the overlay is added to the map.
@@ -321,10 +320,11 @@ servicesModule.factory('newLayerService', function() {
 
       for (var i = 0; i < circles.length; i++) {
         var circle = circles[i];
+        var newRadius;
         if (diff === 1 || diff === -1) {
-          var newRadius = this.radiusMath(circle.r.baseVal.value, mapZoomLevel, newZoomLevel);
+          newRadius = this.radiusMath(circle.r.baseVal.value, mapZoomLevel, newZoomLevel);
         } else if (diff > 1 || diff < -1) {
-          var newRadius = this.bigRadiusJump(circle.r.baseVal.value, diff);
+          newRadius = this.bigRadiusJump(circle.r.baseVal.value, diff);
         }
         angular.element(circle).attr('r', newRadius);
       }
