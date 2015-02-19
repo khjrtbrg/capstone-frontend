@@ -83,8 +83,34 @@ servicesModule.factory('locationService', ['$http', function($http) {
       scope.map.setZoom(15);
       scope.map.panTo(marker.getPosition());
 
+      // Add Circle
+      this.scoreCircle(coordinates, scope);
+
       // Add Popup
       this.scorePopup(coordinates, scope);
+    },
+    scoreCircle: function(coordinates, scope) {
+      // Clear Any Current Circles
+      for (var i = 0; i < scope.circles.length; i++) {
+        scope.circles[i].setMap(null);
+      }
+      scope.circles = [];
+
+      // Set Options for Circle
+      var populationOptions = {
+        strokeColor: '#00cc00',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#00cc00',
+        fillOpacity: 0.35,
+        map: scope.map,
+        center: coordinates,
+        radius: 64
+      };
+
+      // Add Circle to Map & Array
+      var newCircle = new google.maps.Circle(populationOptions);
+      scope.circles.push(newCircle);
     },
     scorePopup: function(coordinates, scope) {
       var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng
@@ -144,6 +170,16 @@ servicesModule.factory('locationService', ['$http', function($http) {
 
         // Add InfoWindow to Marker
         infowindow.open(scope.map,marker);
+
+        // Close InfoWindow if Map Clicked
+        google.maps.event.addListener(scope.map, "click", function(){
+          infowindow.close();
+        });
+
+        // Reopen InfoWindow if Marker Clicked
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(scope.map,marker);
+        });
       });
     }
   }
@@ -209,7 +245,6 @@ servicesModule.factory('newLayerService', function() {
 
           // Add a circle.
           marker.append("svg:circle")
-              // .attr("r", 4.5)
               .attr("r", findRadius)
               .attr("cx", padding)
               .attr("cy", padding)
@@ -269,11 +304,28 @@ servicesModule.factory('newLayerService', function() {
         return radius * 2;
       }
     },
+    bigRadiusJump: function(radius, diff) {
+      var posDiff = Math.abs(diff);
+      for (var i = 0; i < posDiff; i++) {
+        if (diff > 0) {
+          radius = radius / 2;
+        } else {
+          radius = radius * 2;
+        }
+      }
+      return radius;
+    },
     adjustRadius: function(mapZoomLevel, newZoomLevel) {
+      var diff = mapZoomLevel - newZoomLevel;
       var circles = document.getElementsByTagName('circle');
+
       for (var i = 0; i < circles.length; i++) {
         var circle = circles[i];
-        var newRadius = this.radiusMath(circle.r.baseVal.value, mapZoomLevel, newZoomLevel);
+        if (diff === 1 || diff === -1) {
+          var newRadius = this.radiusMath(circle.r.baseVal.value, mapZoomLevel, newZoomLevel);
+        } else if (diff > 1 || diff < -1) {
+          var newRadius = this.bigRadiusJump(circle.r.baseVal.value, diff);
+        }
         angular.element(circle).attr('r', newRadius);
       }
     }

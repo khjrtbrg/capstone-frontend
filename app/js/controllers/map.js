@@ -59,6 +59,8 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       // Listener for Zoom
       google.maps.event.addListener($scope.map, 'zoom_changed', adjustRadius);
 
+      // Listener for Dropped Pin
+      google.maps.event.addListener($scope.map, 'rightclick', function(e) { dropPin(e); });
     }
 
     //////////////////////////////////////////////////
@@ -170,6 +172,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Zoom Map to Searched Location
     $scope.markers = [];
+    $scope.circles = [];
     $scope.popups = [];
 
     // Zoom to Location Function
@@ -180,6 +183,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         success(function(data) {
           $scope.address_error = '';
           locationService.newMarker(data, $scope);
+          newLayerService.adjustRadius($scope.mapZoomLevel, 15);
         }).
         error(function(data, status, headers, config) {
           $scope.address_error = 'Whoops, can\'t find that address!';
@@ -195,10 +199,21 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
             lng: position.coords.longitude
           };
           locationService.newMarker(coordinates, $scope);
+          newLayerService.adjustRadius($scope.mapZoomLevel, 15);
         });
       }
     };
 
+    // Zoom to Dropped Pin (On Right Click)
+    var dropPin = function(e) {
+        var latLng = e.latLng;
+        var coordinates = {
+          lat: latLng.k,
+          lng: latLng.D
+        };
+        locationService.newMarker(coordinates, $scope);
+        newLayerService.adjustRadius($scope.mapZoomLevel, 15);
+    };
 
     // Initialize Map
     google.maps.event.addDomListener(window, 'load', initialize());

@@ -28,7 +28,17 @@ h1 {
 
 .navbar.navbar-inverse.navbar-fixed-top {
   height: 80px;
-  background-color: #482876;
+  background-color: #383961;
+}
+
+.navbar-text.navbar-right {
+  margin-top: 2em;
+}
+
+.navbar-text.navbar-right a {
+  margin: 1em;
+  color: white;
+  font-size: 1.25em;
 }
 
 h3 {
@@ -94,28 +104,28 @@ input[type="checkbox"] {
 .switch {
   width: 80px;
   height: 33px;
-  background-color: #00cc00;
+  background-color: #8681C6;
   display: inline-block;
   position: relative;
   border: 1px black solid;
   margin-right: 1%;
   border-radius: 4px;
   z-index: 1;
-  animation-name: to_green;
+  animation-name: to_on;
   animation-duration: 1s;
-  -webkit-animation-name: to_green;
+  -webkit-animation-name: to_on;
   -webkit-animation-duration: 1s;
-  -moz-animation-name: to_green;
+  -moz-animation-name: to_on;
   -moz-animation-duration: 1s;
 }
 
 .switched-off {
-  background-color: #ff1919;
-  animation-name: to_red;
+  background-color: #ADACB5;
+  animation-name: to_off;
   animation-duration: .7s;
-  -webkit-animation-name: to_red;
+  -webkit-animation-name: to_off;
   -webkit-animation-duration: 0.7s;
-  -moz-animation-name: to_red;
+  -moz-animation-name: to_off;
   -moz-animation-duration: .7s;
 }
 
@@ -219,6 +229,13 @@ input[type=checkbox]:not(:checked) ~ div span {
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .navbar.navbar-inverse.navbar-fixed-top { height: 100px; }
+  .navbar-text.navbar-right { margin-top: 1em; }
+  .navbar-text.navbar-right a { margin-left: 0; }
+  body { padding-top: 100px; }
+}
+
 /* Key Frames */
 
 /* Standard */
@@ -247,21 +264,21 @@ input[type=checkbox]:not(:checked) ~ div span {
   }
 }
 
-@keyframes to_red {
+@keyframes to_off {
   0% {
-    background-color: #00cc00;
+    background-color: #8681C6;
   }
   100% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
 }
 
-@keyframes to_green {
+@keyframes to_on {
   0% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
   100% {
-    background-color: #00cc00;
+    background-color: #8681C6;
   }
 }
 
@@ -291,21 +308,21 @@ input[type=checkbox]:not(:checked) ~ div span {
   }
 }
 
-@-webkit-keyframes to_red {
+@-webkit-keyframes to_off {
   0% {
-    background-color: #00cc00;
+    background-color: #8681C6;
   }
   100% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
 }
 
-@-webkit-keyframes to_green {
+@-webkit-keyframes to_on {
   0% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
   100% {
-    background-color: #00cc00;
+    background-color: #8681C6;
   }
 }
 
@@ -335,20 +352,20 @@ input[type=checkbox]:not(:checked) ~ div span {
   }
 }
 
-@-moz-keyframes to_red {
+@-moz-keyframes to_off {
   0% {
-    background-color: #00cc00;
+    background-color: #8681C6;
   }
   100% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
 }
 
-@-moz-keyframes to_green {
+@-moz-keyframes to_on {
   0% {
-    background-color: #ff1919;
+    background-color: #ADACB5;
   }
   100% {
-    background-color: #00cc00;
+    background-color: #8681C6;
   }
 }

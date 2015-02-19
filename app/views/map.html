@@ -14,18 +14,18 @@
       <div class="location-search">
         <form>
           <div class="form-group">
-            <label for="locationSearch"><h3>Find Location</h3></label>
+            <label for="locationSearch"><h3>Get Location Score</h3></label>
             <input class="form-control" type="text" id="locationSearch" ng-model="locationSearch">
             <div class="error-msg" ng-hide="!address_error">{{ address_error }}</div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" ng-click="findLocation()">Search</button>
+            <button class="btn btn-info" ng-click="findLocation()">Search</button>
             <strong>OR</strong>
             <button class="btn btn-default" ng-click="currentLocation()">Use Current Location</button>
           </div>
+          <div><small>Right click on the map to drop a pin!</small></div>
         </form>
       </div>
-      <!-- <div class="divider"></div> -->
       <div class="map-options">
         <h3>Filter Noise Types</h3>
 

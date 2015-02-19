@@ -12,6 +12,7 @@
     <script src="app/js/ui-bootstrap-tpls-0.12.0.min.js"></script>
     <script src="app/js/app.js"></script>
     <script src="app/js/controllers/map.js"></script>
+    <script src="app/js/controllers/other.js"></script>
     <script src="app/js/services.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
   </head>
@@ -19,7 +20,12 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/"><h1>Shut Up, Seattle</h1></a>
+          <a class="navbar-brand" ui-sref="map"><h1>Shut Up, Seattle</h1></a>
+        </div>
+        <div class="navbar-text navbar-right">
+          <a ui-sref="about" class="navbar-link">About</a>
+          <a href="http://54.191.247.160" class="navbar-link">API</a>
+          <a ui-sref="contact" class="navbar-link">Contact</a>
         </div>
       </div>
     </div>
