@@ -233,33 +233,10 @@ servicesModule.factory('newLayerService', function() {
           }
 
           function showNoiseDescrip(d) {
-            // angular.element(map).append("Hello!!");
-            // Create text to appear in window
-            // Need to refactor!
-            var noiseContentString = '<div id="content">' +
-              '<h1 id="firstHeading" class="firstHeading text-center">' +
-              d.value.noise_type +
-              '</h1>' +
-              '<div id="bodyContent">' +
-              '<p class="text-center>' +
-              d.value.description +
-              '</p>' +
-              '</div>' +
-              '</div>';
-              console.log(d.value.description);
-              actualScope.currentNoiseInfo = d.value.description;
-              console.log(actualScope.currentNoiseInfo);
-              // Add watch
-            }
-        //
-        //   // Create InfoWindow
-        //   var noiseWindow = new google.maps.InfoWindow({
-        //       content: noiseContentString
-        //   });
-        //
-        //   // Add InfoWindow to Circle
-        // noiseWindow.open(map,marker);
-        // }
+            actualScope.currentNoiseType = d.value.noise_type;
+            actualScope.currentNoiseInfo = d.value.description;
+            actualScope.$apply(actualScope);
+          }
 
         };
       };

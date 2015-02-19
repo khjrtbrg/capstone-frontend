@@ -4,9 +4,10 @@
 
     <div class="map-wrapper col-md-9 col-sm-12 col-xs-12">
       <div id="map-canvas"></div>
-      <!-- <div id="noise-descrip">
+      <div class="noise-descrip">
+        <h2 ng-model="currentNoiseType">{{ currentNoiseType }}</h2>
         <p ng-model="currentNoiseInfo">{{ currentNoiseInfo }}</p>
-      </div> -->
+      </div>
     </div>
 
     <div class="map-filters col-md-3 col-sm-12 col-xs-12">
@@ -169,12 +170,6 @@
           <p>Airports/Heliports</p>
         </label>
 
-
-        <input type="text" ng-model="yourName" placeholder="Enter a name here">
-        <h1 style="color:black;">Hello, {{ yourName }}!</h1>
-        <div>
-          <p ng-model="currentNoiseInfo" id="noise-descrip">{{ currentNoiseInfo }}</p>
-        </div>
       </div>
     </div>
 

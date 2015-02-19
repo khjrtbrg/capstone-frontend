@@ -35,13 +35,13 @@ h3 {
   font-size: 23pt;
 }
 
-.map-home.row {
+/*.map-home.row {
   background-color: #5DD9C1;
-}
+}*/
 
 .map-wrapper {
   padding: 0;
-  background-color: #5DD9C1;
+  /*background-color: #5DD9C1;*/
   height: 100%;
   z-index: 99;
 }
@@ -54,13 +54,21 @@ h3 {
   z-index: 99;
 }
 
-#noise-descrip {
-  background-color: rgba(255, 5, 50, .2);
+.noise-descrip {
+  border: 2px black solid;
   z-index: 100;
-  height: 130px;
-  width: 350px;
+  height: 110px;
+  width: 300px;
   position: absolute;
+  background-color: white;
+  bottom: 0;
+  padding: 0 5px;
+  margin: 5px;
+  overflow: scroll;
+}
 
+.noise-descrip p, h2 {
+  text-align: center;
 }
 
 .map-filters {
