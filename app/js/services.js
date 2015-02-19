@@ -233,7 +233,7 @@ servicesModule.factory('newLayerService', function() {
           }
 
           function showNoiseDescrip(d) {
-            actualScope.currentNoiseType = d.value.noise_type;
+            actualScope.currentNoiseType = formatNoiseDescrip(d.value.noise_type);
             actualScope.currentNoiseInfo = d.value.description;
             actualScope.$apply(actualScope);
           }
@@ -241,6 +241,23 @@ servicesModule.factory('newLayerService', function() {
         };
       };
       return overlay;
+    },
+    formatNoiseDescrip: function(noise_type) {
+      if (noise_type === "fireStation") {
+        return "Fire Station";
+      }
+      else if (noise_type === "heliportOrAirport") {
+        return "Heliport/Airport";
+      }
+      else if (noise_type === "policeStation") {
+        return "Police Station";
+      }
+      else if (noise_type === "noiseComplaints") {
+        return "Noise Complaint";
+      }
+      else {
+        // capitalize first letter
+      }
     },
     radiusMath: function(radius, originalZoom, newZoomLevel) {
       if (originalZoom > newZoomLevel) {
