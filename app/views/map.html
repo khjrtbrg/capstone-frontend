@@ -3,12 +3,11 @@
   <div class="map-home row">
 
     <div class="map-wrapper col-md-9 col-sm-12 col-xs-12">
-      <div id="map-canvas">
-
-      </div>
-      <div id="noise-descrip">{{ currentNoiseInfo }}</div>
+      <div id="map-canvas"></div>
+      <!-- <div id="noise-descrip">
+        <p ng-model="currentNoiseInfo">{{ currentNoiseInfo }}</p>
+      </div> -->
     </div>
-
 
     <div class="map-filters col-md-3 col-sm-12 col-xs-12">
       <div class="location-search">
@@ -170,6 +169,12 @@
           <p>Airports/Heliports</p>
         </label>
 
+
+        <input type="text" ng-model="yourName" placeholder="Enter a name here">
+        <h1 style="color:black;">Hello, {{ yourName }}!</h1>
+        <div id="noise-descrip">
+          <p ng-model="currentNoiseInfo">{{ currentNoiseInfo }}</p>
+        </div>
       </div>
     </div>
 

@@ -3,6 +3,11 @@ var mapControllerModule = angular.module('mapControllerModule', []);
 mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerService', 'locationService', 'filterService',
   function($scope, $http, newLayerService, locationService, filterService) {
 
+    ////////////////////////////////////////////////////
+    // Displaying Individual Noise Info //
+    ///////////////////////////////////////////////////
+    $scope.currentNoiseInfo = "Click a spot to learn more";
+
     function initialize() {
       var mapOptions = {
         center: { lat: 47.6, lng: -122.35},
@@ -33,7 +38,8 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         $scope.heatmapOn = true;
 
         // Create D3 Points
-        var overlay = newLayerService.createD3Points(data, $scope.map);
+        // Rename scope argument!
+        var overlay = newLayerService.createD3Points(data, $scope.map, $scope);
         // Bind D3 overlay to the map
         overlay.setMap($scope.map);
       });
@@ -180,10 +186,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         });
       }
     };
-    ////////////////////////////////////////////////////
-    // Functions for Displaying Individual Noise Info //
-    ///////////////////////////////////////////////////
-    $scope.currentNoiseInfo = [];
 
 
     // Initialize Map

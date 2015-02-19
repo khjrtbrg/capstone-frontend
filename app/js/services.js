@@ -176,7 +176,7 @@ servicesModule.factory('newLayerService', function() {
 
       return layer;
     },
-    createD3Points: function(data, scope) {
+    createD3Points: function(data, scope, actualScope) {
       // Set Up Overlay
       var overlay = new google.maps.OverlayView();
 
@@ -245,9 +245,10 @@ servicesModule.factory('newLayerService', function() {
               '</p>' +
               '</div>' +
               '</div>';
-
-              console.log(noiseContentString);
-              scope.currentNoiseInfo.push(noiseContentString);
+              console.log(d.value.description);
+              actualScope.currentNoiseInfo = d.value.description;
+              console.log(actualScope.currentNoiseInfo);
+              // Add watch
             }
         //
         //   // Create InfoWindow
