@@ -33,7 +33,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         $scope.heatmapOn = true;
 
         // Create D3 Points
-        var overlay = newLayerService.createD3Points(data);
+        var overlay = newLayerService.createD3Points(data, $scope.map);
         // Bind D3 overlay to the map
         overlay.setMap($scope.map);
       });
@@ -99,29 +99,6 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       var switchDiv = angular.element($event.toElement.nextElementSibling);
       switchDiv.toggleClass("switched-off");
     }
-
-    // Show individual noises info
-    $scope.showNoiseDescrip = function(data, item, map) {
-      var noiseContentString = '<div id="content">' +
-        '<h1 id="firstHeading" class="firstHeading text-center">' +
-        data.value.noise_type +
-        '</h1>' +
-        '<div id="bodyContent">' +
-        '<h2 class="text-center ' +
-        data.value.description +
-        '</div>' +
-        '</div>';
-
-    // Create InfoWindow
-    var noiseWindow = new google.maps.InfoWindow({
-        content: noiseContentString
-    });
-    // scope.popups.push(infowindow);
-
-    // Add InfoWindow to Circle
-    noiseWindow.open(scope.map,item);
-  }
-
 
     //////////////////////////////////////////////////
     // Functions for Toggling All Layers            //
@@ -203,6 +180,11 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
         });
       }
     };
+    ////////////////////////////////////////////////////
+    // Functions for Displaying Individual Noise Info //
+    ///////////////////////////////////////////////////
+    $scope.currentNoiseInfo = [];
+
 
     // Initialize Map
     google.maps.event.addDomListener(window, 'load', initialize());

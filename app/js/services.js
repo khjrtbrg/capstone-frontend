@@ -75,7 +75,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
       marker = new google.maps.Marker({
         position: coordinates,
         map: scope.map,
-        zIndex: 100
+        zIndex: 99
       });
       scope.markers.push(marker);
 
@@ -176,7 +176,7 @@ servicesModule.factory('newLayerService', function() {
 
       return layer;
     },
-    createD3Points: function(data) {
+    createD3Points: function(data, scope) {
       // Set Up Overlay
       var overlay = new google.maps.OverlayView();
 
@@ -214,9 +214,7 @@ servicesModule.factory('newLayerService', function() {
               .attr("cx", padding)
               .attr("cy", padding)
               .style("pointer-events", "all")
-              .on("click", scope.showNoiseDescrip(d, this, map));
-            //  .onclick function takes in this/circle argument
-            // function sets content string, creates info window
+              .on("click", showNoiseDescrip);
 
           function transform(d) {
             d = new google.maps.LatLng(d.value.lat, d.value.lon);
@@ -233,6 +231,34 @@ servicesModule.factory('newLayerService', function() {
           function findRadius(d) {
             return d.value.display_reach;
           }
+
+          function showNoiseDescrip(d) {
+            // angular.element(map).append("Hello!!");
+            // Create text to appear in window
+            var noiseContentString = '<div id="content">' +
+              '<h1 id="firstHeading" class="firstHeading text-center">' +
+              d.value.noise_type +
+              '</h1>' +
+              '<div id="bodyContent">' +
+              '<p class="text-center>' +
+              d.value.description +
+              '</p>' +
+              '</div>' +
+              '</div>';
+
+              console.log(noiseContentString);
+              scope.currentNoiseInfo.push(noiseContentString);
+            }
+        //
+        //   // Create InfoWindow
+        //   var noiseWindow = new google.maps.InfoWindow({
+        //       content: noiseContentString
+        //   });
+        //
+        //   // Add InfoWindow to Circle
+        // noiseWindow.open(map,marker);
+        // }
+
         };
       };
       return overlay;

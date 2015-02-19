@@ -43,6 +43,7 @@ h3 {
   padding: 0;
   background-color: #5DD9C1;
   height: 100%;
+  z-index: 99;
 }
 
 #map-canvas {
@@ -50,6 +51,16 @@ h3 {
   width: 100%;
   margin: 0;
   padding: 0;
+  z-index: 99;
+}
+
+#noise-descrip {
+  background-color: rgba(255, 5, 50, .2);
+  z-index: 100;
+  height: 130px;
+  width: 350px;
+  position: absolute;
+
 }
 
 .map-filters {
