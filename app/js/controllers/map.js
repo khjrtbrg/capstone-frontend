@@ -30,7 +30,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
       $scope.map = new google.maps.Map(d3.select("#map-canvas").node(), mapOptions);
 
       // Fetch Noises From API and Add To Map
-      d3.json("http://localhost:3000/noises", function(data) {
+      d3.json("http://api.shutupseattle.com/noises", function(data) {
         $scope.dataPoints = data;
         $scope.excludedNoises = [];
 
@@ -165,7 +165,7 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
 
     // Zoom to Location Function
     $scope.findLocation = function() {
-      var url = 'http://localhost:3000/coordinates?address=' + $scope.locationSearch;
+      var url = 'http://api.shutupseattle.com/coordinates?address=' + $scope.locationSearch;
 
       $http.get(url).
         success(function(data) {
