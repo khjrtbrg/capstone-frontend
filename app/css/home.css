@@ -76,6 +76,10 @@ h3 {
   overflow: scroll;
 }
 
+.noise-descrip-wrapper {
+  padding: 15px 0;
+}
+
 .noise-descrip h4 {
   font-size: 20pt;
 }
