@@ -126,9 +126,15 @@ h1#firstHeading {
   position: absolute;
   background-color: white;
   bottom: 0;
-  padding: 4px;
+  padding: 0px 4px;
   margin: 5px;
   overflow: scroll;
+}
+
+.noise-descrip h4 {
+  padding: 0;
+  margin: 0;
+  /*border: 1px black solid;*/
 }
 
 .noise-descrip-wrapper {
