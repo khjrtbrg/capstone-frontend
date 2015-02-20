@@ -154,9 +154,12 @@ servicesModule.factory('locationService', ['$http', function($http) {
           '</div>' +
           '<h1 id="firstHeading" class="firstHeading text-center">Location Score</h1>' +
           '<div id="bodyContent">' +
-          '<h2 class="text-center ' +
+          '<div class="scoreIcon ' +
           scoreType +
-          '">' + data.score + '</h2>'+
+          '">' +
+          '<h2 class="text-center">' +
+          data.score + '</h2>' +
+          '</div>' +
           nearbyNoises +
           '</div>' +
           '</div>';
