@@ -3,7 +3,6 @@
 var noiseScoreApp = angular.module('noiseScoreApp', [
   'ui.router',
   'mapControllerModule',
-  'otherControllerModule',
   'servicesModule',
   'ui.bootstrap'
 ]);
