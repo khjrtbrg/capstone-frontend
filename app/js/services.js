@@ -112,8 +112,7 @@ servicesModule.factory('locationService', ['$http', function($http) {
       scope.circles.push(newCircle);
     },
     scorePopup: function(coordinates, marker, scope) {
-      var url = 'http://localhost:3000/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng;
-      // http://54.191.247.160
+      var url = 'http://api.shutupseattle.com/score?latitude=' + coordinates.lat + '&longitude=' + coordinates.lng;
       $http.get(url).success(function(data) {
         // Clear Any Current Popups
         for (var i = 0; i < scope.popups.length; i++) {
