@@ -206,4 +206,14 @@ mapControllerModule.controller('mapController', ['$scope', '$http', 'newLayerSer
     // Initialize Map
     google.maps.event.addDomListener(window, 'load', initialize());
 
+
+    // Toggle Mobile Filters
+    $scope.toggleMobile = function() {
+      var displayFilters = document.getElementsByClassName('mobile-filters')[0];
+      var filters = document.getElementsByClassName('map-filters')[0];
+
+      angular.element(filters).toggleClass('filters-open');
+      angular.element(displayFilters).toggleClass('mobile-open');
+    };
+
   }]);

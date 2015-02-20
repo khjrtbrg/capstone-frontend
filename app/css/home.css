@@ -143,6 +143,10 @@ h1#firstHeading {
   text-align: center;
 }
 
+.mobile-filters {
+  display: none;
+}
+
 .map-filters {
   background-color: white;
   height: 88.5vh;
@@ -304,20 +308,84 @@ input[type=checkbox]:not(:checked) ~ div span {
 
 @media only screen and (max-width: 990px) {
   h1, h3 { font-size: 25pt; }
+
   h1 { margin-top: 0; }
+
   label p { font-size: 12pt; }
+
   label p { font-size: 12pt; }
-  #map-canvas { border-bottom: solid #5DD9C1 15px;}
+
+  #map-canvas {
+    height: 82.5vh;
+  }
+
+  .mobile-filters {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    background-color: #5DD9C1;
+    z-index: 100;
+    width: 100%;
+  }
+
+  .mobile-filters button {
+    border: none;
+    background-color: transparent;
+  }
+
+  .mobile-filters h5 {
+    font-size: 14pt;
+  }
+
+  .mobile-open {
+    border-top: 2px gray solid;
+    top: 100px;
+  }
+
   .map-filters {
-    height: 100%;
-    overflow: visible;
+    display: none;
+    position: absolute;
+    z-index: 100;
+    top: 250px;
+    height: 56vh;
+  }
+
+  .filters-open {
+    display: block;
+  }
+
+  .noise-descrip {
+    bottom: 40px;
+    height: 75px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-top: 2px gray solid;
+  }
+
+  .noise-descrip-wrapper {
+    padding: 0;
+  }
+
+  .noise-descrip p {
+    font-size: 10pt;
+    line-height: 1;
+  }
+
+  .noise-descrip h4 {
+    font-size: 14pt;
+    margin-bottom: 5px;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .navbar.navbar-inverse.navbar-fixed-top { height: 100px; }
+
   .navbar-text.navbar-right { margin-top: 1em; }
+
   .navbar-text.navbar-right a { margin-left: 0; }
+
   body { padding-top: 100px; }
 }
 
