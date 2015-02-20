@@ -1,0 +1,98 @@
+<div class="api">
+
+  <div class="row">
+
+    <div class="col-md-11">
+    <h2>About the API</h2>
+
+    <p>Shut Up, Seattle (SuS) empowers citizens to make informed decisions about where they work, play, and live. Similarly, the SuS API seeks to make data related to noise pollution as public as possible.</p>
+
+    <p>SuS is the first app and API that visualizes or estimates noise pollution in Seattle. This dataset is extremely useful for people who are currently moving and/or for whom noise is a concern. SuS gives users this knowledge, allowing them to move into or visit a location with their eyes and ears wide open. Given the rapid growth and expansion in Seattle today, construction and other noise is cropping up everywhere, and residents deserve to know what to expect.</p>
+
+    <p>At its core, the SuS API provides a standardized score based on anticipated noise levels at different locations in Seattle, determined from data provided by the city tracking some of the more common sources of noise—construction, bars, fire stations, and so forth. The score relies on the Haversine Formula and the Inverse Square Law to calculate the aggregate noise level at any given point within Seattle city limits.</p>
+
+    <h2>Retrieve Common Noises In Seattle</h2>
+
+    <p>To retrieve a list of all the noises in our database, currently limited to only Seattle, use the following query:</p>
+
+    <code>GET http://api.shutupseattle.com/noises</code>
+
+    <p>The response should be formatted as follows:</p>
+
+    <pre>
+    [
+      {
+        "id":35701,
+        "noise_type":"fireStation",
+        "lat":47.699030679286,
+        "lon":-122.387459787663,
+        "decibel":125,
+        "reach":4593,
+        "display_reach":12,
+        "description":"Fire Station #26"
+      },
+      {
+        "id":35702
+        noise_type":"fireStation"
+        lat":47.6983180192103
+        lon":-122.387461371929,
+        "decibel":125,
+        "reach":4593,
+        "display_reach":12,
+        "description":"Fire Station #29"
+      },
+      {
+        "id":35703
+        noise_type":"fireStation"
+        lat":47.6947601855865
+        lon":-122.387469612068,
+        "decibel":125,
+        "reach":4593,
+        "display_reach":12,
+        "description":"Fire Station #33"
+      }
+    ]
+    </pre>
+
+    <h2>Generating a Location Score</h2>
+
+    <p>To generate a Location Score, you'll need to supply the API with latitude and longitude coordinates of your query location. For example:</p>
+
+    <code>GET http://api.shutupseattle.com/score?latitude=47.63619109&longitude=-122.34287009</code>
+
+    <p>A successful result will look like this:</p>
+
+    <pre>
+    {
+      "score":"F",
+      "noises":[
+        {
+          "noise_type":"1 Demolition Site",
+          "icon":"wrench",
+          "details":[
+            "Demolish existing single family residence subject to field inspection."
+          ]
+        },
+        {
+          "noise_type":"1 Bar",
+          "icon":"glass",
+          "details":null
+        },
+        {
+          "noise_type":"2 Transit Stops",
+          "icon":"road",
+          "details":null
+        },
+        {
+          "noise_type":"1 Freeway",
+          "icon":"road",
+          "details":null
+        }
+      ]
+    }
+    </pre>
+
+    <p><strong>Note:</strong> The API will return an error message if your query is outside of Seattle city limits. We roughly define that area as latitudes between <code>47.48172</code> and <code>47.734145</code>, and longitudes between <code>-122.224433</code> and <code>-122.459696</code>.</p>
+    </div>
+  </div>
+</div>

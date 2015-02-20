@@ -22,5 +22,9 @@ noiseScoreApp.config(function($stateProvider, $urlRouterProvider) {
       url: '/contact',
       templateUrl: 'app/views/contact.html'
     })
+    .state('api', {
+      url: '/api',
+      templateUrl: 'app/views/api.html'
+    })
   $urlRouterProvider.otherwise('/');
 });

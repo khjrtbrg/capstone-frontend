@@ -276,12 +276,16 @@ input[type=checkbox]:not(:checked) ~ div span {
 }
 
 /* About/Contact Page */
-.about, .contact {
+.about, .contact, .api {
   width: 70%;
   margin: auto;
 }
 
 .about p, li {
+  font-size: 14pt;
+}
+
+.api p, li {
   font-size: 14pt;
 }
 
