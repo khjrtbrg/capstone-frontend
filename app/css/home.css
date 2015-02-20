@@ -213,6 +213,34 @@ input[type=checkbox]:not(:checked) ~ div span {
   font-weight: bold;
 }
 
+/* About/Contact Page */
+.about, .contact {
+  width: 70%;
+  margin: auto;
+}
+
+.about p, li {
+  font-size: 14pt;
+}
+
+.contact p {
+  font-size: 14pt;
+}
+
+.about h1, h2, h3, h4, h5, h6 {
+  font-size: 25pt;
+  text-align: center;
+}
+
+.contact h1, h2, h3, h4, h5, h6 {
+  font-size: 25pt;
+  text-align: center;
+}
+
+.contact p, h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
+
 
 /* Media Query */
 
