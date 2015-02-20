@@ -96,7 +96,7 @@ h1#firstHeading {
 }
 
 .score-icon {
-  position: relative;
+  position: relative !important;
   background-color: black;
   border-radius: 10%;
   margin-right: 10px;
@@ -315,10 +315,6 @@ input[type=checkbox]:not(:checked) ~ div span {
 
   label p { font-size: 12pt; }
 
-  #map-canvas {
-    height: 82.5vh;
-  }
-
   .mobile-filters {
     position: absolute;
     bottom: 0;
@@ -340,6 +336,7 @@ input[type=checkbox]:not(:checked) ~ div span {
   .mobile-open {
     border-top: 2px gray solid;
     top: 100px;
+    padding-top: 15px;
   }
 
   .map-filters {
@@ -347,7 +344,6 @@ input[type=checkbox]:not(:checked) ~ div span {
     position: absolute;
     z-index: 100;
     top: 250px;
-    height: 56vh;
   }
 
   .filters-open {
@@ -387,6 +383,14 @@ input[type=checkbox]:not(:checked) ~ div span {
   .navbar-text.navbar-right a { margin-left: 0; }
 
   body { padding-top: 100px; }
+
+  #map-canvas {
+    height: 85.5vh;
+  }
+
+  .mobile-open {
+    padding-top: 0;
+  }
 }
 
 /* Key Frames */
