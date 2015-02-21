@@ -126,9 +126,14 @@ h1#firstHeading {
   position: absolute;
   background-color: white;
   bottom: 0;
-  padding: 4px;
+  padding: 0px 4px;
   margin: 5px;
   overflow: scroll;
+}
+
+.noise-descrip h4 {
+  padding: 0;
+  margin: 0;
 }
 
 .noise-descrip-wrapper {
@@ -283,6 +288,27 @@ input[type=checkbox]:not(:checked) ~ div span {
 }
 
 /* About/Contact Page */
+.img-circle {
+  width: 80px;
+  margin-left: 40%;
+  margin-top: 40px;
+}
+
+.contact-link {
+  background-color: #383961;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.contact-link:hover {
+  background-color: #8681C6;
+}
+
+.contact-link-container {
+  margin-left: 25%;
+  margin-top: 20px;
+}
+
 .about, .contact, .api {
   width: 70%;
   margin: auto;
@@ -333,6 +359,10 @@ input[type=checkbox]:not(:checked) ~ div span {
     background-color: #5DD9C1;
     z-index: 100;
     width: 100%;
+  }
+
+  .contact-link {
+    height: 48px;
   }
 
   .mobile-filters button {
