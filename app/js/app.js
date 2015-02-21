@@ -7,7 +7,7 @@ var noiseScoreApp = angular.module('noiseScoreApp', [
   'ui.bootstrap'
 ]);
 
-noiseScoreApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+noiseScoreApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('map', {
       url: '/',
@@ -26,7 +26,4 @@ noiseScoreApp.config(function($stateProvider, $urlRouterProvider, $locationProvi
       templateUrl: 'app/views/api.html'
     })
   $urlRouterProvider.otherwise('/');
-
-  // use the HTML5 History API
-  $locationProvider.html5Mode(true);
 });
