@@ -293,6 +293,10 @@ input[type=checkbox]:not(:checked) ~ div span {
   border-radius: 50%;
 }
 
+.contact-link:hover {
+  background-color: #8681C6;
+}
+
 .contact-link-container {
   margin-left: 25%;
   margin-top: 20px;
