@@ -341,6 +341,7 @@ input[type=checkbox]:not(:checked) ~ div span {
   .mobile-filters button {
     border: none;
     background-color: transparent;
+    height: 100%;
   }
 
   .mobile-filters h5 {
@@ -349,7 +350,7 @@ input[type=checkbox]:not(:checked) ~ div span {
 
   .mobile-open {
     border-top: 2px gray solid;
-    top: 100px;
+    top: 17.2vh;
     padding-top: 15px;
   }
 
@@ -386,6 +387,7 @@ input[type=checkbox]:not(:checked) ~ div span {
   .noise-descrip h4 {
     font-size: 14pt;
     margin-bottom: 5px;
+    margin-top: 10px;
   }
 }
 
@@ -396,14 +398,10 @@ input[type=checkbox]:not(:checked) ~ div span {
 
   .navbar-text.navbar-right a { margin-left: 0; }
 
-  body { padding-top: 100px; }
+  body { padding-top: 18vh; }
 
   #map-canvas {
     height: 82.5vh;
-  }
-
-  .noise-descrip h4 {
-    margin-top: 10px;
   }
 
   .mobile-open {
