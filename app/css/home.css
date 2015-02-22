@@ -1,14 +1,6 @@
+/* --- General Styles --- */
 body {
   padding-top: 79px;
-}
-
-.divider {
-  background-image: url('./../img/Soundwave.svg');
-  height: 2.5vh;
-  width: 100%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  margin-left: -1%;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-brand {
@@ -21,6 +13,12 @@ h1 {
   color: white;
 }
 
+h3 {
+  font-size: 23pt;
+}
+
+
+/* --- Nav --- */
 .navbar a:hover, .navbar a:focus {
   text-decoration: none;
   color: gray;
@@ -41,14 +39,8 @@ h1 {
   font-size: 1.25em;
 }
 
-h3 {
-  font-size: 23pt;
-}
 
-/*.map-home.row {
-  background-color: #5DD9C1;
-}*/
-
+/* --- Map Styles --- */
 .map-wrapper {
   padding: 0;
   height: 100%;
@@ -68,11 +60,8 @@ h3 {
 }
 
 .noises svg {
-  /*width: 20px;*/
-  /*height: 20px;*/
   width: 400px;
   height: 400px;
-  /*background-color: cyan;*/
 }
 
 .noises circle {
@@ -131,23 +120,18 @@ h1#firstHeading {
   overflow: scroll;
 }
 
-.noise-descrip h4 {
-  padding: 0;
-  margin: 0;
-}
-
 .noise-descrip-wrapper {
   padding: 14px 0;
 }
 
 .noise-descrip h4 {
+  padding: 0;
+  margin: 0;
   font-size: 20pt;
 }
 
-.noise-descrip p, h4 {
-  text-align: center;
-}
 
+/* --- Map Filters --- */
 .mobile-filters {
   display: none;
 }
@@ -287,10 +271,10 @@ input[type=checkbox]:not(:checked) ~ div span {
   font-weight: bold;
 }
 
-/* About/Contact Page */
+
+/* --- About/Contact Page --- */
 .img-circle {
   width: 80px;
-  margin-left: 40%;
   margin-top: 40px;
 }
 
@@ -305,44 +289,32 @@ input[type=checkbox]:not(:checked) ~ div span {
 }
 
 .contact-link-container {
-  margin-left: 25%;
   margin-top: 20px;
 }
 
-.about, .contact, .api {
-  width: 70%;
-  margin: auto;
+.content-page p,
+.content-page li {
+  font-size: 20px;
 }
 
-.about p, li {
-  font-size: 14pt;
+.content-page p code {
+  font-size: 65%;
 }
 
-.api p, li {
-  font-size: 14pt;
-}
-
-.contact p {
-  font-size: 14pt;
-}
-
-.about h1, h2, h3, h4, h5, h6 {
-  font-size: 25pt;
+.content-page h1,
+.content-page h2,
+.content-page h3,
+.content-page h4 {
+  font-size: 35px;
   text-align: center;
 }
 
-.contact h1, h2, h3, h4, h5, h6 {
-  font-size: 25pt;
-  text-align: center;
-}
-
-.contact p, h1, h2, h3, h4, h5, h6 {
-  text-align: center;
+.content-page h4 {
+  margin-top: 50px;
 }
 
 
-/* Media Query */
-
+/* --- Media Queries --- */
 @media only screen and (max-width: 990px) {
   h1, h3 { font-size: 25pt; }
 
@@ -432,10 +404,15 @@ input[type=checkbox]:not(:checked) ~ div span {
   .mobile-open {
     padding-top: 0;
   }
+
+  .content-page p,
+  .content-page li {
+    font-size: 16px;
+  }
 }
 
-/* Key Frames */
 
+/* --- Key Frames --- */
 /* Standard */
 @keyframes slide_off {
   0% {
